@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import InputForm from './components/InputForm/InputForm'
-
+import TopHeader  from './components/Header/TopHeader'
+import GrayBox from './components/GrayBox/GrayBox'
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to our Project!</h1>
-        </header>
+	<TopHeader/>
         <div id = "Input-Form">
           <InputForm ></InputForm>
-        </div>
+          <GrayBox/>
+	</div>
       </div>
 
     );
