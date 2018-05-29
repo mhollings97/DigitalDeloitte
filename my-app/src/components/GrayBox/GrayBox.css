@@ -1,0 +1,12 @@
+#OuterContainer{
+	height: 116px;
+	width: 100%;
+	text-align: center;
+	background-color: gray;
+	table-layout: fixed;
+}
+
+
+#col{
+	width: 20%;
+}
