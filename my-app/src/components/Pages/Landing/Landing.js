@@ -3,6 +3,7 @@ import InputForm from '../.././InputForm/InputForm'
 import TopHeader  from '../.././Header/TopHeader'
 import GrayBox  from '../.././GrayBox/GrayBox'
 import TextBox from '../.././TextBox/TextBox'
+import ScrollArrow from '../../ScrollArrow/ScrollArrow'
 import './Landing.css'
 class Landing extends Component {
 
@@ -36,8 +37,12 @@ render() {
 			<TextBox size = "medium" message = "Just work from anywhere with us" />
 	  	</div>
 	  }
-          <GrayBox/>
-        </div>
+  	</div>
+
+	<div  id = "GB">
+		<ScrollArrow/>
+        	<GrayBox/>
+	</div>
       </div>
 
     );
