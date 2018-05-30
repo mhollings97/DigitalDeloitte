@@ -1,0 +1,20 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "testing",
+  "files": [
+    "test.js",
+    "user.js",
+    "connection.js"
+  ],
+  "main": "test.js",
+  "author": "jake",
+  "license": "ds",
+  "repository": "ds",
+  "private": null,
+  "dependencies": {
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.10"
+  }
+}
