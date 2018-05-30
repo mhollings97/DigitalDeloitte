@@ -34,6 +34,8 @@ function Connection() {
 	var User = null;
 	var Skills = null;
 	var HS = null;
+	const var Project = null;
+	const var NS = null;
 
 	this.createTable = function() {
 		try{
@@ -78,9 +80,37 @@ HS = sequelize.define('hasSkills', {
 	},
 	skill: Sequelize.STRING
 });
+		//define project table
+		Project = sequelize.define('project' {
+			project_id: {
+			    type: Sequelize.INTEGER,
+			    autoIncrement: true,
+			    primaryKey: true
+			},
+			project_name: Sequelize.STRING,
+			deadline: {
+			    type: Sequelize.DATE,
+			    allowNull: false
+			},
+			xp: Sequelize.INTEGER,
+			min_diff: Sequelize.INTEGER,
+			max_diff: Sequelize.INTEGER,
+			people: Sequelize.INTEGER
+		    });
+
+		const NS = sequelize.define('needSkills' {
+			project_id: {
+			    type: Sequelize.INTEGER
+			    primaryKey: true
+			},
+			skill: {
+			    type: Sequelize.STRING,
+			    primaryKey: true
+			}
+		    });
 
 //removed force:true  (forces defined architecture)
-User.sync({}).then(Skills.sync({})).then(HS.sync({}));//then(this.closeConnection());
+		User.sync({}).then(Skills.sync({})).then(HS.sync({})).then(Project.sync({force: true})).then(NS.sync({force: true}));//then(this.closeConnection());
 }
 catch(err) {
 	console.log(err);
