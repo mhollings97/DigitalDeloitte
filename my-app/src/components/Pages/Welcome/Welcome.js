@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import InputForm from '../.././InputForm/InputForm'
 import TopHeader  from '../.././Header/TopHeader'
 import GrayBox  from '../.././GrayBox/GrayBox'
+import Image from '../.././Image/Image'
 import TextBox from '../.././TextBox/TextBox'
 import './Welcome.css'
+
 
 
 class Welcome extends Component {
@@ -21,9 +23,12 @@ render() {
 
 		<div>
 			<div id = "LP">
-				<p>"This is our new project where we created a place for students and digital technologies enthusiasts to be able to work with us remotely on real projects and get experience, feedback and reward in return" </p>
+				<p>This is our new project where we created a place for students and digital technologies enthusiasts to be able to work with us remotely on real projects and get experience, feedback and reward in return </p>
 			</div>
 
+			<div id = "logo">
+				<Image/>
+			</div>
 		</div>
 	</div>
 
