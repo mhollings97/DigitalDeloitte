@@ -1,1 +1,18 @@
+#LandingContainer{
+	text-align: center;
+	position: relative;
+
+}
+
+#largeTB{
+	width: 50%;
+	font-color: green;
+	margin: 0 auto;
+}
+
+#smallTB{
+        width: 35%;
+        font-color: green;
+        margin: 0 auto;
+}
 

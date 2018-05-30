@@ -5,7 +5,9 @@ import Landing from './components/Pages/Landing/Landing'
 class App extends Component {
   render() {
     return (
-	<Landing/>
+	<div className = "App">
+		<Landing/>
+    	</div>
     );
   }
 }
