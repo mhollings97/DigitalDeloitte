@@ -34,3 +34,15 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+#WelcomeContainer{
+	position: releative;
+	background-color: purple;
+	bottom: 60px;
+}
+
+#LandingContainer{
+	
+	background-color: blue;
+}
