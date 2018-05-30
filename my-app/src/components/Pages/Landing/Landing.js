@@ -23,7 +23,6 @@ render() {
       <div className="App">
         <TopHeader func = {this.toggleLog}/>
         <div id = "Input-Form">
-          <button onClick = {this.toggleLog}> TOGGLE </button>
 	  {this.state.showLogOn && <InputForm/>}
           <GrayBox/>
         </div>
