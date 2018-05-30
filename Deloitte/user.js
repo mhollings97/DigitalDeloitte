@@ -10,18 +10,18 @@
 //Add and Remove a Project
 //Getters and Setters for Application
 
-connectDB = require("./connectDB");
+Connect = require("./connection");
 
 //Constructs a User object using data from the Database.
 //Checks if password is correct.
 function User(e, p) {
-	var val = connectDB.getUser(e);
+	var val = Connect.getUser(e);
 
 	if(p != val[2]) {
 		return -1;
 	}
 
-	var s = connectDB.getUserSkills(var[0]);
+	var s = Connect.getUserSkills(var[0]);
 
 	var user_id = val[0];
 	var email = val[1];
@@ -71,12 +71,12 @@ function User(e, p) {
 
 //Sets the users password.
 User.prototype.setPassword = function(p) {
-	connectDB.updateUser(/*Some code to update*/);
+	Connect.updateUser(/*Some code to update*/);
 }
 
 //Checks if the password has ever been set.
 User.prototype.checkApprove = function() {
-	var val = connectDB.getUser(this.getEmail());
+	var val = Connect.getUser(this.getEmail());
 
 	if(val[2] == undefined) {
 		return 0;
