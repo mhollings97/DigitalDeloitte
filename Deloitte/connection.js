@@ -34,8 +34,8 @@ function Connection() {
 	var User = null;
 	var Skills = null;
 	var HS = null;
-	const var Project = null;
-	const var NS = null;
+	var Project = null;
+	var NS = null;
 
 	this.createTable = function() {
 		try{
@@ -81,7 +81,7 @@ HS = sequelize.define('hasSkills', {
 	skill: Sequelize.STRING
 });
 		//define project table
-		Project = sequelize.define('project' {
+		Project = sequelize.define('project', {
 			project_id: {
 			    type: Sequelize.INTEGER,
 			    autoIncrement: true,
@@ -98,9 +98,9 @@ HS = sequelize.define('hasSkills', {
 			people: Sequelize.INTEGER
 		    });
 
-		const NS = sequelize.define('needSkills' {
+		const NS = sequelize.define('needSkills', {
 			project_id: {
-			    type: Sequelize.INTEGER
+			    type: Sequelize.INTEGER,
 			    primaryKey: true
 			},
 			skill: {

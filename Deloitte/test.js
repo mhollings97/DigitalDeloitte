@@ -9,8 +9,8 @@ function createUser(email, first, last){
 	var temp = function() {
 		conn.createUser(email, first, last);
 	}
-	setTimeout(temp, 500);
-	setTimeout(conn.closeConnection, 1000);
+	setTimeout(temp, 1000);
+	setTimeout(conn.closeConnection, 2000);
 	/*timer(function() {
 	return conn.getDone();
 }, function() {
