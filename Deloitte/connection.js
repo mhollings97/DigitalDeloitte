@@ -92,13 +92,12 @@ this.createUser = function(e, n, s) {
 //A nonapproved user (no interview) will have NULL password until approved
     return User.create({
         email: e,
-        password: NULL,
-        name: n
+        password: null,
+        name: n,
         surname: s,
         xp: 0,
         type: 'Developer'
     })
-User.prototype.createUser(egc320@lehigh.edu, Evan, Choy);
 }
 }
 

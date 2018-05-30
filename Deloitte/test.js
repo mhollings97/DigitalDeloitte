@@ -2,12 +2,15 @@
 //import mysql;
 var User = require("./user");
 var Connection = require("./connection");
-var user = new User("MAIN");
 var conn = new Connection();
 
 function createUser(email, first, last){
 	conn.createTable();
-	setTimeout(conn.closeConnection, 500);
+	var temp = function() {
+		conn.createUser(email, first, last);
+	}
+	setTimeout(temp, 500);
+	setTimeout(conn.closeConnection, 1000);
 	/*timer(function() {
 	return conn.getDone();
 }, function() {
@@ -26,4 +29,4 @@ function timer(func, func2, count) {
 	}
 }
 
-createUser("dsh@dsa","klsdaj","sdfadsfa");
+createUser("pen@dsa","kyle","smith");

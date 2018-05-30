@@ -21,50 +21,50 @@ function User(e, p) {
 		return -1;
 	}
 
-	var s = Connect.getUserSkills(var[0]);
+	var s = Connect.getUserSkills(val[0]);
 
 	var user_id = val[0];
 	var email = val[1];
-	var fName; = val[3];
-	var sName; = val[4];
+	var fName = val[3];
+	var sName = val[4];
 	var xp = val[5];
 	var skills = s;
 	var type = val[6];
 
-	this.getUser_id() {
+	this.getUser_id = function() {
 		return user_id;
 	}
-	this.getEmail() {
+	this.getEmail = function() {
 		return email;
 	}
-	this.getFName() {
+	this.getFName = function() {
 		return fName;
 	}
-	this.getSName() {
+	this.getSName = function() {
 		return sName;
 	}
-	this.getXP() {
+	this.getXP = function() {
 		return xp;
 	}
-	this.getSkills() {
+	this.getSkills = function() {
 		return skills;
 	}
-	this.getType() {
+	this.getType = function() {
 		return type;
 	}
-	this.setFName(f) {
+	this.setFName = function(f) {
 		fName = f;
 	}
-	this.setSName(s) {
+	this.setSName = function(s) {
 		sName = s;
 	}
-	this.setXP(x) {
+	this.setXP = function(x) {
 		xp = x;
 	}
-	this.setSkills(s) {
+	this.setSkills = function(s) {
 		skills = s;
 	}
-	this.setType(t) {
+	this.setType = function(t) {
 		type = t;
 	}
 }
@@ -116,7 +116,7 @@ User.prototype.getLevel = function() {
 		case x >= 0 && x <= 100:
 			return "Beginner";
 			break;
-		case x >= 101 && <= 1000:
+		case x >= 101 && x <= 1000:
 			return "Consultant";
 			break;
 		case x >= 1001:
