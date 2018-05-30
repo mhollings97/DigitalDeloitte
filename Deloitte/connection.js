@@ -79,8 +79,8 @@ HS = sequelize.define('hasSkills', {
 	skill: Sequelize.STRING
 });
 
-
-User.sync({force: true}).then(Skills.sync({force: true})).then(HS.sync({force: true}));//then(this.closeConnection());
+//removed force:true  (forces defined architecture)
+User.sync({}).then(Skills.sync({})).then(HS.sync({}));//then(this.closeConnection());
 }
 catch(err) {
 	console.log(err);

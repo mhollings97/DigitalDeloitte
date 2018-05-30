@@ -29,4 +29,4 @@ function timer(func, func2, count) {
 	}
 }
 
-createUser("pen@dsa","kyle","smith");
+createUser("orange@dsa","billy","small");
