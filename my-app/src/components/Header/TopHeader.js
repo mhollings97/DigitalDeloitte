@@ -13,7 +13,7 @@ class TopHeader extends Component {
     render() {
         return (
         <div>
-       
+
 	<div id = "AU">
 	<Header title = "About Us" ></Header>
 	</div>
@@ -24,7 +24,7 @@ class TopHeader extends Component {
 	<Header title = "Contact Us"></Header>
 	</div>
 	<div id = "SI">
-	<Header title = "Sign In"></Header>
+	<Header func = {this.props.func} title = "Sign In"></Header>
 	</div>
 
 	<div id = "home">
