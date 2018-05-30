@@ -31,10 +31,14 @@ function Connection() {
 		}
 	}
 
+	var User = null;
+	var Skills = null;
+	var HS = null;
+
 	this.createTable = function() {
 		try{
 		//Define table User table
-		const User = sequelize.define('user', {
+		User = sequelize.define('user', {
 			user_id: {
 				type: Sequelize.INTEGER,
 				autoIncrement: true,
@@ -58,7 +62,7 @@ function Connection() {
 		});
 
 //Define Skills table
-const Skills = sequelize.define('skills',{
+Skills = sequelize.define('skills',{
 	skill: {
 		type: Sequelize.STRING,
 		primaryKey: true
@@ -67,7 +71,7 @@ const Skills = sequelize.define('skills',{
 
 
 //Define hasSkills table
-const HS = sequelize.define('hasSkills', {
+HS = sequelize.define('hasSkills', {
 	user_id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true
@@ -81,6 +85,20 @@ User.sync({force: true}).then(Skills.sync({force: true})).then(HS.sync({force: t
 catch(err) {
 	console.log(err);
 }
+}
+
+this.createUser = function(e, n, s) {
+	//createUser adds a new User to the database
+//A nonapproved user (no interview) will have NULL password until approved
+    return User.create({
+        email: e,
+        password: NULL,
+        name: n
+        surname: s,
+        xp: 0,
+        type: 'Developer'
+    })
+User.prototype.createUser(egc320@lehigh.edu, Evan, Choy);
 }
 }
 
