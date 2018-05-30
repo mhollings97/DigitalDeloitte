@@ -29,4 +29,8 @@ function timer(func, func2, count) {
 	}
 }
 
+<<<<<<< Updated upstream
 createUser("lorange@dsa","sally","small");
+=======
+createUser(Math.random().toString(36).substring(7) + "@gmail.com", Math.random().toString(36).substring(7), Math.random().toString(36).substring(7));
+>>>>>>> Stashed changes
