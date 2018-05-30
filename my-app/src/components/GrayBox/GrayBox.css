@@ -1,4 +1,6 @@
 #OuterContainer{
+	position: relative;
+	top: 115px;
 	height: 116px;
 	width: 100%;
 	text-align: center;
@@ -9,4 +11,8 @@
 
 #col{
 	width: 20%;
+	height: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }

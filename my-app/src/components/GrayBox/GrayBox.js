@@ -5,20 +5,20 @@ class GrayBox extends Component {
     render() {
 	return (
 	<table id = "OuterContainer">
-		<tc id = "col">
-		    <button> Apply for Virtual Internship </button>
+		<tc>
+			<button id = "col"> Apply for Virtual Internship </button>
 		</tc>
-		<tc id = "col">
-			<button> Become A Member </button>
+		<tc>
+		 	<button id = "col"> Become A Member </button>
 		</tc>
-		<tc id = "col">
-			<button> Choose Project </button>
+		<tc>
+			<button id = "col"> Choose Project </button>
 		</tc>
- 		<tc id = "col">
-			<button> Submit Your Work </button>
+ 		<tc>
+			<button id = "col"> Submit Your Work </button>
 		</tc>
-		<tc id = "col">
-			<button> Get Rewarded </button>
+		<tc>
+			<button id = "col"> Get Rewarded </button>
 		</tc>
 	</table>
 	)
