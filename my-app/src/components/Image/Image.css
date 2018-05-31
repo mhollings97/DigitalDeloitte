@@ -1,9 +1,26 @@
 #Image{
     position: block;
-    max-height: 100%;
-    max-width: 100%;
     margin-right: auto;
     margin-left: auto;
     position: relative;
 }
 
+#small{
+	heigth: 45%;
+	width: 45%;
+}
+
+#medium{
+	height: 60%;
+	width: 60%;
+}
+
+#large{
+	height: 75%;
+	width: 75%;
+}
+
+#xlarge{
+	height: 95%;
+	width: 95%;
+}

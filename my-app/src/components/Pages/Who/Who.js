@@ -33,7 +33,7 @@ class Who extends Component {
 	    </div>
 
 	    <div id = "Image">
-		<Image/>
+		<Image size = "small"/>
 	    </div>
 
 	</div>

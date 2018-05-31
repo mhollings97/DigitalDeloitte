@@ -20,7 +20,7 @@ render() {
 		<p> We will need you to tell us a few words about yourself and your motivation to work with us. After you send us application with your CV, our trusty ambassador Jirka will go through it </p>
 		<p> Together with all of us, he will decide if you are a good fit and if so, we will contact you on your email and finally you will be able to start choosing interesting projects to work on. </p>
                 <div id ="IMG">
-                        <Image/>
+                        <Image size = "small"/>
                 </div>
 
 	</div>

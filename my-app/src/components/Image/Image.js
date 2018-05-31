@@ -11,7 +11,9 @@ class Image extends Component {
 	return(
 	<div>
 	<div id = "Image">
-	<img src = {require("./DeloitteLogo.jpg")} height= "200" width= "200" />
+	  <div id = {this.props.size}>
+		<img src = {require("./DeloitteLogo.jpg")} height = "100%" width = "100%" />
+	  </div>
 	</div>
 	</div>
 	)    
