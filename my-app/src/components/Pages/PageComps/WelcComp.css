@@ -1,0 +1,18 @@
+#WCWrapper{
+	width: 100%;
+	position: absolute;
+}
+
+#pic{
+	text-align: left;
+	padding-left:350px;
+	position: absolute;
+	top: 0;
+}
+
+#par{
+	width: 185px;
+	text-align: left;
+	padding-left: 10%;
+}
+

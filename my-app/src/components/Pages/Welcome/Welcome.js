@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import InputForm from '../.././InputForm/InputForm'
-import TopHeader  from '../.././Header/TopHeader'
-import GrayBox  from '../.././GrayBox/GrayBox'
-import Image from '../.././Image/Image'
 import TextBox from '../.././TextBox/TextBox'
+import WelcComp from '.././PageComps/WelcComp'
 import './Welcome.css'
 
 
@@ -17,18 +14,13 @@ constructor(props) {
 
 render() {
     return (
-	<div>
-		<TextBox size = "small" message = "What is this about?"/>
-		<TextBox size = "large" message = "Welcome to our new platform, our workplace for externam employees"/>
-
+	<div id = "WelcomeWrapper">
+		<div id = "TopText">
+			<TextBox size = "small" message = "What is this about?"/>
+			<TextBox size = "large" message = "Welcome to our new platform, our workplace for external employees"/>
+		</div>
 		<div>
-			<div id = "LP">
-				<p>This is our new project where we created a place for students and digital technologies enthusiasts to be able to work with us remotely on real projects and get experience, feedback and reward in return </p>
-			</div>
-
-			<div id = "logo">
-				<Image/>
-			</div>
+			<WelcComp/>
 		</div>
 	</div>
 

@@ -1,13 +1,10 @@
-#LP{
-	text-align: left;
-	background-color: pink;
-	width: 200px;
-	padding-left: 20%;
+#WelcomeWrapper{
+	padding-left: 10%;
+	position: absolute;
+	padding-right: 10%;
+	height: 750px;
 }
 
-#logo{
-	text-align: right;
-	padding-right: 20%;
-	position: relative;
-	bottom: 180px;
+#TopText{
+	padding-top: 30px;
 }
