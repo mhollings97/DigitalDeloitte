@@ -188,3 +188,7 @@ User.prototype.setPersonal_Ln = function(s) {
 User.prototype.setCV = function(s) {
 	//Connection to the server to update the data.
 }
+
+User.prototype.toString = function() {
+	return "" + this.getUser_id() + " " + this.getEmail() + " " + this.getFName() + " " + this.getSName() + " " + this.getXP() + " " + this.getType() + " " + this.getSkills();
+}
