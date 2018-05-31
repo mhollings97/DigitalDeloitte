@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Image from '../.././Image/Image'
+import Image from '../../.././Image/Image'
 import './WelcComp.css'
 
 

@@ -1,10 +1,30 @@
 #WelcomeWrapper{
-	padding-left: 10%;
-	position: absolute;
-	padding-right: 10%;
 	height: 750px;
 }
 
 #TopText{
 	padding-top: 30px;
+}
+
+#Apply{
+	padding-top: 175px;
+	width: 100%;
+}
+
+#HowBut{
+	padding-top: 15px;
+	background-color: Transparent;
+    	background-repeat:no-repeat;
+    	border: none;
+    	cursor:pointer;
+    	overflow: hidden;
+    	outline:none;
+	color: green;
+	text-decoration: underline;
+}
+
+#WDD{
+	padding-left: 10%;
+	padding-right: 10%;
+
 }
