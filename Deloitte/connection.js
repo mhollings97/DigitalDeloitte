@@ -145,7 +145,17 @@ function Connection() {
 		})
 	}
 
-	const Op = Sequelize.Op
+	const Op = Sequelize.Op;
+
+	this.getUserSkills = function(id) {
+            var results = []
+            results.push(HS.findAll({
+			attributes: ['skill'],
+			where: { user_id: {[Op.eq]: id}}
+                    }));
+            return results.map(result => results.skill)
+        }
+
 	//Update user fields
 	this.updateUser = function(id, e, p, n, s, x) {
 	    var i = [];
@@ -181,7 +191,7 @@ function Connection() {
 		    i.push(User.update({xp: x}, 
 	                               {where: {user_id: {[Op.eq]:id}}}))
 		}
-
+	    console.log(this.getUserSkills(1));
 	    return Promise.all(i);
         }
 }
