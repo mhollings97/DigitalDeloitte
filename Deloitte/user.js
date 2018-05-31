@@ -1,7 +1,7 @@
 //Create User Object
 //Getters and Setters
 //Set Password
-//Check if password has been set
+////Check if password has been set
 //Add a skill
 //Remove a skill
 //Gain XP
@@ -69,18 +69,6 @@ function User(u, e, f, s, x, sk, t) {
 //Sets the users password.
 User.prototype.setPassword = function(p) {
 	Connect.updateUser(this.getUser_id, null, p, null, null, null);
-}
-
-//Checks if the password has ever been set.
-User.prototype.checkApprove = function() {
-	var prom = Connect.getUser(this.getEmail());
-	var val = prom.password;
-
-	if(val == null) {
-		return 0;
-	}
-
-	return 1;
 }
 
 //Allows a user to add a skill.
@@ -189,6 +177,7 @@ User.prototype.setCV = function(s) {
 	//Connection to the server to update the data.
 }
 
+//toString function for testing code.
 User.prototype.toString = function() {
 	return "" + this.getUser_id() + " " + this.getEmail() + " " + this.getFName() + " " + this.getSName() + " " + this.getXP() + " " + this.getType() + " " + this.getSkills();
 }
