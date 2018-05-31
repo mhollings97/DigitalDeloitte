@@ -1,0 +1,19 @@
+#Hyperlink {
+    color: #73AD21;
+}
+
+#Hyperlink.link {
+    color: #73AD21;
+}
+
+#Hyperlink.visited {
+    color: #73AD21;
+}
+
+#Hyperlink.hover {
+    color: #73AD21;
+}
+
+#Hyperlink.active {
+    color: #73AD21;
+}

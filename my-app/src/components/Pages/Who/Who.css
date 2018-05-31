@@ -1,0 +1,19 @@
+#IntroHeading {
+    text-align: center;
+}
+
+#MainHeading {
+    text-align: center;
+}
+
+#Paragraphs {
+    position: relative;
+    float: right;
+    text-align: left;
+    width: 35%;
+    margin-right: 15%;
+}
+
+#Image {
+
+}
