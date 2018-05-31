@@ -110,10 +110,15 @@ function Connection() {
 			});
 
 			//removed force:true  (forces defined architecture)
-			User.sync({}).then(Skills.sync({})).then(HS.sync({})).then(Project.sync({force: true})).then(NS.sync({force: true}));//then(this.closeConnection());
+			return User.sync({})
+				.then(() => Skills.sync({})
+					.then(() => HS.sync({})
+						.then(() => Project.sync({force: true})
+							.then(() => NS.sync({force: true})))));
 		}
 		catch(err) {
 			console.log(err);
+			return null;
 		}
 
 	}
@@ -129,6 +134,15 @@ function Connection() {
 	        xp: 0,
 	        type: 'Developer'
 	    })
+	}
+
+	//getUser returns array of strings of User tuple
+	this.getUser = function(emailaddr) {
+		return User.findAll({
+			where: {
+				email: emailaddr
+			}
+		})
 	}
 }
 
