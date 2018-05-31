@@ -147,13 +147,21 @@ function Connection() {
 
 	const Op = Sequelize.Op;
 
-	this.getUserSkills = function(id) {
-            var results = []
-            results.push(HS.findAll({
-			attributes: ['skill'],
-			where: { user_id: {[Op.eq]: id}}
-                    }));
-            return results.map(result => results.skill)
+	function pullSkills(results) {
+            var skills = [];
+            for(var i = 0; i < results.length; i++)
+                {console.log(results[i].dataValues.skillSkill);
+                    skills[i] = results[i].dataValues.skillSkill;
+                }
+            return skills;
+        }
+
+        this.getUserSkills = function(id) {
+            return HS.findAll({
+		    attributes: ['skillSkill'],
+		    where: { userUserId: {[Op.eq]: id}}
+                }).then(tuples => pullSkills(tuples));
+
         }
 
 	//Update user fields
