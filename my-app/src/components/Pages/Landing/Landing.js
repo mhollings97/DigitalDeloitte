@@ -19,7 +19,7 @@ constructor(props) {
 	    this.setState(prevState => ({
 		showLogOn: !prevState.showLogOn
 	  }));
-	}
+}
 
 render() {
     return (
