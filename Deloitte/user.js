@@ -14,34 +14,14 @@ Connect = require("./connection");
 
 //Constructs a User object using data from the Database.
 //Checks if password is correct.
-function User(e, p) {
-	var prom = Connect.getUser(e);
-
-	var val = [];
-
-	val.push(prom.user_id);
-	val.push(prom.email);
-	val.push(prom.password);
-	val.push(prom.name);
-	val.push(prom.surname);
-	val.push(prom.xp);
-	val.push(prom.uType);
-
-	if(p != val[2]) {
-		return -1;
-	}
-
-	prom = Connect.getUserSkills(val[0]);
-
-	var s = prom.skills;
-
-	var user_id = val[0];
-	var email = val[1];
-	var fName = val[3];
-	var sName = val[4];
-	var xp = val[5];
-	var skills = s;
-	var type = val[6];
+function User(u, e, f, s, x, sk, t) {
+	var user_id = u;
+	var email = e;
+	var fName = f;
+	var sName = s;
+	var xp = x;
+	var skills = sk;
+	var type = t;
 
 	this.getUser_id = function() {
 		return user_id;
@@ -64,6 +44,7 @@ function User(e, p) {
 	this.getType = function() {
 		return type;
 	}
+
 	this.setEmail = function(e) {
 		email = e;
 		Connect.updateUser(this.getUser_id, e, null, null, null, null);
