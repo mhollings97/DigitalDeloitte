@@ -181,3 +181,5 @@ User.prototype.setCV = function(s) {
 User.prototype.toString = function() {
 	return "" + this.getUser_id() + " " + this.getEmail() + " " + this.getFName() + " " + this.getSName() + " " + this.getXP() + " " + this.getType() + " " + this.getSkills();
 }
+
+module.exports = User;
