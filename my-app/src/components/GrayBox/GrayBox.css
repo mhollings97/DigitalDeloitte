@@ -11,6 +11,8 @@
 #col{
 	width: 20%;
 	height: 100%;
+	border: none;
+	cursor: pointer;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
