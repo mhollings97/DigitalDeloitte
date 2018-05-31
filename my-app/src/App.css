@@ -37,9 +37,8 @@
 
 
 #WelcomeContainer{
-	position: releative;
-	background-color: purple;
-	bottom: 60px;
+	position: absolute;
+	width: 100%;
 }
 
 #LandingContainer{

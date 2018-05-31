@@ -1,0 +1,19 @@
+DDCWrapper#{
+	position: absolute;
+
+	width: 100%;
+}
+
+#LeftPars{
+        width: 250px;
+        text-align: left;
+
+}
+
+#IMG{
+        text-align: left;
+	margin-top: -350px;
+	position: absolute;
+	right: 15%;
+}
+

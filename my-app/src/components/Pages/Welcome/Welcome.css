@@ -1,13 +1,30 @@
-#LP{
-	text-align: left;
-	background-color: pink;
-	width: 200px;
-	padding-left: 20%;
+#WelcomeWrapper{
+	height: 750px;
 }
 
-#logo{
-	text-align: right;
-	padding-right: 20%;
-	position: relative;
-	bottom: 180px;
+#TopText{
+	padding-top: 30px;
+}
+
+#Apply{
+	padding-top: 175px;
+	width: 100%;
+}
+
+#HowBut{
+	padding-top: 15px;
+	background-color: Transparent;
+    	background-repeat:no-repeat;
+    	border: none;
+    	cursor:pointer;
+    	overflow: hidden;
+    	outline:none;
+	color: green;
+	text-decoration: underline;
+}
+
+#WDD{
+	padding-left: 10%;
+	padding-right: 10%;
+
 }

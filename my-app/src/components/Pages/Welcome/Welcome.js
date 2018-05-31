@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import InputForm from '../.././InputForm/InputForm'
-import TopHeader  from '../.././Header/TopHeader'
-import GrayBox  from '../.././GrayBox/GrayBox'
-import Image from '../.././Image/Image'
 import TextBox from '../.././TextBox/TextBox'
+import WelcComp from '.././PageComps/WelcComp/WelcComp'
+import Apply from '../../Buttons/Apply/Apply'
+import DropDown from '../DropDown/DropDown'
 import './Welcome.css'
 
 
@@ -13,22 +12,35 @@ class Welcome extends Component {
 constructor(props) {
     super(props);
 
+    this.state = {
+        showDD: false
+    };
+
+        this.toggleDD = this.toggleDD.bind(this);
 }
+        toggleDD(showDD) {
+            this.setState(prevState => ({
+                showDD: !prevState.showDD
+          }));
+}
+
 
 render() {
     return (
-	<div>
-		<TextBox size = "small" message = "What is this about?"/>
-		<TextBox size = "large" message = "Welcome to our new platform, our workplace for externam employees"/>
-
+	<div id = "WelcomeWrapper">
+		<div id = "TopText">
+			<TextBox size = "small" message = "What is this about?"/>
+			<TextBox size = "large" message = "Welcome to our new platform, our workplace for external employees"/>
+		</div>
 		<div>
-			<div id = "LP">
-				<p>This is our new project where we created a place for students and digital technologies enthusiasts to be able to work with us remotely on real projects and get experience, feedback and reward in return </p>
-			</div>
-
-			<div id = "logo">
-				<Image/>
-			</div>
+			<WelcComp/>
+		</div>
+		<div id = "Apply">
+			<Apply/>
+			<button id = "HowBut" onClick = {this.toggleDD}> How we select out candidates </button>
+		</div>
+		<div id = "WDD">
+			{this.state.showDD && <DropDown/>}
 		</div>
 	</div>
 
