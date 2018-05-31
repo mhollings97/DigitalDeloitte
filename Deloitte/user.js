@@ -1,7 +1,7 @@
 //Create User Object
 //Getters and Setters
 //Set Password
-//Check if password has been set
+////Check if password has been set
 //Add a skill
 //Remove a skill
 //Gain XP
@@ -14,80 +14,70 @@ Connect = require("./connection");
 
 //Constructs a User object using data from the Database.
 //Checks if password is correct.
-function User(e, p) {
-	var val = Connect.getUser(e);
+function User(u, e, f, s, x, sk, t) {
+	var user_id = u;
+	var email = e;
+	var fName = f;
+	var sName = s;
+	var xp = x;
+	var skills = sk;
+	var type = t;
 
-	if(p != val[2]) {
-		return -1;
-	}
-
-	var s = Connect.getUserSkills(var[0]);
-
-	var user_id = val[0];
-	var email = val[1];
-	var fName; = val[3];
-	var sName; = val[4];
-	var xp = val[5];
-	var skills = s;
-	var type = val[6];
-
-	this.getUser_id() {
+	this.getUser_id = function() {
 		return user_id;
 	}
-	this.getEmail() {
+	this.getEmail = function() {
 		return email;
 	}
-	this.getFName() {
+	this.getFName = function() {
 		return fName;
 	}
-	this.getSName() {
+	this.getSName = function() {
 		return sName;
 	}
-	this.getXP() {
+	this.getXP = function() {
 		return xp;
 	}
-	this.getSkills() {
+	this.getSkills = function() {
 		return skills;
 	}
-	this.getType() {
+	this.getType = function() {
 		return type;
 	}
-	this.setFName(f) {
+
+	this.setEmail = function(e) {
+		email = e;
+		Connect.updateUser(this.getUser_id, e, null, null, null, null);
+	}
+	this.setFName = function(f) {
 		fName = f;
+		Connect.updateUser(this.getUser_id, null, null, f, null, null);
 	}
-	this.setSName(s) {
+	this.setSName = function(s) {
 		sName = s;
+		Connect.updateUser(this.getUser_id, null, null, null, s, null);
 	}
-	this.setXP(x) {
+	this.setXP = function(x) {
 		xp = x;
+		Connect.updateUser(this.getUser_id, null, null, null, null, x);
 	}
-	this.setSkills(s) {
+	this.setSkills = function(s) {
 		skills = s;
-	}
-	this.setType(t) {
-		type = t;
 	}
 }
 
 //Sets the users password.
 User.prototype.setPassword = function(p) {
-	Connect.updateUser(/*Some code to update*/);
-}
-
-//Checks if the password has ever been set.
-User.prototype.checkApprove = function() {
-	var val = Connect.getUser(this.getEmail());
-
-	if(val[2] == undefined) {
-		return 0;
-	}
-
-	return 1;
+	Connect.updateUser(this.getUser_id, null, p, null, null, null);
 }
 
 //Allows a user to add a skill.
 User.prototype.addSkill = function(s) {
-	this.getSkills.push(s);
+	var temp = this.getSkills();
+	temp.push(s);
+	this.setSkills(temp);
+	Connect.addHS(this.getUser_id(), s);
+	return s;
 }
 
 //Allows a User to remove a skill.
@@ -96,11 +86,13 @@ User.prototype.removeSkill = function(s) {
 
 	for(var i = 0; i < temp.length; i++) {
 		if(s == temp[i]) {
-			var ret = this.getSkills().splice(i, 1);
+			var ret = temp.splice(i, 1);
+			this.setSkills(temp);
+			Connect.removeHS(this.getUser_id(), s);
 			return ret;
 		}
 	}
-	return undefined;
+	return null;
 }
 
 //Adds XP to the user.
@@ -116,7 +108,7 @@ User.prototype.getLevel = function() {
 		case x >= 0 && x <= 100:
 			return "Beginner";
 			break;
-		case x >= 101 && <= 1000:
+		case x >= 101 && x <= 1000:
 			return "Consultant";
 			break;
 		case x >= 1001:
@@ -184,3 +176,10 @@ User.prototype.setPersonal_Ln = function(s) {
 User.prototype.setCV = function(s) {
 	//Connection to the server to update the data.
 }
+
+//toString function for testing code.
+User.prototype.toString = function() {
+	return "" + this.getUser_id() + " " + this.getEmail() + " " + this.getFName() + " " + this.getSName() + " " + this.getXP() + " " + this.getType() + " " + this.getSkills();
+}
+
+module.exports = User;

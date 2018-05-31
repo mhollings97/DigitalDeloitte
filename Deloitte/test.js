@@ -2,28 +2,40 @@
 //import mysql;
 var User = require("./user");
 var Connection = require("./connection");
-var user = new User("MAIN");
 var conn = new Connection();
+var currentUser = null;
 
 function createUser(email, first, last){
-	conn.createTable();
-	setTimeout(conn.closeConnection, 500);
-	/*timer(function() {
-	return conn.getDone();
-}, function() {
-	conn.closeConnection();
-}, 0);*/
-	//conn.closeConnection();
+	conn.createTable()
+	.then(() => conn.createUser(email, first, last)
+		.then(() => conn.getUser(email)
+			.then(users => console.log(users))//this is where we print selected user
+		      .then(() => conn.updateUser(1, null, "island", null, null, null))
+			.then(() => conn.closeConnection())));
 }
 
-function timer(func, func2, count) {
-	console.log(count);
-	if(!(func()) && count < 1000){
-		setTimeout(timer(func, func2, count + 1), 50);
-	}
-	else{
-		func2();
-	}
+function login(email, password) {
+	conn.createTable()
+		.then(() => conn.getUser(email)
+			.then(users => verifyUser(users, password))//this is where we print selected user
+			.then(() => conn.closeConnection()));
 }
 
-createUser("dsh@dsa","klsdaj","sdfadsfa");
+function verifyUser(inUser, password) {
+	//console.log(inUser[0].dataValues.xp);
+	var theUser = inUser[0].dataValues;
+	if(password == theUser.password) {
+		currentUser = new User(theUser.user_id, theUser.email, theUser.name, theUser.surname, theUser.xp, null, theUser.uType);
+		console.log(currentUser.toString()); //The User is now logged in
+	}
+	else {
+		console.log("incorrect password");
+		currentUser = null;
+	}
+}
+/*
+conn.updateUser(1, "egc320@lehigh.edu","password", "Evan", "Choy", 9000); 
+*/
+
+login("pen@dsa", "island");
+//createUser(Math.random().toString(36).substring(7) + "@gmail.com", Math.random().toString(36).substring(7), Math.random().toString(36).substring(7));
