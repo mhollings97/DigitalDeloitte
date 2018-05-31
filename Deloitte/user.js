@@ -15,13 +15,25 @@ Connect = require("./connection");
 //Constructs a User object using data from the Database.
 //Checks if password is correct.
 function User(e, p) {
-	var val = Connect.getUser(e);
+	var prom = Connect.getUser(e);
+
+	var val = [];
+
+	val.push(prom.user_id);
+	val.push(prom.email);
+	val.push(prom.password);
+	val.push(prom.name);
+	val.push(prom.surname);
+	val.push(prom.xp);
+	val.push(prom.uType);
 
 	if(p != val[2]) {
 		return -1;
 	}
 
-	var s = Connect.getUserSkills(val[0]);
+	prom = Connect.getUserSkills(val[0]);
+
+	var s = prom.skills;
 
 	var user_id = val[0];
 	var email = val[1];
@@ -52,33 +64,38 @@ function User(e, p) {
 	this.getType = function() {
 		return type;
 	}
+	this.setEmail = function(e) {
+		email = e;
+		Connect.updateUser(this.getUser_id, e, null, null, null, null);
+	}
 	this.setFName = function(f) {
 		fName = f;
+		Connect.updateUser(this.getUser_id, null, null, f, null, null);
 	}
 	this.setSName = function(s) {
 		sName = s;
+		Connect.updateUser(this.getUser_id, null, null, null, s, null);
 	}
 	this.setXP = function(x) {
 		xp = x;
+		Connect.updateUser(this.getUser_id, null, null, null, null, x);
 	}
 	this.setSkills = function(s) {
 		skills = s;
-	}
-	this.setType = function(t) {
-		type = t;
 	}
 }
 
 //Sets the users password.
 User.prototype.setPassword = function(p) {
-	Connect.updateUser(/*Some code to update*/);
+	Connect.updateUser(this.getUser_id, null, p, null, null, null);
 }
 
 //Checks if the password has ever been set.
 User.prototype.checkApprove = function() {
-	var val = Connect.getUser(this.getEmail());
+	var prom = Connect.getUser(this.getEmail());
+	var val = prom.password;
 
-	if(val[2] == undefined) {
+	if(val == null) {
 		return 0;
 	}
 
@@ -87,7 +104,11 @@ User.prototype.checkApprove = function() {
 
 //Allows a user to add a skill.
 User.prototype.addSkill = function(s) {
-	this.getSkills.push(s);
+	var temp = this.getSkills();
+	temp.push(s);
+	this.setSkills(temp);
+	Connect.addHS(this.getUser_id(), s);
+	return s;
 }
 
 //Allows a User to remove a skill.
@@ -96,11 +117,13 @@ User.prototype.removeSkill = function(s) {
 
 	for(var i = 0; i < temp.length; i++) {
 		if(s == temp[i]) {
-			var ret = this.getSkills().splice(i, 1);
+			var ret = temp.splice(i, 1);
+			this.setSkills(temp);
+			Connect.removeHS(this.getUser_id(), s);
 			return ret;
 		}
 	}
-	return undefined;
+	return null;
 }
 
 //Adds XP to the user.
