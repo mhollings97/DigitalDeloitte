@@ -144,6 +144,46 @@ function Connection() {
 			}
 		})
 	}
+
+	const Op = Sequelize.Op
+	//Update user fields
+	this.updateUser = function(id, e, p, n, s, x) {
+	    var i = [];
+            if(e != null)
+                {
+		    i.push(User.update({email: e}, 
+				       {where: {user_id: {[Op.eq]:id}}
+				       }))
+		}
+
+            if(p != null)
+                {
+		    i.push(User.update({password: p}, 
+				       {where: {user_id: {[Op.eq]:id}}
+				       }))
+		}
+
+            if(n != null)
+                {
+		    i.push(User.update({name: n}, 
+	                               {where: {user_id: {[Op.eq]:id}}
+				       }))
+		}
+
+            if(s != null)
+                {
+		    i.push(User.update({surname: s}, 
+	                               {where: {user_id: {[Op.eq]:id}}}))
+		}
+
+            if(x != null)
+                {
+		    i.push(User.update({xp: x}, 
+	                               {where: {user_id: {[Op.eq]:id}}}))
+		}
+
+	    return Promise.all(i);
+        }
 }
 
 module.exports = Connection;
