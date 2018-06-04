@@ -68,8 +68,13 @@ function User(u, e, f, s, x, sk, t) {
 		xp = x;
 		Connect.updateUser(this.getUser_id(), null, null, null, null, x);
 	}
-	this.setSkills = function(s) {
-		skills = s;
+	this.setSkills = function(sk) {
+		if(sk == null) {
+			skills = [];
+		}
+		else {
+			skills = sk;
+		}	
 	}
 }
 
@@ -83,8 +88,7 @@ User.prototype.addSkill = function(s) {
 	var temp = this.getSkills();
 	temp.push(s);
 	this.setSkills(temp);
-	Connect.addHS(this.getUser_id(), s);
-	return s;
+	return Connect.addHS(this.getUser_id(), s);
 }
 
 //Allows a User to remove a skill.

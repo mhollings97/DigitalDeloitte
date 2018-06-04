@@ -11,8 +11,22 @@ Connect = require("./connection");
 function Project(pid, pn, s, t) {
 	var proj_id = pid;
 	var p_name = pn;
-	var skills = s;
-	var tags = t;
+	var skills;
+	var tags;
+
+	if(s == null) {
+		skills = [];
+	}
+	else {
+		skills = s;
+	}
+
+	if(t == null) {
+		tags = [];
+	}
+	else {
+		tags = t;
+	}
 
 	this.getProj_id = function() {
 		return proj_id;
@@ -34,10 +48,20 @@ function Project(pid, pn, s, t) {
 		p_name = n;
 	}
 	this.setSkills = function(s) {
-		skills = s;
+		if(s == null) {
+			skills = [];
+		}
+		else {
+			skills = s;
+		}
 	}
 	this.setTags = function(t) {
-		tags = t;
+		if(t == null) {
+			tags = [];
+		}
+		else {
+			tags = t;
+		}
 	}
 }
 
