@@ -5,6 +5,7 @@ import Landing from './components/Pages/Landing/Landing'
 import DropDown from './components/Pages/DropDown/DropDown'
 import Welcome from './components/Pages/Welcome/Welcome'
 import Who from './components/Pages/Who/Who'
+import {BrowserRouter as Router, Link} from 'react-router-dom'
 class App extends Component {
 constructor(props) {
     super(props);
@@ -22,6 +23,7 @@ constructor(props) {
 
   render() {
     return (
+	<Router>
 	<div className = "App">
 		<div id = "LandingContainer">
 			<Landing/>
@@ -36,6 +38,7 @@ constructor(props) {
 			<Who/>
 		</div>
 	</div>
+    	</Router>
     );
   }
 }

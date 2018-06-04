@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import './TopHeader.css';
 import Header from '.././Buttons/Header/Header';
 import HomeButton from '.././Buttons/Home/HomeButton';
-
-class TopHeader extends Component { 
+import {BrowserRouter as Router, Link} from 'react-router-dom';
+class TopHeader extends Component {
 
     constructor(props) {
 	super(props);
@@ -12,25 +12,34 @@ class TopHeader extends Component {
 
     render() {
         return (
-        <div>
+	<Router>
+	    <div>
+		<div id = "AU">
+			<Link to = { '/aboutus'}>
+				<Header title = "About Us" ></Header>
+			</Link>
+		</div>
+		<div id = "AP">
+			<Link to = { '/abouttheproject'}>
+				<Header title = "About the Project"></Header>
+			</Link>
+		</div>
+		<div id = "CU">
+			<Link to = { '/contactus'}>
+				<Header title = "Contact Us"></Header>
+			</Link>
+		</div>
+		<div id = "SI">
+				<Header func = {this.props.func} title = "Sign In"></Header>
 
-	<div id = "AU">
-	<Header title = "About Us" ></Header>
-	</div>
-	<div id = "AP">
-	<Header title = "About the Project"></Header>
-	</div>
-	<div id = "CU">
-	<Header title = "Contact Us"></Header>
-	</div>
-	<div id = "SI">
-	<Header func = {this.props.func} title = "Sign In"></Header>
-	</div>
-
-	<div id = "home">
-	<HomeButton>Deloitte Digital</HomeButton>
-	</div>
-        </div>
+		</div>
+		<div id = "home">
+			<Link to = { '/'}>
+				<HomeButton>Deloitte Digital</HomeButton>
+			</Link>
+		</div>
+	    </div>
+	</Router>
 	)
      }
 
