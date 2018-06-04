@@ -8,10 +8,7 @@ var currentUser = null;
 function createUser(email, first, last){
 	conn.createTable()
 	.then(() => conn.createUser(email, first, last)
-		.then(() => conn.getUser(email)
-			.then(users => console.log(users))//this is where we print selected user
-		      .then(() => conn.updateUser(1, "egc320@lehigh.edu","password", "Evan", "Choy", 9000))
-			.then(() => conn.closeConnection())));
+		.then(user => user.toString()));
 }
 
 function login(email, password) {
@@ -35,9 +32,9 @@ function verifyUser(inUser, password) {
 	}
 }
 
-function doSomething(func, ...inArg){
+function doSomething(func, inArg){
 	conn.createTable().then(() =>
-	func(...inArg)).then(() =>
+	func.addSkill(inArg)).then(() =>
 	conn.closeConnection());
 }
 
@@ -57,7 +54,8 @@ function pullSkills(results) {
 /*
 conn.updateUser(1, "egc320@lehigh.edu","password", "Evan", "Choy", 9000); 
 */
-login("egc320@lehigh.edu", "password").then(() => doSomething(currentUser.addSkill, "JavaScript"));
+login("egc320@lehigh.edu", "password").then(() => doSomething(currentUser, "JavaScript"));
 //createUser(Math.random().toString(36).substring(7) + "@gmail.com", Math.random().toString(36).substring(7), Math.random().toString(36).substring(7));
-
 setTimeout(conn.closeConnection, 3000);
+
+

@@ -20,8 +20,15 @@ function User(u, e, f, s, x, sk, t) {
 	var fName = f;
 	var sName = s;
 	var xp = x;
-	var skills = sk;
+	var skills;
 	var type = t;
+
+	if(sk == null) {
+		skills = [];
+	}
+	else {
+		skills = sk;
+	}
 
 	this.getUser_id = function() {
 		return user_id;
@@ -47,19 +54,19 @@ function User(u, e, f, s, x, sk, t) {
 
 	this.setEmail = function(e) {
 		email = e;
-		Connect.updateUser(this.getUser_id, e, null, null, null, null);
+		Connect.updateUser(this.getUser_id(), e, null, null, null, null);
 	}
 	this.setFName = function(f) {
 		fName = f;
-		Connect.updateUser(this.getUser_id, null, null, f, null, null);
+		Connect.updateUser(this.getUser_id(), null, null, f, null, null);
 	}
 	this.setSName = function(s) {
 		sName = s;
-		Connect.updateUser(this.getUser_id, null, null, null, s, null);
+		Connect.updateUser(this.getUser_id(), null, null, null, s, null);
 	}
 	this.setXP = function(x) {
 		xp = x;
-		Connect.updateUser(this.getUser_id, null, null, null, null, x);
+		Connect.updateUser(this.getUser_id(), null, null, null, null, x);
 	}
 	this.setSkills = function(s) {
 		skills = s;
@@ -68,16 +75,16 @@ function User(u, e, f, s, x, sk, t) {
 
 //Sets the users password.
 User.prototype.setPassword = function(p) {
-	Connect.updateUser(this.getUser_id, null, p, null, null, null);
+	Connect.updateUser(this.getUser_id(), null, p, null, null, null);
 }
 
 //Allows a user to add a skill.
 User.prototype.addSkill = function(s) {
-	var temp = [];
-	temp = this.getSkills();
+	var temp = this.getSkills();
 	temp.push(s);
 	this.setSkills(temp);
-	return Connect.addHS(this.getUser_id(), s);
+	Connect.addHS(this.getUser_id(), s);
+	return s;
 }
 
 //Allows a User to remove a skill.
