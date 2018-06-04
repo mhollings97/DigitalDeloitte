@@ -101,14 +101,26 @@ function Connection() {
 				    primaryKey: true
 				},
 				project_name: Sequelize.STRING,
-				deadline: {
+				completion_time: Sequelize.STRING,
+				description: Sequelize.STRING,
+				rec_desc: Sequelize.STRING,
+				join_deadline: {
 				    type: Sequelize.DATE,
 				    allowNull: false
 				},
-				xp: Sequelize.INTEGER,
+				rev_deadline: {
+				    type: Sequelize.DATE,
+				    allowNull: false
+				},
+				sub_deadline: {
+				    type: Sequelize.DATE,
+				    allowNull: false
+				},
 				min_diff: Sequelize.INTEGER,
 				max_diff: Sequelize.INTEGER,
-				people: Sequelize.INTEGER
+				people: Sequelize.INTEGER,
+				xp_gain: Sequelize.INTEGER,
+				xp_bonus: Sequelize.INTEGER
 			});
 
 			NS = sequelize.define('needsSkills', {
