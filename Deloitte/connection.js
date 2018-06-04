@@ -424,6 +424,62 @@ function Connection() {
                     xp_bonus: bonus
                 });
         }
+
+
+
+
+
+
+
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Tags table related functions begin here
+
+	//Adds a tag to list of tags used by Projects                                       
+        this.insertTags = function(t) {
+            return Tags.create({
+                    tag: t
+                });
+        }
+
+        //Returns the promise of all skills                                                                 
+        this.getTags = function() {
+            return Tags.findAll({
+                    attributes: ['tag'],
+		});
+
+	}
+
+
+
+
+
+
+
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//hasTags table related functions begin here
+	
+	//Adds tag for specific project                                                                  
+        this.addHT = function(pid, t) {
+            return HT.create({
+                    project_id: pid,
+                    tag: t
+                })
+        }
+
+        //Removes project/tag tuple from hasTag table                                                      
+        this.deleteHT = function(pid, t)
+        {
+            return HT.destroy({
+                    where: {
+                        project_id: pid,
+                        tag: t
+                    }});
+        }
+	
 }
 
 module.exports = Connection;
