@@ -216,6 +216,13 @@ function Connection() {
 	    console.log(this.getUserSkills(1));
 	    return Promise.all(i);
         }
+
+	//Adds a skill to list of tags used by Projects and users
+	this.insertSkills = function(s) {
+	    return Skills.create({
+		    skill: s
+		});
+	}
 }
 
 module.exports = Connection;
