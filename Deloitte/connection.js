@@ -309,15 +309,11 @@ function Connection() {
 
         }
 
-    this.setHS = function(inId, inSkills) {
-    	var out = [];
-    	for(s in inSkills) {
-    		out.push(HS.create({
+    this.addHS = function(inId, s) {
+    		return HS.create({
 	        user_id: inId,
 	        skill: s
-	    	}))
-    	}
-    	return out;
+	    	})
     }
 
 	//Update user fields

@@ -22,7 +22,7 @@ function verifyUser(inUser, password) {
 	//console.log(inUser[0].dataValues.xp);
 	var theUser = inUser[0].dataValues;
 	if(password == theUser.password) {
-		currentUser = new User(theUser.user_id, theUser.email, theUser.name, theUser.surname, theUser.xp, null, theUser.uType);
+		currentUser = new User(theUser.user_id, theUser.email, theUser.name, theUser.surname, theUser.xp, null, theUser.uType, conn);
 		//console.log(currentUser.toString()); //The User is now logged in
 		getUserSkills();
 	}
@@ -32,9 +32,10 @@ function verifyUser(inUser, password) {
 	}
 }
 
-function doSomething(func, inArg){
+function doSomething(func, ...inArg){
+	console.log("\n\n\n\n\n\n"+currentUser);
 	conn.createTable().then(() =>
-	func.addSkill(inArg)).then(() =>
+	currentUser.addSkill(...inArg)).then(() =>
 	conn.closeConnection());
 }
 
@@ -54,7 +55,7 @@ function pullSkills(results) {
 /*
 conn.updateUser(1, "egc320@lehigh.edu","password", "Evan", "Choy", 9000); 
 */
-login("egc320@lehigh.edu", "password").then(() => doSomething(currentUser, "JavaScript"));
+login("egc320@lehigh.edu", "password").then(() => doSomething(currentUser.addSkill, "JavaScript"));
 //createUser(Math.random().toString(36).substring(7) + "@gmail.com", Math.random().toString(36).substring(7), Math.random().toString(36).substring(7));
 setTimeout(conn.closeConnection, 3000);
 

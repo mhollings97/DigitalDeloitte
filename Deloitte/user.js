@@ -11,10 +11,9 @@
 //Getters and Setters for Application
 
 Connect = require("./connection");
-
 //Constructs a User object using data from the Database.
 //Checks if password is correct.
-function User(u, e, f, s, x, sk, t) {
+function User(u, e, f, s, x, sk, t, inConn) {
 	var user_id = u;
 	var email = e;
 	var fName = f;
@@ -22,6 +21,7 @@ function User(u, e, f, s, x, sk, t) {
 	var xp = x;
 	var skills;
 	var type = t;
+	this.conn = inConn;
 
 	if(sk == null) {
 		skills = [];
@@ -46,6 +46,9 @@ function User(u, e, f, s, x, sk, t) {
 		return xp;
 	}
 	this.getSkills = function() {
+		if(skills == null) {
+			skills = [];
+		}
 		return skills;
 	}
 	this.getType = function() {
@@ -88,7 +91,7 @@ User.prototype.addSkill = function(s) {
 	var temp = this.getSkills();
 	temp.push(s);
 	this.setSkills(temp);
-	return Connect.addHS(this.getUser_id(), s);
+	return this.conn.addHS(this.getUser_id(), s);
 }
 
 //Allows a User to remove a skill.
