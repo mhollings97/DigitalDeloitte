@@ -13,6 +13,7 @@ function Connection() {
 	var Sub = null;
 	var SubFrom = null;
 	var SubFor = null;
+	var Assets = null;
 
 	try{
 		//Create connection via Sequelize
@@ -223,6 +224,25 @@ function Connection() {
 			Sub.hasMany(SubFor, {foreignKey: 'sub_id'});
 			Project.hasMany(SubFor, {foreignKey: 'proj_id'});
 
+			Assets = sequelize.define('assets', {
+				user_id: {
+					type: Sequelize.INTEGER,
+					primaryKey: true
+				},
+				asset_type: {
+					type: Sequelize.STRING
+				},
+				asset_loc: {
+					type: Sequelize.STRING
+				},
+				asset_desc: {
+					type: Sequelize.STRING
+				},
+				asset_update: {
+					type: Sequelize.DATE
+				}
+			});
+			User.hasMany(Assets, {foreignKey: 'user_id'});
 			//removed force:true  (forces defined architecture)
 			return sequelize.sync({});
 		}
