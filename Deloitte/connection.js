@@ -72,10 +72,9 @@ function Connection() {
 			});
 
 			//Define hasSkills table
-			HS = sequelize.define('hasSkills', {
-				user_id: Sequelize.INTEGER,
-				skill: Sequelize.STRING
-			});
+			HS = sequelize.define('hasSkills', {});
+			HS.hasMany(User, {});
+			HS.hasMany(Skills, {});
 		
 			//define project table
 			Project = sequelize.define('project', {
