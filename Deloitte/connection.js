@@ -73,10 +73,7 @@ function Connection() {
 
 			//Define hasSkills table
 			HS = sequelize.define('hasSkills', {
-				user_id: {
-					type: Sequelize.INTEGER,
-					primaryKey: true
-				},
+				user_id: Sequelize.INTEGER,
 				skill: Sequelize.STRING
 			});
 		
@@ -113,8 +110,8 @@ function Connection() {
 			return User.sync({})
 				.then(() => Skills.sync({})
 					.then(() => HS.sync({})
-						.then(() => Project.sync({force: true})
-							.then(() => NS.sync({force: true})))));
+						.then(() => Project.sync({})
+						      .then(() => NS.sync({})))));
 		}
 		catch(err) {
 			console.log(err);
