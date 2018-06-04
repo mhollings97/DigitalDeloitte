@@ -1,11 +1,12 @@
 function Connection() {
-	var sequalize = null;
+	var sequelize = null;
 	const Sequelize = require ('sequelize');
 	var User = null;
 	var Skills = null;
 	var HS = null;
 	var Project = null;
 	var NS = null;
+	var App = null;
 
 	try{
 		//Create connection via Sequelize
@@ -108,12 +109,35 @@ function Connection() {
 				}
 			});
 
+			App = sequelize.define('Application', {
+				user_id: {
+					type: Sequelize.INTEGER,
+					primaryKey: true
+				},
+				schooling: {
+					type: Sequelize.STRING
+				},
+				interest: {
+					type: Sequelize.STRING
+				},
+				apply_Text: {
+					type: Sequelize.STRING
+				},
+				link_In: {
+					type: Sequelize.STRING
+				},
+				per_Ln: {
+					type: Sequelize.STRING
+				},
+				CV_Loc: {
+					type: Sequelize.STRING
+				}
+
+			});
+			User.hasMany(App, {foreignKey: 'user_id'});
+
 			//removed force:true  (forces defined architecture)
-			return User.sync({})
-			.then(() => Skills.sync({})
-				      .then(() => HS.sync({})
-					    .then(() => Project.sync({force: true})
-						      .then(() => NS.sync({})))));
+			return sequelize.sync({});
 		}
 		catch(err) {
 			console.log("ERROR" + err);
