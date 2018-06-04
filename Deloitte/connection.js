@@ -310,6 +310,23 @@ function Connection() {
 		    skill: s
 		});
 	}
+
+	//Returns the promise of all skills
+	this.getSkills = function() {
+	    return Skills.findAll({
+                    attributes: ['skill'],
+                });
+
+	}
+
+	this.deleteHS = function(user, skillset)
+	{
+	    return HS.destroy({
+		    where: {
+			user_id: user,
+		        skill: skillset
+		    }});
+	}
 }
 
 module.exports = Connection;
