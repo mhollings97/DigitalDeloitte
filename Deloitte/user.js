@@ -151,42 +151,28 @@ User.prototype.removeProject = function(p) {
 
 //Getters for application
 User.prototype.getSchooling = function() {
-	//this.connion to server to get required data.
+	var tuple = this.conn.getApp(this.getUser_id());
+	return tuple[0].dataValues.schooling;	
 }
 User.prototype.getInterest = function() {
-	//this.connion to server to get required data.
+	var tuple = this.conn.getApp(this.getUser_id());
+	return tuple[0].dataValues.interest;	
 }
 User.prototype.getApply_Text = function() {
-	//this.connion to server to get required data.
+	var tuple = this.conn.getApp(this.getUser_id());
+	return tuple[0].dataValues.apply_Text;	
 }
 User.prototype.getLinked_In = function() {
-	//this.connion to server to get required data.
+	var tuple = this.conn.getApp(this.getUser_id());
+	return tuple[0].dataValues.link_In;	
 }
 User.prototype.getPersonal_Ln = function() {
-	//this.connion to server to get required data.
+	var tuple = this.conn.getApp(this.getUser_id());
+	return tuple[0].dataValues.per_Ln;	
 }
 User.prototype.getCV = function() {
-	//this.connion to server to get required data.
-}
-
-//Setters for application
-User.prototype.setSchooling = function(s) {
-	//this.connion to the server to update the data.
-}
-User.prototype.setInterest = function(s) {
-	//this.connion to the server to update the data.
-}
-User.prototype.setApply_Text = function(s) {
-	//this.connion to the server to update the data.
-}
-User.prototype.setLinked_In = function(s) {
-	//this.connion to the server to update the data.
-}
-User.prototype.setPersonal_Ln = function(s) {
-	//this.connion to the server to update the data.
-}
-User.prototype.setCV = function(s) {
-	//this.connion to the server to update the data.
+	var tuple = this.conn.getApp(this.getUser_id());
+	return tuple[0].dataValues.CV_Loc;	
 }
 
 //toString function for testing code.
