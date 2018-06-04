@@ -10,7 +10,7 @@ function createUser(email, first, last){
 	.then(() => conn.createUser(email, first, last)
 		.then(() => conn.getUser(email)
 			.then(users => console.log(users))//this is where we print selected user
-		      .then(() => conn.updateUser(1, null, "island", null, null, null))
+		      .then(() => conn.updateUser(1, "egc320@lehigh.edu","password", "Evan", "Choy", 9000))
 			.then(() => conn.closeConnection())));
 }
 
