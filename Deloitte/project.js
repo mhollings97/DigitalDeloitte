@@ -35,9 +35,15 @@ function Project(pid, pn, s, t) {
 		return p_name;
 	}
 	this.getSkills = function() {
+		if(skills == null) {
+			skills = [];
+		}
 		return skills;
 	}
 	this.getTags = function() {
+		if(tags == null) {
+			tags = [];
+		}
 		return tags;
 	}
 

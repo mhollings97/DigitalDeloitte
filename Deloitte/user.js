@@ -9,8 +9,6 @@
 //View Current Projects
 //Add and Remove a Project
 //Getters and Setters for Application
-
-Connect = require("./connection");
 //Constructs a User object using data from the Database.
 //Checks if password is correct.
 function User(u, e, f, s, x, sk, t, inConn) {
@@ -57,19 +55,19 @@ function User(u, e, f, s, x, sk, t, inConn) {
 
 	this.setEmail = function(e) {
 		email = e;
-		Connect.updateUser(this.getUser_id(), e, null, null, null, null);
+		this.conn.updateUser(this.getUser_id(), e, null, null, null, null);
 	}
 	this.setFName = function(f) {
 		fName = f;
-		Connect.updateUser(this.getUser_id(), null, null, f, null, null);
+		this.conn.updateUser(this.getUser_id(), null, null, f, null, null);
 	}
 	this.setSName = function(s) {
 		sName = s;
-		Connect.updateUser(this.getUser_id(), null, null, null, s, null);
+		this.conn.updateUser(this.getUser_id(), null, null, null, s, null);
 	}
 	this.setXP = function(x) {
 		xp = x;
-		Connect.updateUser(this.getUser_id(), null, null, null, null, x);
+		this.conn.updateUser(this.getUser_id(), null, null, null, null, x);
 	}
 	this.setSkills = function(sk) {
 		if(sk == null) {
@@ -83,7 +81,7 @@ function User(u, e, f, s, x, sk, t, inConn) {
 
 //Sets the users password.
 User.prototype.setPassword = function(p) {
-	Connect.updateUser(this.getUser_id(), null, p, null, null, null);
+	this.conn.updateUser(this.getUser_id(), null, p, null, null, null);
 }
 
 //Allows a user to add a skill.
@@ -102,7 +100,7 @@ User.prototype.removeSkill = function(s) {
 		if(s == temp[i]) {
 			var ret = temp.splice(i, 1);
 			this.setSkills(temp);
-			Connect.removeHS(this.getUser_id(), s);
+			this.conn.removeHS(this.getUser_id(), s);
 			return ret;
 		}
 	}
@@ -153,42 +151,42 @@ User.prototype.removeProject = function(p) {
 
 //Getters for application
 User.prototype.getSchooling = function() {
-	//Connection to server to get required data.
+	//this.connion to server to get required data.
 }
 User.prototype.getInterest = function() {
-	//Connection to server to get required data.
+	//this.connion to server to get required data.
 }
 User.prototype.getApply_Text = function() {
-	//Connection to server to get required data.
+	//this.connion to server to get required data.
 }
 User.prototype.getLinked_In = function() {
-	//Connection to server to get required data.
+	//this.connion to server to get required data.
 }
 User.prototype.getPersonal_Ln = function() {
-	//Connection to server to get required data.
+	//this.connion to server to get required data.
 }
 User.prototype.getCV = function() {
-	//Connection to server to get required data.
+	//this.connion to server to get required data.
 }
 
 //Setters for application
 User.prototype.setSchooling = function(s) {
-	//Connection to the server to update the data.
+	//this.connion to the server to update the data.
 }
 User.prototype.setInterest = function(s) {
-	//Connection to the server to update the data.
+	//this.connion to the server to update the data.
 }
 User.prototype.setApply_Text = function(s) {
-	//Connection to the server to update the data.
+	//this.connion to the server to update the data.
 }
 User.prototype.setLinked_In = function(s) {
-	//Connection to the server to update the data.
+	//this.connion to the server to update the data.
 }
 User.prototype.setPersonal_Ln = function(s) {
-	//Connection to the server to update the data.
+	//this.connion to the server to update the data.
 }
 User.prototype.setCV = function(s) {
-	//Connection to the server to update the data.
+	//this.connion to the server to update the data.
 }
 
 //toString function for testing code.
