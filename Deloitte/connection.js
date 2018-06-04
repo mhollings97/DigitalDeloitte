@@ -10,6 +10,9 @@ function Connection() {
 	var Tags = null;
 	var HT = null;
 	var Works = null;
+	var Sub = null;
+	var SubFrom = null;
+	var SubFor = null;
 
 	try{
 		//Create connection via Sequelize
@@ -115,7 +118,7 @@ function Connection() {
 			Project.hasMany(NS, {foreignKey: 'proj_id'});
 			Skills.hasMany(NS, {foreignKey: 'skill'});
 
-			App = sequelize.define('Application', {
+			App = sequelize.define('application', {
 				user_id: {
 					type: Sequelize.INTEGER,
 					primaryKey: true
@@ -180,6 +183,45 @@ function Connection() {
 			});
 			Project.hasMany(Works, {foreignKey: 'proj_id'});
 			User.hasMany(Works, {foreignKey: 'user_id'});
+
+			Sub = sequelize.define('submissions', {
+				sub_id: {
+					type: Sequelize.INTEGER,
+					primaryKey: true
+				},
+				sub_loc: {
+					type: Sequelize.STRING
+				},
+				sub_date: {
+					type: Sequelize.DATE
+				}
+			});
+
+			SubFrom = sequelize.define('subFrom', {
+				user_id: {
+					type: Sequelize.INTEGER,
+					primaryKey: true
+				},
+				sub_id: {
+					type: Sequelize.INTEGER,
+					primaryKey: true
+				}
+			});
+			Sub.hasMany(SubFrom, {foreignKey: 'sub_id'});
+			User.hasMany(SubFrom, {foreignKey: 'user_id'});
+
+			SubFor = sequelize.define('subFor', {
+				proj_id: {
+					type: Sequelize.INTEGER,
+					primaryKey: true
+				},
+				sub_id: {
+					type: Sequelize.INTEGER,
+					primaryKey: true
+				}
+			});
+			Sub.hasMany(SubFor, {foreignKey: 'sub_id'});
+			Project.hasMany(SubFor, {foreignKey: 'proj_id'});
 
 			//removed force:true  (forces defined architecture)
 			return sequelize.sync({});
