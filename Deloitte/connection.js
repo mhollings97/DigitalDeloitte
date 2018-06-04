@@ -72,7 +72,10 @@ function Connection() {
 			});
 
 			//Define hasSkills table
-			HS = sequelize.define('hasSkills', {});
+			HS = sequelize.define('hasSkills', {
+				user_id:{primaryKey: true},
+				skill: {primaryKey: true}
+			    });
 			User.hasMany(HS, {foreignKey: 'user_id'});
 			Skills.hasMany(HS, {foreignKey: 'skill'});
 		
@@ -107,9 +110,9 @@ function Connection() {
 
 			//removed force:true  (forces defined architecture)
 			return User.sync({})
-				.then(() => Skills.sync({})
-					.then(() => HS.sync({})
-						.then(() => Project.sync({})
+			.then(() => Skills.sync({})
+				      .then(() => HS.sync({force:true})
+					    .then(() => Project.sync({force: true})
 						      .then(() => NS.sync({})))));
 		}
 		catch(err) {
