@@ -18,7 +18,7 @@ function login(email, password) {
 	conn.createTable()
 		.then(() => conn.getUser(email)
 			.then(users => verifyUser(users, password))//this is where we print selected user
-			.then(() => conn.closeConnection()));
+			);
 }
 
 function verifyUser(inUser, password) {
@@ -26,12 +26,27 @@ function verifyUser(inUser, password) {
 	var theUser = inUser[0].dataValues;
 	if(password == theUser.password) {
 		currentUser = new User(theUser.user_id, theUser.email, theUser.name, theUser.surname, theUser.xp, null, theUser.uType);
-		console.log(currentUser.toString()); //The User is now logged in
+		//console.log(currentUser.toString()); //The User is now logged in
+		getUserSkills();
 	}
 	else {
 		console.log("incorrect password");
 		currentUser = null;
 	}
+}
+
+function getUserSkills() {
+	conn.getUserSkills(currentUser.getUser_id()).then(tuples => pullSkills(tuples)).then(() => conn.closeConnection());
+}
+
+function pullSkills(results) {
+    var skills = [];
+    for(var i = 0; i < results.length; i++)
+        {console.log(results[i].dataValues.skillSkill);
+            skills[i] = results[i].dataValues.skillSkill;
+    }
+    currentUser.setSkills(skills);
+    console.log(currentUser.toString());
 }
 /*
 conn.updateUser(1, "egc320@lehigh.edu","password", "Evan", "Choy", 9000); 
