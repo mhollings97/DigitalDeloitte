@@ -1,4 +1,6 @@
 function Connection() {
+
+    //Declaration of global table variables
 	var sequelize = null;
 	const Sequelize = require ('sequelize');
 	var User = null;
@@ -15,8 +17,9 @@ function Connection() {
 	var SubFor = null;
 	var Assets = null;
 
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Establish connection with Sequelize
 	try{
-		//Create connection via Sequelize
 		sequelize = new Sequelize('deloitte', 'root', 'root', {
 			host: 'localhost',
 			dialect: 'mysql',
@@ -45,6 +48,9 @@ function Connection() {
 		}
 	}
 
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Syncs and/or creates table defintions of database
 	this.createTable = function() {
 		try{
 			//Define table User table
@@ -253,6 +259,12 @@ function Connection() {
 
 	}
 
+
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//User table related functions begin here
+
 	this.createUser = function(e, n, s) {
 		//createUser adds a new User to the database
 		//A nonapproved user (no interview) will have NULL password until approved
@@ -324,6 +336,14 @@ function Connection() {
 	    return Promise.all(i);
         }
 
+
+
+
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Skills table related functions begin here
+
 	//Adds a skill to list of tags used by Projects and users
 	this.insertSkills = function(s) {
 	    return Skills.create({
@@ -339,6 +359,16 @@ function Connection() {
 
 	}
 
+
+
+
+
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//hasSkills related table functions begin here
+
+	//Removes user/skill tuple from hasSkill table
 	this.deleteHS = function(user, skillset)
 	{
 	    return HS.destroy({
