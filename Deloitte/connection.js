@@ -73,8 +73,8 @@ function Connection() {
 
 			//Define hasSkills table
 			HS = sequelize.define('hasSkills', {
-				user_id:{primaryKey: true},
-				skill: {primaryKey: true}
+				user_id:{type: Sequelize.INTEGER, primaryKey: true},
+				skill: {type: Sequelize.STRING, primaryKey: true}
 			    });
 			User.hasMany(HS, {foreignKey: 'user_id'});
 			Skills.hasMany(HS, {foreignKey: 'skill'});
@@ -116,7 +116,7 @@ function Connection() {
 						      .then(() => NS.sync({})))));
 		}
 		catch(err) {
-			console.log(err);
+			console.log("ERROR" + err);
 			return null;
 		}
 
