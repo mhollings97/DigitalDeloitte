@@ -9,6 +9,7 @@ function Connection() {
 	var App = null;
 	var Tags = null;
 	var HT = null;
+	var Works = null;
 
 	try{
 		//Create connection via Sequelize
@@ -100,16 +101,19 @@ function Connection() {
 				people: Sequelize.INTEGER
 			});
 
-			const NS = sequelize.define('needSkills', {
-				project_id: {
-				    type: Sequelize.INTEGER,
-				    primaryKey: true
+			NS = sequelize.define('needsSkills', {
+				proj_id: {
+					type: Sequelize.INTEGER,
+					primaryKey: true
 				},
 				skill: {
-				    type: Sequelize.STRING,
-				    primaryKey: true
+					type: Sequelize.STRING,
+					primaryKey: true
 				}
+
 			});
+			Project.hasMany(NS, {foreignKey: 'proj_id'});
+			Skills.hasMany(NS, {foreignKey: 'skill'});
 
 			App = sequelize.define('Application', {
 				user_id: {
@@ -160,6 +164,22 @@ function Connection() {
 			});
 			Project.hasMany(HT, {foreignKey: 'proj_id'});
 			Tags.hasMany(HT, {foreignKey: 'tag'});
+
+			Works = sequelize.define('worksOn', {
+				user_id: {
+					type: Sequelize.INTEGER,
+					primaryKey: true
+				},
+				proj_id: {
+					type: Sequelize.INTEGER,
+					primaryKey: true
+				},
+				role: {
+					type: Sequelize.STRING
+				}
+			});
+			Project.hasMany(Works, {foreignKey: 'proj_id'});
+			User.hasMany(Works, {foreignKey: 'user_id'});
 
 			//removed force:true  (forces defined architecture)
 			return sequelize.sync({});
