@@ -344,7 +344,7 @@ function Connection() {
 		    i.push(User.update({xp: x}, 
 	                               {where: {user_id: {[Op.eq]:id}}}))
 		}
-	    console.log(this.getUserSkills(1));
+	    //console.log(this.getUserSkills(1));
 	    return Promise.all(i);
         }
 
@@ -398,10 +398,32 @@ function Connection() {
 		    }});
 	}
 
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Application related table functions begin here
 
+	//Creates an application tuple in the table, coresponding to a user id.
+	this.createApp = function(id, s, i, a, l, p, c) {
+		//createUser adds a new User to the database
+		//A nonapproved user (no interview) will have NULL password until approved
+	    return App.create({
+	  		user_id: id,
+			schooling: s,
+			interest: i,
+			apply_Text: a,
+			link_In: l,
+			per_Ln: p,
+			CV_Loc: c 
+	    })
+	}
 
-
-
+	//Returns a tuple given the user id.
+	this.getApp = function(id) {
+		return App.findAll({
+			where: {
+				user_id: id
+			}
+		})
+	}
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Project related table functions begin here
