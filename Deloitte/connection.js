@@ -111,7 +111,7 @@ function Connection() {
 			//removed force:true  (forces defined architecture)
 			return User.sync({})
 			.then(() => Skills.sync({})
-				      .then(() => HS.sync({force:true})
+				      .then(() => HS.sync({})
 					    .then(() => Project.sync({force: true})
 						      .then(() => NS.sync({})))));
 		}

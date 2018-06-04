@@ -42,8 +42,8 @@ function getUserSkills() {
 function pullSkills(results) {
     var skills = [];
     for(var i = 0; i < results.length; i++)
-        {console.log(results[i].dataValues.skillSkill);
-            skills[i] = results[i].dataValues.skillSkill;
+        {console.log(results[i].dataValues.skill);
+            skills[i] = results[i].dataValues.skill;
     }
     currentUser.setSkills(skills);
     console.log(currentUser.toString());
@@ -52,5 +52,5 @@ function pullSkills(results) {
 conn.updateUser(1, "egc320@lehigh.edu","password", "Evan", "Choy", 9000); 
 */
 
-login("pen@dsa", "island");
+login("egc320@lehigh.edu", "password");
 //createUser(Math.random().toString(36).substring(7) + "@gmail.com", Math.random().toString(36).substring(7), Math.random().toString(36).substring(7));
