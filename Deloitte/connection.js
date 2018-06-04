@@ -371,11 +371,36 @@ function Connection() {
 
 	}
 
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//worksOn related table function
+	//Returns a list of every project that a given user_id is apart of.
+	this.getProjectsbyUser = function(id) {
+		return Project.findAll({
+			include: [{
+				model: User,
+				required: true,
+				where: {user_id: id}
+			}]
+		})
+	}
 
+	//Adds that a user is working on a project.
+	this.addProject = function(uid, pid, r) {
+		return Works.create({
+			user_id: uid,
+			proj_id: pid,
+			role: r
+		})
+	}
 
-
-
-
+	//Removes that a user is working on a project.
+	this.removeProject = function(uid, pid) {
+		return Works.destroy({
+			where: {
+				user_id: uid,
+				proj_id: pid
+			}})
+	}
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//hasSkills related table functions begin here
