@@ -1,0 +1,35 @@
+
+.App {
+  text-align: center;
+  background-color: white;
+}
+
+
+#Input-Form{
+  position: relative;
+  background-color: lightblue;
+  padding-right: auto;
+  padding-left: auto;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+#WelcomeContainer{
+        width: 100%;
+        position: relative;
+}
+
+#LandingContainer{
+
+
+}
+
+
+#WhoContainer{
+        position: relative;
+}
+

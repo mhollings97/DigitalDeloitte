@@ -10,6 +10,9 @@ import WhatDrop from './components/Pages/WhatDrop/WhatDrop'
 import Expect from './components/Pages/Expect/Expect'
 import Offer from './components/Pages/Offer/Offer'
 import LandingFooter from './components/Pages/LandingFooter/LandingFooter'
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import HomeScreen from './components/Pages/HomeScreen/HomeScreen'
+
 class App extends Component {
 constructor(props) {
     super(props);
@@ -27,39 +30,9 @@ constructor(props) {
 
   render() {
     return (
-        <div className = "App">
-                <div id = "LandingContainer">
-                        <Landing/>
-                </div>
-                <div id = "WelcomeContainer">
-                        <Welcome toggleDD = {this.toggleDD}/>
-                </div>
-                <div>
-                        {this.state.showDD && <DropDown/>}
-                </div>
-
-		<div id = "WhoContainer">
-                        <Who/>
-                </div>
-                <div id = "WhatContainer">
-                        <What toggleDD = {this.toggleDD}/>
-                </div>
-                <div>
-                        {this.state.showDD && <WhatDrop/>}
-                </div>
-
-                <div id = "ExpectContainer">
-                        <Expect/>
-                </div>
-
-                <div id = "OfferContainer">
-                        <Offer/>
-                </div>
-
-                <div id = "LandingFooterContainer">
-                        <LandingFooter/>
-                </div>
-        </div>
+    <Router>
+	<HomeScreen/>
+    </Router>
     );
   }
 }
