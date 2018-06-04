@@ -73,11 +73,11 @@ User.prototype.setPassword = function(p) {
 
 //Allows a user to add a skill.
 User.prototype.addSkill = function(s) {
-	var temp = this.getSkills();
+	var temp = [];
+	temp = this.getSkills();
 	temp.push(s);
 	this.setSkills(temp);
-	Connect.addHS(this.getUser_id(), s);
-	return s;
+	return Connect.addHS(this.getUser_id(), s);
 }
 
 //Allows a User to remove a skill.
