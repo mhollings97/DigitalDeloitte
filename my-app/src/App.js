@@ -5,7 +5,11 @@ import Landing from './components/Pages/Landing/Landing'
 import DropDown from './components/Pages/DropDown/DropDown'
 import Welcome from './components/Pages/Welcome/Welcome'
 import Who from './components/Pages/Who/Who'
-import {BrowserRouter as Router, Link} from 'react-router-dom'
+import What from './components/Pages/What/What'
+import WhatDrop from './components/Pages/WhatDrop/WhatDrop'
+import Expect from './components/Pages/Expect/Expect'
+import Offer from './components/Pages/Offer/Offer'
+import LandingFooter from './components/Pages/LandingFooter/LandingFooter'
 class App extends Component {
 constructor(props) {
     super(props);
@@ -23,22 +27,39 @@ constructor(props) {
 
   render() {
     return (
-	<Router>
-	<div className = "App">
-		<div id = "LandingContainer">
-			<Landing/>
-    		</div>
-		<div id = "WelcomeContainer">
-			<Welcome toggleDD = {this.toggleDD}/>
-		</div>
-		<div>
-			{this.state.showDD && <DropDown/>}
-		</div>
+        <div className = "App">
+                <div id = "LandingContainer">
+                        <Landing/>
+                </div>
+                <div id = "WelcomeContainer">
+                        <Welcome toggleDD = {this.toggleDD}/>
+                </div>
+                <div>
+                        {this.state.showDD && <DropDown/>}
+                </div>
+
 		<div id = "WhoContainer">
-			<Who/>
-		</div>
-	</div>
-    	</Router>
+                        <Who/>
+                </div>
+                <div id = "WhatContainer">
+                        <What toggleDD = {this.toggleDD}/>
+                </div>
+                <div>
+                        {this.state.showDD && <WhatDrop/>}
+                </div>
+
+                <div id = "ExpectContainer">
+                        <Expect/>
+                </div>
+
+                <div id = "OfferContainer">
+                        <Offer/>
+                </div>
+
+                <div id = "LandingFooterContainer">
+                        <LandingFooter/>
+                </div>
+        </div>
     );
   }
 }
