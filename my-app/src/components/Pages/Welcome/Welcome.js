@@ -12,16 +12,7 @@ class Welcome extends Component {
 constructor(props) {
     super(props);
 
-    this.state = {
-        showDD: false
-    };
 
-        this.toggleDD = this.toggleDD.bind(this);
-}
-        toggleDD(showDD) {
-            this.setState(prevState => ({
-                showDD: !prevState.showDD
-          }));
 }
 
 
@@ -37,10 +28,7 @@ render() {
 		</div>
 		<div id = "Apply">
 			<Apply/>
-			<button id = "HowBut" onClick = {this.toggleDD}> How we select out candidates </button>
-		</div>
-		<div id = "WDD">
-			{this.state.showDD && <DropDown/>}
+			<button id = "HowBut" onClick = {this.props.toggleDD}> How we select out candidates </button>
 		</div>
 	</div>
 

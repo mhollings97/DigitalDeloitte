@@ -3,7 +3,11 @@
 }
 
 #abtus {
-    background-color: white;
-    color: green;
-    font-size: 15px
+ 	background-color: Transparent;
+        background-repeat:no-repeat;
+        border: none;
+        cursor:pointer;
+        overflow: hidden;
+        outline:none;
+        color: #2eb82e;
 }
