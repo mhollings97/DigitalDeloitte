@@ -309,13 +309,6 @@ function Connection() {
 
         }
 
-    this.addHS = function(inId, s) {
-    		return HS.create({
-	        user_id: inId,
-	        skill: s
-	    	})
-    }
-
 	//Update user fields
 	this.updateUser = function(id, e, p, n, s, x) {
 	    var i = [];
@@ -387,6 +380,14 @@ function Connection() {
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//hasSkills related table functions begin here
 
+	//Adds skill for specific user
+	this.addHS = function(inId, s) {
+	    return HS.create({
+		    user_id: inId,
+		    skill: s
+                })
+	}
+
 	//Removes user/skill tuple from hasSkill table
 	this.deleteHS = function(user, skillset)
 	{
@@ -396,6 +397,33 @@ function Connection() {
 		        skill: skillset
 		    }});
 	}
+
+
+
+
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Project related table functions begin here
+
+	//createProject adds a new Project to the database                                     
+        this.createProject = function(name, complete, desc, rec, join, rev, sub, min, max, p, \
+				      xp, bonus) {
+            return Project.create({
+                    project_name: name,
+                    completion_time: complete,
+                    description: desc,
+                    rec_desc: rec,
+                    join_deadline: join,
+                    rev_deadline: rev,
+                    sub_deadline: sub,
+                    min_diff: min,
+                    max_diff: max,
+                    people: p,
+                    xp_gain: xp,
+                    xp_bonus: bonus
+                });
+        }
 }
 
 module.exports = Connection;
