@@ -5,22 +5,22 @@
     position: relative;
 }
 
-#small{
+#smallIMG{
 	heigth: 45%;
 	width: 45%;
 }
 
-#medium{
+#mediumIMG{
 	height: 60%;
 	width: 60%;
 }
 
-#large{
+#largeIMG{
 	height: 75%;
 	width: 75%;
 }
 
-#xlarge{
+#xlargeIMG{
 	height: 95%;
 	width: 95%;
 }
