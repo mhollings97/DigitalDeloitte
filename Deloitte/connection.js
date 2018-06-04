@@ -7,6 +7,8 @@ function Connection() {
 	var Project = null;
 	var NS = null;
 	var App = null;
+	var Tags = null;
+	var HT = null;
 
 	try{
 		//Create connection via Sequelize
@@ -135,6 +137,29 @@ function Connection() {
 
 			});
 			User.hasMany(App, {foreignKey: 'user_id'});
+
+			Tags = sequelize.define('Tags', {
+				tag: {
+					type: Sequelize.STRING,
+					primaryKey: true
+				},
+				tag_type: {
+					type: Sequelize.STRING
+				}
+			});
+
+			HT = sequelize.define('hasTags', {
+				proj_id: {
+					type: Sequelize.INTEGER,
+					primaryKey: true
+				},
+				tag: {
+					type: Sequelize.STRING,
+					primaryKey: true
+				}
+			});
+			Project.hasMany(HT, {foreignKey: 'proj_id'});
+			Tags.hasMany(HT, {foreignKey: 'tag'});
 
 			//removed force:true  (forces defined architecture)
 			return sequelize.sync({});
