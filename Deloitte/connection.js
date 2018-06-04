@@ -73,8 +73,8 @@ function Connection() {
 
 			//Define hasSkills table
 			HS = sequelize.define('hasSkills', {});
-			HS.hasMany(User, {});
-			HS.hasMany(Skills, {});
+			User.hasMany(HS, {foreignKey: 'user_id'});
+			Skills.hasMany(HS, {foreignKey: 'skill'});
 		
 			//define project table
 			Project = sequelize.define('project', {
