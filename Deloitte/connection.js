@@ -344,7 +344,7 @@ function Connection() {
 		    i.push(User.update({xp: x}, 
 	                               {where: {user_id: {[Op.eq]:id}}}))
 		}
-	    //console.log(this.getUserSkills(1));
+	    
 	    return Promise.all(i);
         }
 
@@ -448,9 +448,108 @@ function Connection() {
         }
 
 
+	//Update user fields                                                                                              
+        this.updateProject = function(id, name, complete, desc, rec, join, rev, sub, min, max, p, xp, bonus) {
+            var i = [];
+            if(name != null)
+                {
+                    i.push(Project.update({project_name: name},
+                                       {where: {project_id: {[Op.eq]:id}}
+                    
+				       }));
+		}
+
+	    if(complete != null)
+                {
+                    i.push(Project.update({completion_time: complete},
+	                  {where: {project_id: {[Op.eq]:id}}
+
+			  }));
+		}
+
+	    if(desc != null)
+                {
+                    i.push(Project.update({description: desc},
+	                  {where: {project_id: {[Op.eq]:id}}
+
+			  }));
+                }
+
+	    if(rec != null)
+                {
+                    i.push(Project.update({rec_desc: rec},
+	                {where: {project_id: {[Op.eq]:id}}
+
+			}));
+                }
+
+	    if(join != null)
+                {
+                    i.push(Project.update({join_deadline: join},
+	                  {where: {project_id: {[Op.eq]:id}}
+
+			  }));
+                }
+
+            if(rev != null)
+                {
+                    i.push(Project.update({rev_deadline: rev},
+	                  {where: {project_id: {[Op.eq]:id}}
+
+			  }));
+                }
+
+	    if(sub != null)
+                {
+                    i.push(Project.update({sub_deadline: sub},
+	                   {where: {project_id: {[Op.eq]:id}}
+
+			   }));
+                }
+
+            if(p != null)
+                {
+                    i.push(Project.update({people: p},
+	               {where: {project_id: {[Op.eq]:id}}
+
+		       }));
+                }
+
+	    if(min != null)
+                {
+                    i.push(Project.update({min_diff: min},
+	                  {where: {project_id: {[Op.eq]:id}}
+
+			  }));
+                }
 
 
+	    if(max != null)
+                {
+                    i.push(Project.update({max_diff: max},
+	                  {where: {project_id: {[Op.eq]:id}}
 
+			  }));
+                }
+
+	    if(xp != null)
+                {
+                    i.push(Project.update({xp_gain: xp},
+	                 {where: {project_id: {[Op.eq]:id}}
+
+			 }));
+                }
+
+	    if(bonus != null)
+                {
+                    i.push(Project.update({xp_bonus: bonus},
+	                  {where: {project_id: {[Op.eq]:id}}
+
+			  }));
+                }
+
+	    return Promise.all(i);
+	}
 
 
 
