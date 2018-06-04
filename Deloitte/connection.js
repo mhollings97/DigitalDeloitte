@@ -101,7 +101,7 @@ function Connection() {
 				    primaryKey: true
 				},
 				project_name: Sequelize.STRING,
-				completion_time: Sequelize.STRING,
+				completion_time: Sequelize.INTEGER,
 				description: Sequelize.STRING,
 				rec_desc: Sequelize.STRING,
 				join_deadline: {
@@ -407,7 +407,7 @@ function Connection() {
 	//Project related table functions begin here
 
 	//createProject adds a new Project to the database                                     
-        this.createProject = function(name, complete, desc, rec, join, rev, sub, min, max, p, \
+        this.createProject = function(name, complete, desc, rec, join, rev, sub, min, max, p,
 				      xp, bonus) {
             return Project.create({
                     project_name: name,
