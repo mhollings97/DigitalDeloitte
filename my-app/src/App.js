@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
 import HomeScreen from './components/Pages/HomeScreen/HomeScreen'
 import AboutUs from './components/Pages/AboutUs/AboutUs'
+import AboutProj from './components/Pages/AboutProj/AboutProj'
 import InputForm from './components/InputForm/InputForm'
 import TopHeader from './components/Header/TopHeader'
 class App extends Component {
@@ -91,7 +92,7 @@ constructor(props) {
 	 <Route exact = {true} path = "/contactus" render={props => <div> CONTACT US </div>} />
 
 	 {this.state.showAP && <Redirect from = {this.location} to = "/abouttheproject"/>}
-	 <Route exact = {true} path = "/abouttheproject" render={props => <div> ABOUT THE PROJECT </div>} />
+	 <Route exact = {true} path = "/abouttheproject" render={props => <AboutProj/>} />
 
 	</div>
     </Router>
