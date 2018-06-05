@@ -13,9 +13,7 @@ function Connection() {
 	var HT = null;
 	var Works = null;
 	var Sub = null;
-	var SubFrom = null;
-	var SubFor = null;
-	var Assets = null;
+    	var Assets = null;
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Establish connection with Sequelize
@@ -405,6 +403,37 @@ function Connection() {
 		    }});
 	}
 
+
+
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                           
+        //needSkills related table functions begin here                                                                 
+
+        //Adds skill for specific project
+        this.addNS = function(pid, s) {
+            return NS.create({
+                    project_id: pid,
+                    skill: s
+                })
+        }
+
+        //Removes project/skill tuple from needSkill table                                                    
+        this.deleteNS = function(pid, s)
+        {
+            return NS.destroy({
+                    where: {
+                        project_id: pid,
+                        skill: s
+                    }});
+        }
+
+
+
+
+
+
+
+
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Application related table functions begin here
 
@@ -616,6 +645,51 @@ function Connection() {
                     }});
         }
 	
+
+
+
+
+	
+
+
+	
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//submissions table related functions begin here
+	
+	//Adds submission for specific project  
+        this.addSub = function(id, loc, date, uid, pid) {
+            return Sub.create({
+                    sub_id: id,
+		    sub_loc: loc,
+		    sub_date: date,
+		    user_id: uid,
+		    project_id: pid
+                })
+        }
+
+
+	//gets information on submissions for a project
+	this.getSub = function(uid, pid)
+	{   
+	    if(uid != null && pid != null)
+		{
+		    return Sub.findAll({
+				where: {user_id: uid,
+					project_id: pid}
+			});
+		}
+
+	    
+	    if(uid != null)
+		{
+		    return (Sub.findAll({where: {user_id: uid}}));
+		}
+
+	    if(pid != null)
+		{ return Sub.findAll({where: {project_id: pid}}); }
+
+        }
 }
 
 module.exports = Connection;
