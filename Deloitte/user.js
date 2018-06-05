@@ -97,7 +97,7 @@ User.prototype.removeSkill = function(s) {
 		if(s == temp[i]) {
 			var ret = temp.splice(i, 1);
 			this.setSkills(temp);
-			this.conn.removeHS(this.getUser_id(), s);
+			this.conn.deleteHS(this.getUser_id(), s);
 			return ret;
 		}
 	}
