@@ -211,10 +211,10 @@ function Connection() {
 				},
 				sub_date: {
 					type: Sequelize.DATE
-				}
+				},
 				user_id: {
 					type: Sequelize.INTEGER
-				}
+				},
 				project_id : {
 					type: Sequelize.INTEGER
 				}
@@ -690,6 +690,20 @@ function Connection() {
 		{ return Sub.findAll({where: {project_id: pid}}); }
 
         }
-}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//worksOn table related functions begin here
 
+	this.getWorkers = function(pid, r) {
+		return User.findAll({
+			include: [{
+				model: Works,
+				required: true,
+				where: {
+					project_id: pid,
+					role: r
+				}
+			}]
+		});
+	}
+}
 module.exports = Connection;
