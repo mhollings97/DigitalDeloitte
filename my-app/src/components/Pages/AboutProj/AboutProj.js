@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import TextBox from '../../.././TextBox/TextBox'
-import Image from '../../.././Image/Image'
+import TextBox from '../.././TextBox/TextBox'
+import Image from '../.././Image/Image'
+import AboutProjHeader from './AboutProjHeader/AboutProjHeader'
 import './AboutProj.css'
 
 class AboutProj extends Component {
@@ -12,9 +13,19 @@ class AboutProj extends Component {
 render() {
 
     return (
-        <div id = "Heading">
+	<div id = "AboutProjWrap">
+        <div id = "ProjHeading">
             <TextBox size = "small" message = "We believe in this platform."/>
+	</div>
+
+	<div id = "HeaderContainer">
+	<AboutProjHeader/>
+	</div>
 	</div>
     );
 
 }
+
+}
+
+export default AboutProj;
