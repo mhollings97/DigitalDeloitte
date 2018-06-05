@@ -6,7 +6,7 @@ class HomeButton extends Component {
   render() {
     return (
       <div id = "ButtonWrapper">
-	<button id = "Button"> Deloitte Digital </button>
+	<button onClick = {this.props.func} id = "Button"> Deloitte Digital </button>
     </div>
 
     );
