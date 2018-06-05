@@ -169,12 +169,7 @@ Project.prototype.getDevs = function() {
 //Returns a list of Submissions that the project has recieved.
 //User, file location, and date.
 Project.prototype.viewSubs = function() {
-
-}
-
-//Adds a submission to the list, given the user_id and location.
-Project.prototype.addSub = function(u, l) {
-
+	return this.conn.getSub(null, this.getProj_id());
 }
 
 //Adds a skill to the list.

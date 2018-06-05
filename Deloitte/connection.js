@@ -204,6 +204,7 @@ function Connection() {
 			Sub = sequelize.define('submissions', {
 				sub_id: {
 					type: Sequelize.INTEGER,
+					autoIncrement: true,
 					primaryKey: true
 				},
 				sub_loc: {
@@ -529,125 +530,125 @@ function Connection() {
 	//Project related table functions begin here
 
 	//createProject adds a new Project to the database                                     
-        this.createProject = function(name, complete, desc, rec, join, rev, sub, min, max, p,
-				      xp, bonus) {
-            return Project.create({
-                    project_name: name,
-                    completion_time: complete,
-                    description: desc,
-                    rec_desc: rec,
-                    join_deadline: join,
-                    rev_deadline: rev,
-                    sub_deadline: sub,
-                    min_diff: min,
-                    max_diff: max,
-                    people: p,
-                    xp_gain: xp,
-                    xp_bonus: bonus
-                });
-        }
+    this.createProject = function(name, complete, desc, rec, join, rev, sub, min, max, p,
+			      xp, bonus) {
+        return Project.create({
+                project_name: name,
+                completion_time: complete,
+                description: desc,
+                rec_desc: rec,
+                join_deadline: join,
+                rev_deadline: rev,
+                sub_deadline: sub,
+                min_diff: min,
+                max_diff: max,
+                people: p,
+                xp_gain: xp,
+                xp_bonus: bonus
+            });
+    }
 
 
 
 	//Update project fields        
-        this.updateProject = function(id, name, complete, desc, rec, join, rev, sub, min, max, p, xp, bonus) {
-            var i = [];
-            if(name != null)
-                {
-                    i.push(Project.update({project_name: name},
-                                       {where: {project_id: {[Op.eq]:id}}
-                    
-				       }));
+    this.updateProject = function(id, name, complete, desc, rec, join, rev, sub, min, max, p, xp, bonus) {
+        var i = [];
+        if(name != null)
+            {
+                i.push(Project.update({project_name: name},
+                                   {where: {project_id: {[Op.eq]:id}}
+                
+			       }));
 		}
 
 	    if(complete != null)
-                {
-                    i.push(Project.update({completion_time: complete},
+	            {
+	                i.push(Project.update({completion_time: complete},
 	                  {where: {project_id: {[Op.eq]:id}}
 
 			  }));
 		}
 
 	    if(desc != null)
-                {
-                    i.push(Project.update({description: desc},
+	            {
+	                i.push(Project.update({description: desc},
 	                  {where: {project_id: {[Op.eq]:id}}
 
 			  }));
-                }
+	            }
 
 	    if(rec != null)
-                {
-                    i.push(Project.update({rec_desc: rec},
+	            {
+	                i.push(Project.update({rec_desc: rec},
 	                {where: {project_id: {[Op.eq]:id}}
 
 			}));
-                }
+	            }
 
 	    if(join != null)
-                {
-                    i.push(Project.update({join_deadline: join},
+	            {
+	                i.push(Project.update({join_deadline: join},
 	                  {where: {project_id: {[Op.eq]:id}}
 
 			  }));
-                }
+	            }
 
-            if(rev != null)
-                {
-                    i.push(Project.update({rev_deadline: rev},
+	        if(rev != null)
+	            {
+	                i.push(Project.update({rev_deadline: rev},
 	                  {where: {project_id: {[Op.eq]:id}}
 
 			  }));
-                }
+	            }
 
 	    if(sub != null)
-                {
-                    i.push(Project.update({sub_deadline: sub},
+	            {
+	                i.push(Project.update({sub_deadline: sub},
 	                   {where: {project_id: {[Op.eq]:id}}
 
 			   }));
-                }
+	            }
 
-            if(p != null)
-                {
-                    i.push(Project.update({people: p},
+	        if(p != null)
+	            {
+	                i.push(Project.update({people: p},
 	               {where: {project_id: {[Op.eq]:id}}
 
 		       }));
-                }
+	            }
 
 	    if(min != null)
-                {
-                    i.push(Project.update({min_diff: min},
+	            {
+	                i.push(Project.update({min_diff: min},
 	                  {where: {project_id: {[Op.eq]:id}}
 
 			  }));
-                }
+	            }
 
 
 	    if(max != null)
-                {
-                    i.push(Project.update({max_diff: max},
+	            {
+	                i.push(Project.update({max_diff: max},
 	                  {where: {project_id: {[Op.eq]:id}}
 
 			  }));
-                }
+	            }
 
 	    if(xp != null)
-                {
-                    i.push(Project.update({xp_gain: xp},
+	            {
+	                i.push(Project.update({xp_gain: xp},
 	                 {where: {project_id: {[Op.eq]:id}}
 
 			 }));
-                }
+	            }
 
 	    if(bonus != null)
-                {
-                    i.push(Project.update({xp_bonus: bonus},
+	            {
+	                i.push(Project.update({xp_bonus: bonus},
 	                  {where: {project_id: {[Op.eq]:id}}
 
 			  }));
-                }
+	            }
 
 	    return Promise.all(i);
 	}
@@ -680,18 +681,17 @@ function Connection() {
 	//Tags table related functions begin here
 
 	//Adds a tag to list of tags used by Projects                                       
-        this.insertTags = function(t) {
-            return Tags.create({
-                    tag: t
-                });
-        }
+    this.insertTags = function(t) {
+        return Tags.create({
+                tag: t
+            });
+    }
 
-        //Returns the promise of all skills                                                                 
-        this.getTags = function() {
-            return Tags.findAll({
-                    attributes: ['tag'],
+    //Returns the promise of all skills                                                                 
+    this.getTags = function() {
+        return Tags.findAll({
+                attributes: ['tag'],
 		});
-
 	}
 
 
@@ -706,22 +706,22 @@ function Connection() {
 	//hasTags table related functions begin here
 	
 	//Adds tag for specific project                                                                  
-        this.addHT = function(pid, t) {
-            return HT.create({
+    this.addHT = function(pid, t) {
+        return HT.create({
+                project_id: pid,
+                tag: t
+            })
+    }
+
+    //Removes project/tag tuple from hasTag table                                                      
+    this.deleteHT = function(pid, t)
+    {
+        return HT.destroy({
+                where: {
                     project_id: pid,
                     tag: t
-                })
-        }
-
-        //Removes project/tag tuple from hasTag table                                                      
-        this.deleteHT = function(pid, t)
-        {
-            return HT.destroy({
-                    where: {
-                        project_id: pid,
-                        tag: t
-                    }});
-        }
+                }});
+    }
 	
 
 
@@ -736,15 +736,15 @@ function Connection() {
 	//submissions table related functions begin here
 	
 	//Adds submission for specific project  
-        this.addSub = function(id, loc, date, uid, pid) {
-            return Sub.create({
-                    sub_id: id,
-		    sub_loc: loc,
-		    sub_date: date,
-		    user_id: uid,
-		    project_id: pid
-                })
-        }
+    this.addSub = function(id, loc, date, uid, pid) {
+        return Sub.create({
+                sub_id: id,
+	    sub_loc: loc,
+	    sub_date: date,
+	    user_id: uid,
+	    project_id: pid
+            })
+    }
 
 
 	//gets information on submissions for a project
@@ -765,8 +765,9 @@ function Connection() {
 		}
 
 	    if(pid != null)
-		{ return Sub.findAll({where: {project_id: pid}}); }
-
-        }
+		{ 
+			return Sub.findAll({where: {project_id: pid}}); 
+		}
+    }
 }
 module.exports = Connection;
