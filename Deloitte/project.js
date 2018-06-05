@@ -45,9 +45,6 @@ function Project(pid, pn, s, t, inConn) {
 		return tags;
 	}
 
-	this.setProj_id = function(id) {
-		proj_id = id;
-	}
 	this.setP_name = function(n) {
 		p_name = n;
 	}

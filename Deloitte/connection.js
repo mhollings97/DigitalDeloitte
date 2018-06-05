@@ -124,7 +124,7 @@ function Connection() {
 			});
 
 			NS = sequelize.define('needsSkills', {
-				proj_id: {
+				project_id: {
 					type: Sequelize.INTEGER,
 					primaryKey: true
 				},
@@ -134,7 +134,7 @@ function Connection() {
 				}
 
 			});
-			Project.hasMany(NS, {foreignKey: 'proj_id'});
+			Project.hasMany(NS, {foreignKey: 'project_id'});
 			Skills.hasMany(NS, {foreignKey: 'skill'});
 
 			App = sequelize.define('application', {
@@ -175,7 +175,7 @@ function Connection() {
 			});
 
 			HT = sequelize.define('hasTags', {
-				proj_id: {
+				project_id: {
 					type: Sequelize.INTEGER,
 					primaryKey: true
 				},
@@ -184,7 +184,7 @@ function Connection() {
 					primaryKey: true
 				}
 			});
-			Project.hasMany(HT, {foreignKey: 'proj_id'});
+			Project.hasMany(HT, {foreignKey: 'project_id'});
 			Tags.hasMany(HT, {foreignKey: 'tag'});
 
 			Works = sequelize.define('worksOn', {
@@ -192,7 +192,7 @@ function Connection() {
 					type: Sequelize.INTEGER,
 					primaryKey: true
 				},
-				proj_id: {
+				project_id: {
 					type: Sequelize.INTEGER,
 					primaryKey: true
 				},
@@ -200,7 +200,7 @@ function Connection() {
 					type: Sequelize.STRING
 				}
 			});
-			Project.hasMany(Works, {foreignKey: 'proj_id'});
+			Project.hasMany(Works, {foreignKey: 'project_id'});
 			User.hasMany(Works, {foreignKey: 'user_id'});
 
 			Sub = sequelize.define('submissions', {
@@ -214,33 +214,15 @@ function Connection() {
 				sub_date: {
 					type: Sequelize.DATE
 				}
-			});
-
-			SubFrom = sequelize.define('subFrom', {
 				user_id: {
-					type: Sequelize.INTEGER,
-					primaryKey: true
-				},
-				sub_id: {
-					type: Sequelize.INTEGER,
-					primaryKey: true
+					type: Sequelize.INTEGER
+				}
+				project_id : {
+					type: Sequelize.INTEGER
 				}
 			});
-			Sub.hasMany(SubFrom, {foreignKey: 'sub_id'});
-			User.hasMany(SubFrom, {foreignKey: 'user_id'});
-
-			SubFor = sequelize.define('subFor', {
-				proj_id: {
-					type: Sequelize.INTEGER,
-					primaryKey: true
-				},
-				sub_id: {
-					type: Sequelize.INTEGER,
-					primaryKey: true
-				}
-			});
-			Sub.hasMany(SubFor, {foreignKey: 'sub_id'});
-			Project.hasMany(SubFor, {foreignKey: 'proj_id'});
+			User.hasMany(Sub, {foreignKey: 'user_id'});
+			Project.hasMany(Sub, {foreignKey: 'project_id'});
 
 			Assets = sequelize.define('assets', {
 				user_id: {
@@ -388,7 +370,7 @@ function Connection() {
 	this.addProject = function(uid, pid, r) {
 		return Works.create({
 			user_id: uid,
-			proj_id: pid,
+			project_id: pid,
 			role: r
 		})
 	}
@@ -398,7 +380,7 @@ function Connection() {
 		return Works.destroy({
 			where: {
 				user_id: uid,
-				proj_id: pid
+				project_id: pid
 			}})
 	}
 
@@ -586,14 +568,6 @@ function Connection() {
                         }
 		    })
 	}
-
-
-
-
-
-
-
-
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Tags table related functions begin here
