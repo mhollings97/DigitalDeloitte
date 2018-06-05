@@ -5,7 +5,10 @@
   "files": [
     "test.js",
     "user.js",
-    "connection.js"
+    "connection.js",
+	"project.js",
+	"submissions.js",
+	"interaction.js"
   ],
   "main": "test.js",
   "author": "jake",
