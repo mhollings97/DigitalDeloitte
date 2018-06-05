@@ -218,6 +218,21 @@ Project.prototype.removeTag = function(t) {
 	return null;
 }
 
+//Adds an asset to the project.
+Project.prototype.addAsset = function(type, loc, desc, date) {
+	return this.conn.addAsset(this.getProj_id(), type, loc, desc, date);
+}
+
+//Gets an asset by its type, or all assets if type is null
+Project.prototype.getAsset = function(type) {
+	return this.conn.getAsset(this.getProj_id(), type);
+}
+
+//Removes an asset based on its location
+Project.prototype.removeAsset = function(loc) {
+	return this.conn.deleteAsset(this.getProj_id(), loc);
+}
+
 //toString function for testing.
 Project.prototype.toString = function() {
 	return "" + this.getProj_id() + " " + this.getP_name() + " " + this.getSkills() + " " + this.getTags();

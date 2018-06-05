@@ -736,13 +736,12 @@ function Connection() {
 	//submissions table related functions begin here
 	
 	//Adds submission for specific project  
-    this.addSub = function(id, loc, date, uid, pid) {
+    this.addSub = function(loc, date, uid, pid) {
         return Sub.create({
-                sub_id: id,
-	    sub_loc: loc,
-	    sub_date: date,
-	    user_id: uid,
-	    project_id: pid
+		    sub_loc: loc,
+		    sub_date: date,
+		    user_id: uid,
+		    project_id: pid
             })
     }
 
@@ -768,6 +767,58 @@ function Connection() {
 		{ 
 			return Sub.findAll({where: {project_id: pid}}); 
 		}
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//asset table related functions begin here
+    
+    //Adds an asset to the asset table
+    this.addAsset = function(pid, type, loc, desc, date) {
+    	return Assets.create({
+    		project_id: pid,
+    		asset_type: type,
+    		asset_loc: loc,
+    		asset_desc: desc,
+    		asset_update: date
+    	})
+    }
+
+    //Gets an asset by a type if specified, or gets all assets if null
+    this.getAsset = function(pid, type) {
+    	if(type != null) {
+    		return Assets.findAll({
+    			where: {project_id: pid,
+    					asset_type: type}
+    		})
+    	}
+    	else {
+    		return Assets.findAll({
+    			where: {project_id: pid}
+    		})
+    	}
+    }
+
+    //Deletes an asset from the table
+    this.deleteAsset = function(pid, loc) {
+    	return Assets.destroy({
+    		where: {project_id: pid,
+    				asset_loc: loc}
+    	})
     }
 }
 module.exports = Connection;
