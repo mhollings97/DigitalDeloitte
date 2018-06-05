@@ -1,5 +1,10 @@
 #ButtonWrapper{
 	text-align: left;
+	cursor: default;
+}
+
+#ButtonWrapper:hover{
+	cursor: default;
 }
 
 #Button{
@@ -7,5 +12,7 @@
 	font-size: 24px;
 }
 
-
+#Button:hover {
+	cursor: pointer;
+}
 
