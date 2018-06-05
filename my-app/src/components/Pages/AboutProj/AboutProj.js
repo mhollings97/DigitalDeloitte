@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TextBox from '../.././TextBox/TextBox'
 import Image from '../.././Image/Image'
+import GreyFooter from '../.././GreyFooter/GreyFooter'
 import AboutProjHeader from './AboutProjHeader/AboutProjHeader'
 import './AboutProj.css'
 
@@ -14,12 +15,12 @@ render() {
 
     return (
 	<div id = "AboutProjWrap">
-        <div id = "ProjHeading">
-            <TextBox size = "small" message = "We believe in this platform."/>
-	</div>
 
 	<div id = "HeaderContainer">
-	<AboutProjHeader/>
+	  <AboutProjHeader/>
+	</div>
+	<div id = "FooterContainer">
+	  <GreyFooter/>
 	</div>
 	</div>
     );

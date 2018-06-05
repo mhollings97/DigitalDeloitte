@@ -1,0 +1,23 @@
+#PeopleBox {
+	width: 100%;
+	display: inline-block;
+
+}
+
+#POne {
+	display: inline-block;
+	width: 20%;
+	text-align: left;
+}
+
+#PTwo {
+	display: inline-block;
+	width: 20%;
+	text-align: left;
+}
+
+#PThree {
+	display: inline-block;
+	width: 20%;
+	text-align: left;
+}
