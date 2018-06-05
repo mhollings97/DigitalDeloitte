@@ -24,12 +24,15 @@ render () {
 	<div id = "InformationWrap">
 	  <AboutUsInfo/>
 	</div>
-	<div id = "ClientsWrap">
-	  <AboutUsClients/>
-	</div>
-	<div id = "PeopleWrap">
-	  <AboutUsPeople/>
-	</div>
+	    <div id = "bottomPart">
+		<div id = "ClientsWrap">
+		  <AboutUsClients/>
+		</div>
+		<div id = "PeopleWrap">
+		  <AboutUsPeople/>
+		</div>
+	    </div>
+
 	<div id = "FooterWrap">
 	  <GreyFooter/>
 	</div>

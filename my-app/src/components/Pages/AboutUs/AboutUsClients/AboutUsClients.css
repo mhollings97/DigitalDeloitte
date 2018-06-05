@@ -1,11 +1,11 @@
 #TopRow {
-	width: 100%;
 	display: inline-block;
+	margin-left: 25%;
 }
 
 #BottomRow {
-	width: 100%;
 	display: inline-block;
+	margin-left: 25%;
 }
 
 #PhotosBox {
@@ -50,4 +50,16 @@
 #Bottom4{ 
         display: inline-block;
         width: 20%;
+}
+
+#ClientsInfo{
+	margin-top: 250px;
+
+}
+
+#header{
+	text-align: center;
+
+	height: 45px;
+	margin-top: 45px;
 }
