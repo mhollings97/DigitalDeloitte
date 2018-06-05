@@ -13,7 +13,7 @@ function Connection() {
 	var HT = null;
 	var Works = null;
 	var Sub = null;
-    	var Assets = null;
+    var Assets = null;
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Establish connection with Sequelize
@@ -223,7 +223,7 @@ function Connection() {
 			Project.hasMany(Sub, {foreignKey: 'project_id'});
 
 			Assets = sequelize.define('assets', {
-				user_id: {
+				project_id: {
 					type: Sequelize.INTEGER,
 					primaryKey: true
 				},
@@ -240,7 +240,7 @@ function Connection() {
 					type: Sequelize.DATE
 				}
 			});
-			User.hasMany(Assets, {foreignKey: 'user_id'});
+			Project.hasMany(Assets, {foreignKey: 'project_id'});
 			//removed force:true  (forces defined architecture)
 			return sequelize.sync({});
 		}
@@ -250,6 +250,9 @@ function Connection() {
 		}
 
 	}
+
+
+
 
 
 
@@ -333,6 +336,12 @@ function Connection() {
 
 
 
+
+
+
+
+
+
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Skills table related functions begin here
 
@@ -350,6 +359,17 @@ function Connection() {
                 });
 
 	}
+
+
+
+
+
+
+
+
+
+
+
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//worksOn related table function
@@ -382,6 +402,29 @@ function Connection() {
 			}})
 	}
 
+	//Returns whose working on a project based on their role
+	this.getWorkers = function(pid, r) {
+		return User.findAll({
+			include: [{
+				model: Works,
+				required: true,
+				where: {
+					project_id: pid,
+					role: r
+				}
+			}]
+		});
+	}
+
+
+
+
+
+
+
+
+
+
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//hasSkills related table functions begin here
 
@@ -406,26 +449,35 @@ function Connection() {
 
 
 
-        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                           
-        //needSkills related table functions begin here                                                                 
 
-        //Adds skill for specific project
-        this.addNS = function(pid, s) {
-            return NS.create({
+
+
+
+
+
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                           
+    //needSkills related table functions begin here                                                                 
+
+    //Adds skill for specific project
+    this.addNS = function(pid, s) {
+        return NS.create({
+                project_id: pid,
+                skill: s
+            })
+    }
+
+    //Removes project/skill tuple from needSkill table                                                    
+    this.deleteNS = function(pid, s)
+    {
+        return NS.destroy({
+                where: {
                     project_id: pid,
                     skill: s
-                })
-        }
+                }});
+    }
 
-        //Removes project/skill tuple from needSkill table                                                    
-        this.deleteNS = function(pid, s)
-        {
-            return NS.destroy({
-                    where: {
-                        project_id: pid,
-                        skill: s
-                    }});
-        }
+
 
 
 
@@ -460,6 +512,18 @@ function Connection() {
 			}
 		})
 	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Project related table functions begin here
@@ -598,6 +662,20 @@ function Connection() {
 		    })
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Tags table related functions begin here
 
@@ -690,20 +768,5 @@ function Connection() {
 		{ return Sub.findAll({where: {project_id: pid}}); }
 
         }
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//worksOn table related functions begin here
-
-	this.getWorkers = function(pid, r) {
-		return User.findAll({
-			include: [{
-				model: Works,
-				required: true,
-				where: {
-					project_id: pid,
-					role: r
-				}
-			}]
-		});
-	}
 }
 module.exports = Connection;
