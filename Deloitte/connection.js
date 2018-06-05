@@ -473,7 +473,8 @@ function Connection() {
         }
 
 
-	//Update user fields                                                                                              
+
+	//Update project fields        
         this.updateProject = function(id, name, complete, desc, rec, join, rev, sub, min, max, p, xp, bonus) {
             var i = [];
             if(name != null)
@@ -575,6 +576,21 @@ function Connection() {
 
 	    return Promise.all(i);
 	}
+
+	//Find a specific Project
+	this.getProject = function(pid)
+	{
+	    return Project.findAll({
+                        where: {
+			project_id: pid
+                        }
+		    })
+	}
+
+
+
+
+
 
 
 
