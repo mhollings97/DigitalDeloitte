@@ -5,6 +5,14 @@ import Landing from './components/Pages/Landing/Landing'
 import DropDown from './components/Pages/DropDown/DropDown'
 import Welcome from './components/Pages/Welcome/Welcome'
 import Who from './components/Pages/Who/Who'
+import What from './components/Pages/What/What'
+import WhatDrop from './components/Pages/WhatDrop/WhatDrop'
+import Expect from './components/Pages/Expect/Expect'
+import Offer from './components/Pages/Offer/Offer'
+import LandingFooter from './components/Pages/LandingFooter/LandingFooter'
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import HomeScreen from './components/Pages/HomeScreen/HomeScreen'
+
 class App extends Component {
 constructor(props) {
     super(props);
@@ -22,20 +30,9 @@ constructor(props) {
 
   render() {
     return (
-	<div className = "App">
-		<div id = "LandingContainer">
-			<Landing/>
-    		</div>
-		<div id = "WelcomeContainer">
-			<Welcome toggleDD = {this.toggleDD}/>
-		</div>
-		<div>
-			{this.state.showDD && <DropDown/>}
-		</div>
-		<div id = "WhoContainer">
-			<Who/>
-		</div>
-	</div>
+    <Router>
+	<HomeScreen/>
+    </Router>
     );
   }
 }

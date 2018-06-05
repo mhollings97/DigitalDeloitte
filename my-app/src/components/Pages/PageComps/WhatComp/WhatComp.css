@@ -1,0 +1,29 @@
+#WhatProj {
+	position: absolute;
+}
+
+#WhatOne{
+	display: inline-block;
+	width: 20%;
+}
+
+#WhatTwo{
+	display: inline-block;
+	width: 20%;
+}
+
+#WhatThree {
+	display: inline-block;
+	width: 20%;
+}
+
+#WhatFour {
+	display: inline-block;
+	width: 20%;
+}
+
+#WhatWrap {
+	display: inline-block;
+	position: relative;
+}
+

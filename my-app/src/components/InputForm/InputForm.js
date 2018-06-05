@@ -47,9 +47,11 @@ constructor(props) {
             <div id ="email"> 
               <p> Email </p>
               <input type = "text" email = {this.state.email} onChange= {this.handleEChange}/> 
-            </div>
-            <input type="submit" value ="Submit"/>
-          </div>
+            </div >
+	    <div id = "buttonS">
+            	<input type="submit" value ="Submit"/>
+	    </div>
+	    </div>
         </form>
 
       </div>

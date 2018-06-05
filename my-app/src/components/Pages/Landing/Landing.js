@@ -25,24 +25,26 @@ render() {
     return (
       <div id = "LandingContainer">
         <TopHeader func = {this.toggleLog}/>
-        <div >
-	  {this.state.showLogOn && <InputForm/>}
-          {!this.state.showLogOn &&
-		<div id = "largeTB">
+        <div id = "landingText">
+        	<div id = "largeTB">
 			<TextBox size = "large" message = "We don't want you to go to work" />
 		</div>
-	  }
-          {!this.state.showLogOn &&
-		<div id = "smallTB">
+          	<div id = "smallTB">
 			<TextBox size = "medium" message = "Just work from anywhere with us" />
 	  	</div>
-	  }
   	</div>
+	{ this.state.showLogOn &&
+		<div id = "signIn">
+			<InputForm/>
+		</div>
+	}
 
 	<div  id = "GB">
 		<ScrollArrow/>
         	<GrayBox/>
 	</div>
+	{this.state.showLogOn && <div id = "catcher" onClick = {this.toggleLog}/>}
+
       </div>
 
     );
