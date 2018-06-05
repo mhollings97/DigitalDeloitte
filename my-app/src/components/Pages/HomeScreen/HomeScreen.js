@@ -9,9 +9,6 @@ import What from '.././What/What'
 import WhatDrop from '.././WhatDrop/WhatDrop'
 import Expect from '.././Expect/Expect'
 import Offer from '.././Offer/Offer'
-import LandingFooter from '.././LandingFooter/LandingFooter'
-import AboutUs from '.././AboutUs/AboutUs'
-import AboutProj from '.././AboutProj/AboutProj'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 class HomeScreen extends Component {
 constructor(props) {
@@ -60,19 +57,6 @@ constructor(props) {
                 <div id = "OfferContainer">
                         <Offer/>
                 </div>
-
-                <div id = "LandingFooterContainer">
-                        <LandingFooter/>
-                </div>
-		
-		<div id = "AboutUsContainer">
-			<AboutUs/>
-		</div>
-
-		<div id = "AboutProjContainer">
-			<AboutProj/>
-		</div>
-
             </div>
         </div>
     </Router>
