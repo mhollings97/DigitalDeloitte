@@ -1,23 +1,29 @@
 #PeopleBox {
-	width: 100%;
 	display: inline-block;
-
+	margin-left: 8%;
+	text-align: center;
 }
 
+#ourPeople{ 
+	text-align: center;
+}
 #POne {
+
+
 	display: inline-block;
 	width: 20%;
-	text-align: left;
+	padding-left: 1px;
+	text-align: center;
 }
 
 #PTwo {
 	display: inline-block;
 	width: 20%;
-	text-align: left;
+	text-align: center;
 }
 
 #PThree {
 	display: inline-block;
 	width: 20%;
-	text-align: left;
+	text-align: center;
 }
