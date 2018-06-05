@@ -1,16 +1,13 @@
 //Create User Object
 //Getters and Setters
 //Set Password
-////Check if password has been set
 //Add a skill
 //Remove a skill
 //Gain XP
 //View Level
 //View Current Projects
 //Add and Remove a Project
-//Getters and Setters for Application
-//Constructs a User object using data from the Database.
-//Checks if password is correct.
+//Getters for Application
 function User(u, e, f, s, x, sk, t, inConn) {
 	var user_id = u;
 	var email = e;
@@ -136,17 +133,17 @@ User.prototype.getLevel = function() {
 
 //View all of the current projects
 User.prototype.viewProjects = function() {
-	//Access server to get projects.
+	return this.conn.getProjectsbyUser(this.getUser_id());
 }
 
 //Add a new project
-User.prototype.addProject = function(p) {
-	//Access server
+User.prototype.addProject = function(pid) {
+	return this.conn.addProject(this.getUser_id(), pid);
 }
 
 //Remove a project
-User.prototype.removeProject = function(p) {
-	//Access server
+User.prototype.removeProject = function(pid) {
+	return this.conn.removeProject(this.getUser_id(), pid);
 }
 
 //Getters for application

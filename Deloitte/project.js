@@ -5,14 +5,12 @@
 //View, Add, and Remove Skills.
 //View, Add, and Remove Tags.
 //View, Get, Add, and Remove Assets.
-
-Connect = require("./connection");
-
-function Project(pid, pn, s, t) {
+function Project(pid, pn, s, t, inConn) {
 	var proj_id = pid;
 	var p_name = pn;
 	var skills;
 	var tags;
+	this.conn = inConn;
 
 	if(s == null) {
 		skills = [];
@@ -73,12 +71,12 @@ function Project(pid, pn, s, t) {
 
 //Returns all of the Ambassadors for the project.
 Project.prototype.getAmbas = function() {
-	var prom = Connect.getWorkers("Ambassador");
+	return this.conn.getWorkers(this.getProj_id(), "Ambassador");
 }
 
 //Returns all of the Developers for the project.
 Project.prototype.getDevs = function() {
-	var prom = Connect.getWorkers("Developer");
+	return this.conn.getWorkers(this.getProj_id(), "Developer");
 }
 
 //Returns a list of Submissions that the project has recieved.
@@ -102,11 +100,6 @@ Project.prototype.removeSkill = function(s) {
 
 }
 
-//Returns an array of skills for the project.
-Project.prototype.viewSkills = function() {
-
-}
-
 //Adds a tag to the list.
 Project.prototype.addTag = function(t) {
 
@@ -117,10 +110,6 @@ Project.prototype.removeTag = function(t) {
 
 }
 
-//Returns a list of tags for the project.
-Project.prototype.viewTags = function() {
-
-}
 //toString function for testing.
 Project.prototype.toString = function() {
 	return "" + this.getProj_id() + " " + this.getP_name() + " " + this.getSkills() + " " + this.getTags();

@@ -5,7 +5,9 @@
   "files": [
     "test.js",
     "user.js",
-    "connection.js"
+    "connection.js",
+	"project.js",
+	"interaction.js"
   ],
   "main": "test.js",
   "author": "jake",
