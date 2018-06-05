@@ -227,3 +227,5 @@ Project.prototype.removeTag = function(t) {
 Project.prototype.toString = function() {
 	return "" + this.getProj_id() + " " + this.getP_name() + " " + this.getSkills() + " " + this.getTags();
 }
+
+module.exports = Project;
