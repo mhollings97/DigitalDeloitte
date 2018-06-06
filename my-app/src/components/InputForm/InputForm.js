@@ -52,7 +52,7 @@ constructor(props) {
             	<input type="submit" value ="Submit"/>
 	    </div>
 	    <div id = "SignUp">
-		    <p func = {this.props.redirect}>Need an account? Apply for Virtual Interview</p>
+		    <button>Need an account? Apply for Virtual Interview</button>
 	    </div>
 	    </div>
         </form>
