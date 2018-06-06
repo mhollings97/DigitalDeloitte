@@ -275,10 +275,11 @@ function Connection() {
 	}
 
 	//getUser returns array of strings of User tuple
-	this.getUser = function(emailaddr) {
+	this.getUser = function(emailaddr, pass) {
 		return User.findAll({
 			where: {
-				email: emailaddr
+			    email: emailaddr,
+				password: pass
 			}
 		})
 	}
