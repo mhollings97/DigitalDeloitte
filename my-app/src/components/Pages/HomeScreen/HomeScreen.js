@@ -9,6 +9,9 @@ import What from '.././What/What'
 import WhatDrop from '.././WhatDrop/WhatDrop'
 import Expect from '.././Expect/Expect'
 import Offer from '.././Offer/Offer'
+import SignUp from '.././SignUp/SignUp'
+import YourMotive from '.././YourMotive/YourMotive'
+import Attachments from '.././Attachments/Attachments'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 class HomeScreen extends Component {
 constructor(props) {
@@ -57,6 +60,15 @@ constructor(props) {
                 <div id = "OfferContainer">
                         <Offer/>
                 </div>
+		<div id = "SignUpContainer">
+			<SignUp/>
+		</div>
+		<div id = "YourMotiveContainer">
+			<YourMotive/>
+		</div>
+		<div id = "AttachmentsContainer">
+			<Attachments/>
+		</div>
             </div>
         </div>
     </Router>
