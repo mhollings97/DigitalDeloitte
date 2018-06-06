@@ -10,7 +10,8 @@
     "project.js",
     "submissions.js",
     "interaction.js",
-    "movies.js"
+    "movies.js",
+    "login.js"
   ],
   "main": "server.js",
   "author": "jake",
