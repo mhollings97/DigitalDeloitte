@@ -284,6 +284,14 @@ function Connection() {
 		}).catch(function(err) {return null})
 	}
 
+	this.getUserById = function(id) {
+		return User.findAll({
+			where: {
+			    user_id: id
+			}
+		}).catch(function(err) {return null})
+	}
+
 	const Op = Sequelize.Op;
 
         this.getUserSkills = function(id) {
