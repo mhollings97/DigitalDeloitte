@@ -56,9 +56,11 @@ app.use(bodyParser({
 
 //Require the Router we defined in movies.js
 var movies = require('./routes/movies.js');
+var createUser = require('./routes/createUser.js');
 
 //Use the Router on the sub route /movies
 app.use(movies.routes());
+app.use(createUser.routes());
 //app.use();
 
 app.listen(3000);

@@ -271,7 +271,7 @@ function Connection() {
 	        surname: s,
 	        xp: 0,
 	        type: 'Developer'
-	    })
+	    }).catch(function(err) {return null})
 	}
 
 	//getUser returns array of strings of User tuple
