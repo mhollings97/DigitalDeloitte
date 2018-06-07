@@ -2,7 +2,7 @@ var Router = require('koa-router');
 var router = Router({
 	prefix: '/login'
     });  //Prefixed all routes with /movies                                                                                           
-var Connection = require("./connection");
+var Connection = require("../connection");
 var conn = new Connection();
 
 conn.createTable();
