@@ -39,12 +39,14 @@ app.listen(3000, function(){
 */
 
 
+var logger = require('koa-logger');
 var koa = require('koa');
 var router = require('koa-router');
 var bodyParser = require('koa-body');
 
 var app = new koa();
 
+app.use(logger());
 //Set up body parsing middleware
 app.use(bodyParser({
    formidable:{uploadDir: './uploads'},
