@@ -12,11 +12,10 @@ async function create(ctx, next) {
 	
 	await conn.createUser(ctx.params.email, ctx.params.first, ctx.params.last).then(function(retval) {
 		if(retval == null) {
-			console.log("CAUGHT");
+			ctx.status = 401;
 			ctx.body = "User failed to create.";
 		}
 		else {
-			console.log("GOOD");
 			ctx.body = "User successfully created.";
 		}
 	})

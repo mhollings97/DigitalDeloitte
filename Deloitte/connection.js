@@ -281,7 +281,7 @@ function Connection() {
 			    email: emailaddr,
 				password: pass
 			}
-		})
+		}).catch(function(err) {return null})
 	}
 
 	const Op = Sequelize.Op;
@@ -290,12 +290,13 @@ function Connection() {
             return HS.findAll({
 		    attributes: ['skill'],
 		    where: { user_id: {[Op.eq]: id}}
-                });
+                }).catch(function(err) {return null});
 
         }
 
 	//Update user fields
 	this.updateUser = function(id, e, p, n, s, x) {
+		try{
 	    var i = [];
             if(e != null)
                 {
@@ -331,7 +332,10 @@ function Connection() {
 		}
 	    
 	    return Promise.all(i);
+       } catch (err) {return null};
+
         }
+
 
 
 
@@ -351,14 +355,14 @@ function Connection() {
 	this.insertSkills = function(s) {
 	    return Skills.create({
 		    skill: s
-		});
+		}).catch(function(err) {return null});
 	}
 
 	//Returns the promise of all skills
 	this.getSkills = function() {
 	    return Skills.findAll({
                     attributes: ['skill'],
-                });
+                }).catch(function(err) {return null});
 
 	}
 
@@ -383,7 +387,7 @@ function Connection() {
 				required: true,
 				where: {user_id: id}
 			}]
-		})
+		}).catch(function(err) {return null})
 	}
 
 	//Adds that a user is working on a project.
@@ -392,7 +396,7 @@ function Connection() {
 			user_id: uid,
 			project_id: pid,
 			role: r
-		})
+		}).catch(function(err) {return null})
 	}
 
 	//Removes that a user is working on a project.
@@ -401,7 +405,7 @@ function Connection() {
 			where: {
 				user_id: uid,
 				project_id: pid
-			}})
+			}}).catch(function(err) {return null})
 	}
 
 	//Returns whose working on a project based on their role
@@ -415,7 +419,7 @@ function Connection() {
 					role: r
 				}
 			}]
-		});
+		}).catch(function(err) {return null});
 	}
 
 
@@ -435,7 +439,7 @@ function Connection() {
 	    return HS.create({
 		    user_id: inId,
 		    skill: s
-                })
+                }).catch(function(err) {return null})
 	}
 
 	//Removes user/skill tuple from hasSkill table
@@ -445,7 +449,7 @@ function Connection() {
 		    where: {
 			user_id: user,
 		        skill: skillset
-		    }});
+		    }}).catch(function(err) {return null});
 	}
 
 
@@ -466,7 +470,7 @@ function Connection() {
         return NS.create({
                 project_id: pid,
                 skill: s
-            })
+            }).catch(function(err) {return null})
     }
 
     //Removes project/skill tuple from needSkill table                                                    
@@ -476,7 +480,7 @@ function Connection() {
                 where: {
                     project_id: pid,
                     skill: s
-                }});
+                }}).catch(function(err) {return null});
     }
 
 
@@ -503,7 +507,7 @@ function Connection() {
 			link_In: l,
 			per_Ln: p,
 			CV_Loc: c 
-	    })
+	    }).catch(function(err) {return null})
 	}
 
 	//Returns a tuple given the user id.
@@ -512,7 +516,7 @@ function Connection() {
 			where: {
 				user_id: id
 			}
-		})
+		}).catch(function(err) {return null})
 	}
 
 
@@ -546,13 +550,14 @@ function Connection() {
                 people: p,
                 xp_gain: xp,
                 xp_bonus: bonus
-            });
+            }).catch(function(err) {return null});
     }
 
 
 
 	//Update project fields        
     this.updateProject = function(id, name, complete, desc, rec, join, rev, sub, min, max, p, xp, bonus) {
+    	try{
         var i = [];
         if(name != null)
             {
@@ -652,6 +657,7 @@ function Connection() {
 	            }
 
 	    return Promise.all(i);
+		} catch (err) {return null}
 	}
 
 	//Find a specific Project
@@ -661,7 +667,7 @@ function Connection() {
                         where: {
 			project_id: pid
                         }
-		    })
+		    }).catch(function(err) {return null})
 	}
 
 
@@ -685,14 +691,14 @@ function Connection() {
     this.insertTags = function(t) {
         return Tags.create({
                 tag: t
-            });
+            }).catch(function(err) {return null});
     }
 
     //Returns the promise of all skills                                                                 
     this.getTags = function() {
         return Tags.findAll({
                 attributes: ['tag'],
-		});
+		}).catch(function(err) {return null});
 	}
 
 
@@ -711,7 +717,7 @@ function Connection() {
         return HT.create({
                 project_id: pid,
                 tag: t
-            })
+            }).catch(function(err) {return null})
     }
 
     //Removes project/tag tuple from hasTag table                                                      
@@ -721,7 +727,7 @@ function Connection() {
                 where: {
                     project_id: pid,
                     tag: t
-                }});
+                }}).catch(function(err) {return null});
     }
 	
 
@@ -743,7 +749,7 @@ function Connection() {
 		    sub_date: date,
 		    user_id: uid,
 		    project_id: pid
-            })
+            }).catch(function(err) {return null})
     }
 
 
@@ -755,18 +761,18 @@ function Connection() {
 		    return Sub.findAll({
 				where: {user_id: uid,
 					project_id: pid}
-			});
+			}).catch(function(err) {return null});
 		}
 
 	    
 	    if(uid != null)
 		{
-		    return (Sub.findAll({where: {user_id: uid}}));
+		    return (Sub.findAll({where: {user_id: uid}}).catch(function(err) {return null}));
 		}
 
 	    if(pid != null)
 		{ 
-			return Sub.findAll({where: {project_id: pid}}); 
+			return Sub.findAll({where: {project_id: pid}}).catch(function(err) {return null}); 
 		}
     }
 
@@ -796,7 +802,7 @@ function Connection() {
     		asset_loc: loc,
     		asset_desc: desc,
     		asset_update: date
-    	})
+    	}).catch(function(err) {return null})
     }
 
     //Gets an asset by a type if specified, or gets all assets if null
@@ -805,12 +811,12 @@ function Connection() {
     		return Assets.findAll({
     			where: {project_id: pid,
     					asset_type: type}
-    		})
+    		}).catch(function(err) {return null})
     	}
     	else {
     		return Assets.findAll({
     			where: {project_id: pid}
-    		})
+    		}).catch(function(err) {return null})
     	}
     }
 
@@ -819,7 +825,7 @@ function Connection() {
     	return Assets.destroy({
     		where: {project_id: pid,
     				asset_loc: loc}
-    	})
+    	}).catch(function(err) {return null})
     }
 }
 module.exports = Connection;
