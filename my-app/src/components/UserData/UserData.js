@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './UserProf.css';
-class UserProf extends Component {
+import './UserData.css';
+class UserData extends Component {
 
  constructor() {
                 super();
@@ -54,7 +54,7 @@ fetch('https://private-ae364-vdwregistration.apiary-mock.com/api/v1/people/1',
     );
   }
 }
-export default UserProf;
+export default UserData;
 
 
 
