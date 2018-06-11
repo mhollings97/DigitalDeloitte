@@ -261,12 +261,12 @@ function Connection() {
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//User table related functions begin here
 
-	this.createUser = function(e, n, s) {
+	this.createUser = function(e, p, n, s) {
 		//createUser adds a new User to the database
 		//A nonapproved user (no interview) will have NULL password until approved
 	    return User.create({
 	        email: e,
-	        password: null,
+	        password: p,
 	        name: n,
 	        surname: s,
 	        xp: 0,
@@ -294,55 +294,68 @@ function Connection() {
 
 	const Op = Sequelize.Op;
 
-        this.getUserSkills = function(id) {
-            return HS.findAll({
-		    attributes: ['skill'],
-		    where: { user_id: {[Op.eq]: id}}
-                }).catch(function(err) {return null});
+    this.getUserSkills = function(id) {
+        return HS.findAll({
+	    attributes: ['skill'],
+	    where: { user_id: {[Op.eq]: id}}
+            }).catch(function(err) {return null});
 
-        }
+    }
 
 	//Update user fields
 	this.updateUser = function(id, e, p, n, s, x) {
 		try{
-	    var i = [];
-            if(e != null)
-                {
-		    i.push(User.update({email: e}, 
-				       {where: {user_id: {[Op.eq]:id}}
-				       }))
-		}
+		    var i = [];
+            if(e != null) {
+		    	i.push(User.update({email: e}, 
+				    {where: {user_id: {[Op.eq]:id}}}))
+			}
 
-            if(p != null)
-                {
-		    i.push(User.update({password: p}, 
-				       {where: {user_id: {[Op.eq]:id}}
-				       }))
-		}
+            if(p != null) {
+		    	i.push(User.update({password: p}, 
+				    {where: {user_id: {[Op.eq]:id}}}))
+			}
 
-            if(n != null)
-                {
-		    i.push(User.update({name: n}, 
-	                               {where: {user_id: {[Op.eq]:id}}
-				       }))
-		}
+            if(n != null) {
+		    	i.push(User.update({name: n}, 
+	                {where: {user_id: {[Op.eq]:id}}}))
+			}
 
-            if(s != null)
-                {
-		    i.push(User.update({surname: s}, 
-	                               {where: {user_id: {[Op.eq]:id}}}))
-		}
+            if(s != null) {
+		    	i.push(User.update({surname: s}, 
+	                {where: {user_id: {[Op.eq]:id}}}))
+			}
 
-            if(x != null)
-                {
-		    i.push(User.update({xp: x}, 
-	                               {where: {user_id: {[Op.eq]:id}}}))
-		}
-	    
-	    return Promise.all(i);
+            if(x != null) {
+		    	i.push(User.update({xp: x}, 
+	                {where: {user_id: {[Op.eq]:id}}}))
+			}
+
+		    return Promise.all(i);
        } catch (err) {return null};
+    }
 
-        }
+    //Sets the type of the user.
+    //Must be one of the types in typeSet.
+    this.setType = function(id, t) {
+    	var typeSet = ["Developer", "Ambassador", "Admin"];
+
+    	try{
+        	if(typeSet.indexOf(t) >= 0) {
+        		return User.update({uType: t}, {where: {user_id: {[Op.eq]: id}}});
+        	}
+        	else {
+        		return Promise.resolve(null);
+        	}
+
+        	return null;
+    	} catch (err) {
+    		return null;
+    	}	
+    }
+
+
+
 
 
 
@@ -566,105 +579,81 @@ function Connection() {
 	//Update project fields        
     this.updateProject = function(id, name, complete, desc, rec, join, rev, sub, min, max, p, xp, bonus) {
     	try{
-        var i = [];
-        if(name != null)
-            {
-                i.push(Project.update({project_name: name},
-                                   {where: {project_id: {[Op.eq]:id}}
-                
-			       }));
-		}
-
-	    if(complete != null)
-	            {
-	                i.push(Project.update({completion_time: complete},
-	                  {where: {project_id: {[Op.eq]:id}}
-
-			  }));
-		}
-
-	    if(desc != null)
-	            {
-	                i.push(Project.update({description: desc},
-	                  {where: {project_id: {[Op.eq]:id}}
-
-			  }));
-	            }
-
-	    if(rec != null)
-	            {
-	                i.push(Project.update({rec_desc: rec},
+	        var i = [];
+	        if(name != null) {
+	            i.push(Project.update({project_name: name},
 	                {where: {project_id: {[Op.eq]:id}}
+				    }));
+			}
 
-			}));
-	            }
+		    if(complete != null) {
+		        i.push(Project.update({completion_time: complete},
+		            {where: {project_id: {[Op.eq]:id}}
+				    }));
+			}
 
-	    if(join != null)
-	            {
-	                i.push(Project.update({join_deadline: join},
-	                  {where: {project_id: {[Op.eq]:id}}
+		    if(desc != null) {
+		        i.push(Project.update({description: desc},
+		            {where: {project_id: {[Op.eq]:id}}
+				    }));
+		    }
 
-			  }));
-	            }
+		    if(rec != null) {
+		        i.push(Project.update({rec_desc: rec},
+		            {where: {project_id: {[Op.eq]:id}}
+					}));
+		    }
 
-	        if(rev != null)
-	            {
-	                i.push(Project.update({rev_deadline: rev},
-	                  {where: {project_id: {[Op.eq]:id}}
+		    if(join != null) {
+                i.push(Project.update({join_deadline: join},
+                    {where: {project_id: {[Op.eq]:id}}
+				    }));
+		    }
 
-			  }));
-	            }
+	        if(rev != null) {
+                i.push(Project.update({rev_deadline: rev},
+                	{where: {project_id: {[Op.eq]:id}}
+			  		}));
+		    }
 
-	    if(sub != null)
-	            {
-	                i.push(Project.update({sub_deadline: sub},
-	                   {where: {project_id: {[Op.eq]:id}}
+		    if(sub != null) {
+                i.push(Project.update({sub_deadline: sub},
+                   {where: {project_id: {[Op.eq]:id}}
+				   }));
+	        }
 
-			   }));
-	            }
-
-	        if(p != null)
-	            {
-	                i.push(Project.update({people: p},
+	        if(p != null) {
+	            i.push(Project.update({people: p},
 	               {where: {project_id: {[Op.eq]:id}}
+			       }));
+            }
 
-		       }));
-	            }
-
-	    if(min != null)
-	            {
-	                i.push(Project.update({min_diff: min},
-	                  {where: {project_id: {[Op.eq]:id}}
-
-			  }));
-	            }
+		    if(min != null) {
+                i.push(Project.update({min_diff: min},
+                  {where: {project_id: {[Op.eq]:id}}
+				  }));
+		    }
 
 
-	    if(max != null)
-	            {
-	                i.push(Project.update({max_diff: max},
-	                  {where: {project_id: {[Op.eq]:id}}
+		    if(max != null) {
+                i.push(Project.update({max_diff: max},
+                  {where: {project_id: {[Op.eq]:id}}
+				  }));
+		    }
 
-			  }));
-	            }
+		    if(xp != null) {
+                i.push(Project.update({xp_gain: xp},
+                 {where: {project_id: {[Op.eq]:id}}
+				 }));
+		    }
 
-	    if(xp != null)
-	            {
-	                i.push(Project.update({xp_gain: xp},
-	                 {where: {project_id: {[Op.eq]:id}}
+		    if(bonus != null) {
+                i.push(Project.update({xp_bonus: bonus},
+                  {where: {project_id: {[Op.eq]:id}}
+		  		}));
+            }
 
-			 }));
-	            }
-
-	    if(bonus != null)
-	            {
-	                i.push(Project.update({xp_bonus: bonus},
-	                  {where: {project_id: {[Op.eq]:id}}
-
-			  }));
-	            }
-
-	    return Promise.all(i);
+		    return Promise.all(i);
 		} catch (err) {return null}
 	}
 

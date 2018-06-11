@@ -1,154 +1,180 @@
 var Router = require('koa-router');
 var router = Router({
-	prefix: '/user'
+	prefix: '/api/v1'
     });                                                                                          
 var Connection = require('../connection');
 var conn = new Connection();
+var apiVersion = 1;
+
 conn.createTable();
 
-router.get('/login/:id/:password', verify);
+router.post('/auth', verify);
 
+//Checks if the username matches the password on record.
+//If it does, returns the user information
+//If it does not, return an error message.
 async function verify(ctx, next){
-    console.log(ctx.params.id + " password:" + ctx.params.password);
-    await conn.getUser(ctx.params.id, ctx.params.password).then(result => {
-    if(result.length == 0)
-	{
-	    ctx.status = 404;
-	    ctx.body = "Your username/password were incorrect";
-	}
+    console.log(ctx.request.body.username);
+    var a = ctx.session.views || 0;
+    ctx.session.views = ++a;
+    await conn.getUser(ctx.request.body.username, ctx.request.body.password).then(result => {
+	    if(result == null || result.length == 0)
+		{
+		    ctx.status = 401;
+		    var retval = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "User login unsuccessful",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "Email or Password Incorrect."
+            	}
+		    }
 
-    else{
-	var retval =  [
-	{"user_id": result[0].user_id,
-		       "email": result[0].dataValues.email,
-		       "name": result[0].dataValues.name,
-		       "surname": result[0].dataValues.surname,
-		       "xp": result[0].dataValues.xp,
-		       "uType": result[0].dataValues.uType}
-		       ];
-	ctx.body = retval;
-    }
-    });
+		    ctx.body = retval;
+		}
+
+	    else {
+	  		ctx.app.key = "['" + result[0].dataValues.email + "']";
+
+	    	ctx.status = 200;
+			var retval = {
+					"status": "success",
+					"code": ctx.status,
+					"message": null,
+					"apiVersion": apiVersion,
+					"requestUrl": ctx.request.host + ctx.request.url,
+					"data": {
+						"authorized": true,
+						"userData": {
+							"user_id": result[0].user_id,
+							"email": result[0].dataValues.email,
+						    "name": result[0].dataValues.name,
+						    "surname": result[0].dataValues.surname,
+						    "xp": result[0].dataValues.xp,
+						    "uType": result[0].dataValues.uType
+						}
+					}
+				};
+			ctx.body = retval;
+		}
+	});
     await next;
 }
 
-router.post('/create/:email/:first/:last', create);
+router.post('/user', createUser);
 
-async function create(ctx, next) {
-	
-	await conn.createUser(ctx.params.email, ctx.params.first, ctx.params.last).then(function(retval) {
-		if(retval == null) {
+async function createUser(ctx, next) {
+	await conn.createUser(ctx.request.body.email, ctx.request.body.password, ctx.request.body.firstName, ctx.request.body.lastName).then(async function(retval) { 
+	    if(retval == null) {
 			ctx.status = 401;
-			ctx.body = "User failed to create.";
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "User creation unsuccessful",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "Email already registered."
+      		  	}
+			}
+			ctx.body = ret;
+	    }
+	    else {
+		    await conn.getUser(ctx.request.body.email, ctx.request.body.password).then(function(result) {
+					ctx.status = 200;
+					var ret = {
+						"status": "success",
+			            "code": ctx.status,
+			            "message": "New user created",
+			            "apiVersion": apiVersion,
+			            "requestUrl": ctx.request.host + ctx.request.url,
+			            "data": {
+			                "firstName": result[0].dataValues.name,
+			                "lastName": result[0].dataValues.surname,
+			                "email": result[0].dataValues.email
+		            	}
+					}
+					ctx.body = ret;
+			});
 		}
-		else {
-			ctx.body = "User successfully created.";
-		}
-	})
-	await next();
-}
+	});
 
-router.post('/approve/:id', approve);
-
-async function approve(ctx, next) {
-
-	await conn.updateUser(ctx.params.id, null, "DeloitteDigital", null, null, null).then(function(retval) {
-		if(retval == null) {
-			ctx.status = 401;
-			ctx.body = "Password failed to set.";
-		}
-		else {
-			ctx.body = "Password successfully set.";
-
-		}
-	})
-
-	await next();
-}
-
-router.post('/application/:id/:school/:int/:apply/:linked/:pers/:cv', application);
-
-async function application(ctx, next) {
-	await conn.createApp(ctx.params.id, ctx.params.school, ctx.params.int, ctx.params.apply, ctx.params.linked, ctx.params.pers, ctx.params.cv).then(function(retval) {
-		if(retval == null) {
-			ctx.status = 401;
-			ctx.body = "Application failed to create.";
-		}
-		else {
-			ctx.body = "Application successfully created.";
-
-		}
-	})
 
 	await next();
 }
 
-router.post('/change/:id/:email/:pass/:name/:sur', changeAtts)
+router.get('/user/:id', getUserData);
 
-async function changeAtts(ctx, next) {
-
-	await conn.updateUser(ctx.params.id, ctx.params.email, ctx.params.pass, ctx.params.name, ctx.params.sur, null).then(function(retval) {
-		if(retval == null) {
+async function getUserData(ctx, next) {
+	await conn.getUserById(ctx.params.id).then(async function(retval) {
+		if(retval == null || retval.length == 0) {
 			ctx.status = 401;
-			ctx.body = "User failed to update.";
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "User retrieval unsuccessful",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "Id not recognized."
+      		  	}
+			}
+			ctx.body = ret;	
 		}
 		else {
-			ctx.body = "User successfully updated.";
-		}
-	})
+			await conn.getApp(ctx.params.id).then(async function(application) {
+				if(application == null || application.length == 0) {
+					ctx.status = 401;
+			   	 	var ret = {
+				    	"status": "not-authorized",
+		            	"code": ctx.status,
+		            	"message": "Application retrieval unsuccessful",
+		            	"apiVersion": apiVersion,
+		            	"requestUrl": ctx.request.host + ctx.request.url,
+		            	"data": {
+		                	"error": "Id has no application."
+		      		  	}
+					}
+					ctx.body = ret;	
+				}
+				else {
+					ctx.status = 200;
+					var ret = {
+						"status": "success",
+						"code": ctx.status,
+						"message": null,
+						"apiVersion": apiVersion,
+						"requestUrl": ctx.request.host + ctx.request.url,
+						"data": {
+							"firstName": retval[0].dataValues.name,
+							"lastName": retval[0].dataValues.surname,
+							"email": retval[0].dataValues.email,
+							"employmentStatus": application[0].dataValues.schooling,
+							"interestArea": application[0].dataValues.interest,
+							"LinkedIn": application[0].dataValues.link_In,
+							"PersonalWebpage": application[0].dataValues.per_Ln,
+							"type": retval[0].dataValues.uType,
+							"xp": retval[0].dataValues.xp
+						}
+					};
 
+					ctx.body = ret;
+				}
+			});
+		}
+	});
 	await next();
 }
 
-router.post('/earnxp/:id/:currxp/:newxp', earnXP);
+/*
+router.get('/user/:id/skills', getUserSkills);
 
-async function earnXP(ctx, next) {
-
-	await conn.updateUser(ctx.params.id, null, null, null, null, +ctx.params.currxp + +ctx.params.newxp).then(function(retval) {
-		if(retval == null) {
-			ctx.status = 401;
-			ctx.body = "XP failed to update.";
-		}
-		else {
-			ctx.body = "XP successfully updated.";
-		}
-	})
+async function getUserSkills(ctx, next) {
 
 	await next();
 }
-
-router.post('/addskill/:id/:skill', addSkill);
-
-async function addSkill(ctx, next) {
-
-	await conn.addHS(ctx.params.id, ctx.params.skill).then(function(retval) {
-		if(retval == null) {
-			ctx.status = 401;
-			ctx.body = "Skill failed to be added.";
-		}
-		else {
-			ctx.body = "Skill successfully added.";
-		}
-	})
-
-	await next();
-}
-
-router.post('/removeskill/:id/:skill', removeSkill);
-
-async function removeSkill(ctx, next) {
-
-	await conn.deleteHS(ctx.params.id, ctx.params.skill).then(function(retval) {
-		if(retval == null) {
-			ctx.status = 401;
-			ctx.body = "Skill failed to be removed.";
-		}
-		else {
-			ctx.body = "Skill successfully removed.";
-		}
-	})
-
-	await next();
-}
+*/
 
 module.exports = router;
