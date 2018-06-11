@@ -5,7 +5,10 @@ import HomeScreen from './components/Pages/HomeScreen/HomeScreen'
 import AboutUs from './components/Pages/AboutUs/AboutUs'
 import AboutProj from './components/Pages/AboutProj/AboutProj'
 import InputForm from './components/InputForm/InputForm'
+import UserData from './components/UserData/UserData'
 import TopHeader from './components/Header/TopHeader'
+import SignUp from './components/Pages/SignUp/SignUp'
+
 class App extends Component {
 constructor(props) {
     super(props);
@@ -14,13 +17,15 @@ constructor(props) {
     	showHome: true,
 	showAP: false,
 	showCU: false,
-	showLogOn: false
+	showLogOn: false,
+	showSU: false
 	};
 
         this.redirectAU = this.redirectAU.bind(this);
         this.redirectHome = this.redirectHome.bind(this);
         this.redirectCU = this.redirectCU.bind(this);
         this.redirectAP = this.redirectAP.bind(this);
+        this.redirectSU = this.redirectSU.bind(this);
 	this.toggleLog = this.toggleLog.bind(this);
 }
 	toggleLog(showLogOn) {
@@ -34,8 +39,8 @@ constructor(props) {
           	        showAU: true,
     			showHome: false,
 			showAP: false,
-			showCU: false
-
+			showCU: false,
+			showSU: false
 	    }))
 	}
         redirectHome(showHome) {
@@ -43,8 +48,8 @@ constructor(props) {
           	        showAU: false,
     			showHome: true,
 			showAP: false,
-			showCU: false
-
+			showCU: false,
+			showSU:  false
           }));
 	}
 	redirectAP(showAP) {
@@ -52,7 +57,8 @@ constructor(props) {
           	        showAU: false,
     			showHome: false,
 			showAP: true,
-			showCU: false
+			showCU: false,
+			showSU: false
 
           }))
         }
@@ -61,8 +67,18 @@ constructor(props) {
           	        showAU: false,
     			showHome: false,
 			showAP: false,
-			showCU: true
-
+			showCU: true,
+			showSU: false
+          }))
+	}
+	redirectSU(showCU) {
+            this.setState(prevState => ({
+          	        showAU: false,
+    			showHome: false,
+			showAP: false,
+			showCU: false,
+			showSU: true,
+			showLogOn: false
           }))
 	}
 
@@ -77,7 +93,7 @@ constructor(props) {
 		toggleLog = {this.toggleLog}
 	/>
 	{this.state.showLogOn
-		&& <div id = "signIn"> <InputForm/> </div>
+		&& <div id = "signIn"> <InputForm redirectSU = {this.redirectSU }/> </div>
 		}
 	{this.state.showLogOn && <div id = "catcher" onClick = {this.toggleLog}/>}
     <Router>
@@ -89,10 +105,13 @@ constructor(props) {
 	 <Route exact = {true} path = "/aboutus" render={props => <AboutUs/>} />
 
 	 {this.state.showCU && <Redirect from = {this.location} to = "/contactus"/>}
-	 <Route exact = {true} path = "/contactus" render={props => <div> CONTACT US </div>} />
+	 <Route exact = {true} path = "/contactus" render={props => <UserData/>} />
 
 	 {this.state.showAP && <Redirect from = {this.location} to = "/abouttheproject"/>}
 	 <Route exact = {true} path = "/abouttheproject" render={props => <AboutProj/>} />
+
+	 {this.state.showSU && <Redirect from = {this.location} to = "/signup"/>}
+	 <Route  path = "/signup" render={props => <SignUp redirectHome = {this.redirectHome}/>}/>
 
 	</div>
     </Router>
