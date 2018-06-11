@@ -1,0 +1,73 @@
+#ASUWrapper {     
+	height: 100%;  
+	width: 100%;
+	margin-left: 10%;
+	margin-right: 10%;
+	display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(8, 1fr);
+        grid-auto-rows: 100px;
+        grid-template-areas:
+        "a a a a a a"
+        "b b c c d d"
+        "b b c c d d";
+        align-items: start;
+}
+
+#Message {
+        grid-area: a;
+        align-self: center;
+        justify-self: center;	
+}
+
+#AboutButton {
+        grid-area: b;
+        align-self: center;
+        justify-self: center;
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#aboutpic {
+        align-self: center;
+        justify-self: center;
+	display: inline-block;
+}
+
+#abouttext {
+	text-align: left;
+	margin-left: 15%;
+}
+
+#PeopleButton {        
+	grid-area: c;
+        align-self: center;
+        justify-self: center;
+}
+
+#peoplepic {
+        align-self: center;
+        justify-self: center;
+}
+
+#peopletext {
+	text-align: left;
+}
+
+#StatsButton {
+	grid-area: d;
+	align-self: center;
+	justify-self: center;
+}
+
+#statspic {
+        align-self: center;
+        justify-self: center;
+	display: inline-block;
+}
+
+#statstext {
+	text-align: left;
+}

@@ -13,21 +13,23 @@ class SignedHeader extends Component {
 
 	return (
 
- <Router>
+     <Router>
             <div>
-                <div id = "Projects">
+		<div id = "Wrap">
+
+		 <div id = "Projects">
                         <Link to = {'/projects'} >
-                                <Header func = {this.props.redirectProjects} title = "Projects" ></Header>
+                                <button func = {this.props.redirectProjects} title = "Projects" >Projects</button>
                         </Link>
                 </div>
                 <div id = "People">
                         <Link to = { '/people'}>
-                                <Header func = {this.props.redirectPeople} title = "People"></Header>
+                                <button func = {this.props.redirectPeople} title = "People">People</button>
                         </Link>
                 </div>
                 <div id = "Info">
                         <Link to = { '/info'}>
-                                <Header func = {this.props.redirectInfo}title = "Info"></Header>
+                                <button func = {this.props.redirectInfo}title = "Info">Info</button>
                         </Link>
                 </div>
                 <div id = "home">
@@ -35,6 +37,8 @@ class SignedHeader extends Component {
                                 <HomeButton func = {this.props.redirectHome} >Deloitte Digital</HomeButton>
                         </Link>
                 </div>
+                </div>
+
             </div>
         </Router>
 

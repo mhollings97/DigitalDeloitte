@@ -14,6 +14,7 @@ constructor(props) {
 	return (
 
 	<div>
+	  <div id = "SignUpWrapper">
 	    <div id = "SignUpHeader">
 		<p>Hi!</p>
 		<p>First we need your name and email,</p>
@@ -28,6 +29,7 @@ constructor(props) {
 	    <div id = "SignInRedirect">
 		
 	    </div>
+	  </div>
 	</div>
 	);
 

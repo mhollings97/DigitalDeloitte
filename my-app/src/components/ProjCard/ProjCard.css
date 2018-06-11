@@ -1,0 +1,34 @@
+#ProjectCard {
+	background-color: #C0C0C0;
+        outline-style: solid;
+        outline-color: #000000;
+}	
+
+#ProjSize {
+	outline-style: dotted;
+	outline-color: #39771f;
+}
+
+#ProjComp {
+	outline-style: dotted;
+	outline-color: #39771f;
+}
+
+#Description {
+
+}
+
+#ApplyDL {
+}
+
+#SubmitDL {
+}
+
+#Reward {
+
+}
+
+#ShowMore {
+	outline-style: solid;
+	outline-color: #39771f;
+}

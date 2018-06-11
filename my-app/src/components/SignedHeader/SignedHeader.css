@@ -1,0 +1,25 @@
+#Wrap {
+	border-style: solid;
+	border-color: #6bc446;
+	background-color: #ededed;
+}
+#Projects {
+    position: absolute;
+    display: inline-block;
+}
+
+#People {
+    position: absolute;
+    display: inline-block;
+}
+
+#Info {
+    position: absolute;
+    display: inline-block;
+}
+
+#User {
+	cursor: pointer;
+	margin-right: 10%;
+	width: 30%;
+}

@@ -12,6 +12,10 @@ import Offer from '.././Offer/Offer'
 import SignUp from '.././SignUp/SignUp'
 import YourMotive from '.././YourMotive/YourMotive'
 import Attachments from '.././Attachments/Attachments'
+import Projects from '.././Projects/Projects'
+import UserProfile from '.././UserProfile/UserProfile'
+import AfterSignUp from '.././AfterSignUp/AfterSignUp'
+import ProjPage from '.././ProjPage/ProjPage'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 class HomeScreen extends Component {
 constructor(props) {
@@ -68,6 +72,18 @@ constructor(props) {
 		</div>
 		<div id = "AttachmentsContainer">
 			<Attachments/>
+		</div>
+		<div id = "ProjectsContainer">
+			<Projects/>
+		</div>
+		<div id = "UserProfileContainer">
+			<UserProfile/>
+		</div>
+		<div id = "AfterSignUpContainer">
+			<AfterSignUp/>
+		</div>
+		<div id = "ProjPageContainer">
+			<ProjPage/>
 		</div>
             </div>
         </div>
