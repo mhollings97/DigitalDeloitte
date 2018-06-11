@@ -81,6 +81,9 @@ function Connection() {
 					type: Sequelize.STRING,
 					primaryKey: true
 				}
+				skill_type: {
+					type: Sequelize.STRING
+				}
 			});
 
 			//Define hasSkills table
@@ -300,6 +303,20 @@ function Connection() {
 	    where: { user_id: {[Op.eq]: id}}
             }).catch(function(err) {return null});
 
+    }
+
+    this.getUserSkillsByType = function(id, t) {
+    	return HS.findAll({
+    	attributes: ['skill'],
+    	include: [{
+				model: Skills,
+				required: true,
+				where: {
+					skill_type: t
+				}
+			}],
+		where: {user_id: id}
+    	})
     }
 
 	//Update user fields
