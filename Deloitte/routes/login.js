@@ -7,27 +7,26 @@ var conn = new Connection();
 
 conn.createTable();
 
-/*var movies = [
-	      {id: 101, name: "Fight Club", year: 1999, rating: 8.1},
-	      {id: 102, name: "Inception", year: 2010, rating: 8.7},
-	      {id: 103, name: "The Dark Knight", year: 2008, rating: 9},
-	      {id: 104, name: "12 Angry Men", year: 1957, rating: 8.9}
-	      ];
-*/
+var a = this.session.views || 0;
+
 //Routes will go here                                                                                                             
 
 router.get('/:id/:password', verify);
 
 async function verify(ctx, next){
     console.log(ctx.params.id + " password:" + ctx.params.password);
+    ctx.session.views = ++a;
     await conn.getUser(ctx.params.id, ctx.params.password).then(result => {
     if(result.length == 0)
 	{
 	    ctx.status = 404;
-	    ctx.body = "Your username/password were incorrect";
+	    ctx.body = "Your username/password were incorrect. This is attempt " + a + ".";
 	}
 
     else{
+
+	
+
 	var retval =  [
 	{"user_id": result[0].user_id,
 		       "email": result[0].dataValues.email,

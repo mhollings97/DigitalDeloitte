@@ -45,6 +45,7 @@ var router = require('koa-router');
 var bodyParser = require('koa-body');
 
 var app = new koa();
+var session = require('koa-session');
 
 app.use(logger());
 //Set up body parsing middleware
@@ -56,9 +57,10 @@ app.use(bodyParser({
 
 //Require the Router we defined in movies.js
 var user = require('./routes/userConn.js');
-
+app.keys = ['Deloitte Digital'];
 
 //Use the Router on the sub route /movies
+app.use(session(app));
 app.use(user.routes());
 //app.use();
 
