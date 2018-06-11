@@ -25,7 +25,7 @@ async function verify(ctx, next){
 
     else{
 
-	
+	ctx.app.key = "['" + result[0].dataValues.email + "']";
 
 	var retval =  [
 	{"user_id": result[0].user_id,
