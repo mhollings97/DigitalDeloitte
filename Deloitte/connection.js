@@ -60,7 +60,6 @@ function Connection() {
 				},
 				email: {
 					type: Sequelize.STRING,
-					allowNull: false,
 					unique: true
 				},
 				password: Sequelize.STRING,
@@ -80,16 +79,20 @@ function Connection() {
 				skill: {
 					type: Sequelize.STRING,
 					primaryKey: true
-				}
+				},
 				skill_type: {
-					type: Sequelize.STRING
+					type: Sequelize.STRING,
+					allowNull: false
 				}
 			});
 
 			//Define hasSkills table
 			HS = sequelize.define('hasSkills', {
 				user_id:{type: Sequelize.INTEGER, primaryKey: true},
-				skill: {type: Sequelize.STRING, primaryKey: true}
+				skill: {type: Sequelize.STRING, primaryKey: true},
+				proficiency: {
+					type: Sequelize.INTEGER
+				}
 			    });
 			User.hasMany(HS, {foreignKey: 'user_id'});
 			Skills.hasMany(HS, {foreignKey: 'skill'});
@@ -305,17 +308,19 @@ function Connection() {
 
     }
 
+    //Returns the users skills based on t.
+    //t can be interest, skills, or software.
     this.getUserSkillsByType = function(id, t) {
-    	return HS.findAll({
-    	attributes: ['skill'],
-    	include: [{
-				model: Skills,
+    	return Skills.findAll({
+    		attributes: ['skill'],
+    		where: {skill_type: t},
+    		include: [{
+				model: HS,
 				required: true,
 				where: {
-					skill_type: t
+					user_id: id
 				}
-			}],
-		where: {user_id: id}
+			}]
     	})
     }
 
@@ -371,7 +376,15 @@ function Connection() {
     	}	
     }
 
-
+    //Clears the email of a user so that it can be used again.
+    this.deleteUser = function(id) {
+    	try {
+    		return User.update({email: null}, 
+    			{where: {user_id: id}})
+    	} catch (err) {
+    		return null;
+    	}
+    }
 
 
 
