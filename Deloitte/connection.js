@@ -2,7 +2,7 @@ function Connection() {
 
     //Declaration of global table variables
 	var sequelize = null;
-	const Sequelize = require ('sequelize');
+	const Sequelize = require ('sequelize'); //this is good
 	var User = null;
 	var Skills = null;
 	var HS = null;
