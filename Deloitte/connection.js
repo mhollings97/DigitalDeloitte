@@ -697,6 +697,15 @@ function Connection() {
 		    }).catch(function(err) {return null})
 	}
 
+        //Find a specific Project                                                                                  
+	this.getAllProject = function()
+	{
+            return Project.findAll({}).catch(function(err) {return null})
+	}
+
+
+
+
 
 
 
