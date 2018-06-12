@@ -65,6 +65,7 @@ async function verify(ctx, next){
 
 router.post('/user', createUser);
 
+//Creates a user tuple
 async function createUser(ctx, next) {
 	await conn.createUser(ctx.request.body.email, ctx.request.body.password, ctx.request.body.firstName, ctx.request.body.lastName).then(async function(retval) { 
 	    if(retval == null) {
@@ -107,6 +108,7 @@ async function createUser(ctx, next) {
 
 router.get('/user/:id', getUserData);
 
+//Returns the users data based on the id.
 async function getUserData(ctx, next) {
 	await conn.getUserById(ctx.params.id).then(async function(retval) {
 		if(retval == null || retval.length == 0) {
@@ -168,13 +170,179 @@ async function getUserData(ctx, next) {
 	await next();
 }
 
-/*
-router.get('/user/:id/skills', getUserSkills);
+router.get('/user/:id/interest', getUserInterest);
 
-async function getUserSkills(ctx, next) {
+//Returns a list of user interest
+async function getUserInterest(ctx, next) {
 
+	await conn.getUserSkillsByType(ctx.params.id, "Interest").then(function(retval) {
+		if(retval == null || retval.length == 0) {
+			ctx.status = 404;
+			var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "User interest failed to be retrieved",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "User has no interest."
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+				"status": "success",
+            	"code": ctx.status,
+            	"message": null,
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                }
+            }
+
+      		for(var i = 0; i < retval.length; i++) {
+      			ret.data[i] = {
+      				"name": retval[i].dataValues.skill,
+      			};
+      		} 
+
+      		ctx.body = ret;
+		}
+	})
 	await next();
 }
-*/
 
+router.get('/user/:id/skills', getUserSkills);
+
+//Returns a list of user skills
+async function getUserSkills(ctx, next) {
+	
+	await conn.getUserSkillsByType(ctx.params.id, "Skill").then(function(retval) {
+		if(retval == null || retval.length == 0) {
+			ctx.status = 404;
+			var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "User skill failed to be retrieved",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "User has no skill."
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+				"status": "success",
+            	"code": ctx.status,
+            	"message": null,
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"skillData": [
+                	]
+                }
+            }
+
+      		for(var i = 0; i < retval.length; i++) {
+      			ret.data.skillData[i] = {
+      				"name": retval[i].dataValues.skill,
+      				"proficiency": retval[i].hasSkills[0].dataValues.proficiency
+      			};
+      		} 
+
+      		ctx.body = ret;
+		}
+	})
+	await next();
+}
+
+router.get('/user/:id/software', getUserSoftware);
+
+//returns a list of user software.
+async function getUserSoftware(ctx, next) {
+
+	await conn.getUserSkillsByType(ctx.params.id, "Software").then(function(retval) {
+		if(retval == null || retval.length == 0) {
+			ctx.status = 404;
+			var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "User software failed to be retrieved",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "User has no software."
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+				"status": "success",
+            	"code": ctx.status,
+            	"message": null,
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"softwareData": [
+                	]
+                }
+            }
+
+      		for(var i = 0; i < retval.length; i++) {
+      			ret.data.softwareData[i] = {
+      				"name": retval[i].dataValues.skill,
+      				"proficiency": retval[i].hasSkills[0].dataValues.proficiency
+      			};
+      		} 
+
+      		ctx.body = ret;
+		}
+	})
+	await next();
+}
+
+router.delete('/user/:id', removeUser);
+
+//Sets a users email as null, marking them as removed from the database
+//Still keeps the data for memory purposes.
+async function removeUser(ctx, next) {
+
+	await conn.deleteUser(ctx.params.id).then(function(retval) {
+		if(retval == null) {
+			ctx.status = 400;
+			var ret = {
+	            "status": "Failure",
+	            "code": ctx.status,
+	            "message": "User failed to deleted",
+	            "apiVersion": apiVersion,
+	            "requestUrl": ctx.request.host + ctx.request.url,
+	            "data": {
+	               }
+	        }
+	        ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+	            "status": "success",
+	            "code": ctx.status,
+	            "message": "User deleted",
+	            "apiVersion": apiVersion,
+	            "requestUrl": ctx.request.host + ctx.request.url,
+	            "data": {
+	               }
+	        }
+	        ctx.body = ret;
+		}
+	})
+
+	await next();
+} 
 module.exports = router;
