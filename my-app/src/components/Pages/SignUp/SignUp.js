@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import InputForm from '../.././InputForm/InputForm'
 import CheckBox from '../.././CheckBox/CheckBox'
 import './SignUp.css'
-
+import {Link, Redirect, Route, BrowserRouter as Router } from 'react-router-dom'
+import UserProfile from '../UserProfile/UserProfile'
 class SignUp extends Component {
 
 constructor(props) {
@@ -13,6 +14,7 @@ constructor(props) {
 		lastName: '',
 		email: '',
 		pw: '',
+		redirect: false
 	}
 	this.handleSubmit = this.handleSubmit.bind(this);
 	this.handleFNChange = this.handleFNChange.bind(this);
@@ -27,7 +29,7 @@ constructor(props) {
 handleSubmit(event){
 event.preventDefault();
 console.log("submit form");
- fetch('https://private-efbab-vdwregistration.apiary-mock.com/api/v1/user', {
+fetch('https://private-efbab-vdwregistration.apiary-mock.com/api/v1/user', {
                 method: 'POST',
                 headers : new Headers(),
                 body:JSON.stringify(
@@ -41,7 +43,8 @@ console.log("submit form");
             }).then((res) => res.json())
             .then((data) =>  console.log(data))
             .catch((err)=>console.log(err));
-
+console.log("here");
+	this.setState({ redirect: true});
 }
 
 handleFNChange(e){
@@ -58,6 +61,16 @@ handlePWChange(e){
 }
 
     render() {
+
+	if(this.state.redirect){
+
+		return (
+		<div>
+				<Redirect to = "/userprofile" />
+
+		</div>
+		)
+	}
 	return (
 	<div>
 	  <div id = "SignUpWrapper">
@@ -86,8 +99,9 @@ handlePWChange(e){
 			<input id = "password" name = "password" value={this.state.pw}
 				onChange={this.handlePWChange}/>
 			<br/>
-
+			<Link to = "userprofile">
 			<button onClick = {this.handleSubmit}> Submit </button>
+			</Link>
 		</form>
 
 	    </div>

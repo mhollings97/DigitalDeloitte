@@ -31,8 +31,7 @@ class TopHeader extends Component {
 			</Link>
 		</div>
 		<div id = "SI">
-				<Header func = {this.props.toggleLog} title = "Sign 
-In"></Header>
+				<Header func = {this.props.toggleLog} title = "Sign In"></Header>
 		</div>
 		<div id = "home">
 			<Link to = {'/'}>

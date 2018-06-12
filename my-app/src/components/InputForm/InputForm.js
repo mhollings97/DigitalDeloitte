@@ -52,7 +52,7 @@ constructor(props) {
             	<input type="submit" value ="Submit"/>
 	    </div>
 	    <div id = "SignUp">
-		    <button onClick = {this.props.redirectSU}>Need an account? Apply for Virtual Interview</button>
+		{this.props.linkButton}
 	    </div>
 	    </div>
         </form>
