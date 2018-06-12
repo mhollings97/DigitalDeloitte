@@ -107,7 +107,7 @@ function Connection() {
 				project_name: Sequelize.STRING,
 				completion_time: Sequelize.INTEGER,
 				description: Sequelize.STRING,
-				rec_desc: Sequelize.STRING,
+				status: Sequelize.STRING,
 				join_deadline: {
 				    type: Sequelize.DATE,
 				    allowNull: false
