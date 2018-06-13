@@ -403,18 +403,17 @@ function Connection() {
 	//Skills table related functions begin here
 
 	//Adds a skill to list of tags used by Projects and users
-	this.insertSkills = function(s) {
+	this.insertSkills = function(s, t) {
 	    return Skills.create({
-		    skill: s
+		    skill: s,
+		    skill_type: t
 		}).catch(function(err) {return null});
 	}
 
 	//Returns the promise of all skills
 	this.getSkills = function() {
-	    return Skills.findAll({
-                    attributes: ['skill'],
-                }).catch(function(err) {return null});
-
+	    return Skills.findAll({})
+	    	.catch(function(err) {return null});
 	}
 
 
@@ -486,10 +485,11 @@ function Connection() {
 	//hasSkills related table functions begin here
 
 	//Adds skill for specific user
-	this.addHS = function(inId, s) {
+	this.addHS = function(inId, s, p) {
 	    return HS.create({
 		    user_id: inId,
-		    skill: s
+		    skill: s,
+		    proficiency: p
                 }).catch(function(err) {return null})
 	}
 
