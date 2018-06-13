@@ -64,27 +64,6 @@ constructor(props) {
                 <div id = "OfferContainer">
                         <Offer/>
                 </div>
-		<div id = "SignUpContainer">
-			<SignUp/>
-		</div>
-		<div id = "YourMotiveContainer">
-			<YourMotive/>
-		</div>
-		<div id = "AttachmentsContainer">
-			<Attachments/>
-		</div>
-		<div id = "ProjectsContainer">
-			<Projects/>
-		</div>
-		<div id = "UserProfileContainer">
-			<UserProfile/>
-		</div>
-		<div id = "AfterSignUpContainer">
-			<AfterSignUp/>
-		</div>
-		<div id = "ProjPageContainer">
-			<ProjPage/>
-		</div>
             </div>
         </div>
     </Router>

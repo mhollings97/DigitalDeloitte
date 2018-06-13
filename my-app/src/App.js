@@ -16,6 +16,7 @@ import Header from './components/Buttons/Header/Header'
 import HomeButton from './components/Buttons/Home/HomeButton'
 import TopHeader from './components/Header/TopHeader'
 import SignUp from './components/Pages/SignUp/SignUp'
+import AfterSignUp from './components/Pages/AfterSignUp/AfterSignUp'
 import UserProfile from './components/Pages/UserProfile/UserProfile'
 class App extends Component {
 constructor(props) {
@@ -36,25 +37,6 @@ constructor(props) {
 
 
 
-handleSubmit(event){
-	event.preventDefault();
-	console.log("submit form");
-	fetch('https://private-efbab-vdwregistration.apiary-mock.com/api/v1/user', {
-                method: 'POST',
-                headers : new Headers(),
-                body:JSON.stringify(
-                  {
-                    "firstName": "John",
-                    "lastName": "Doe",
-                    "email": "xyz@mail.com",
-                    "password": "abc123",
-                  }
-                )
-        }).then((res) => res.json())
-        .then((data) =>  console.log(data))
-        .catch((err)=>console.log(err));
-	console.log("here");
-}
 
 
 render() {
@@ -101,6 +83,7 @@ render() {
         <Route path = "/aboutus" component= {AboutUs}/>
 	<Route path = '/abouttheproject' component = {AboutProj}/>
         <Route path = "/signup" component = {SignUp}/>
+	<Route path = "/signupcomplete" component = {AfterSignUp}/>
         <Route exact = 'true' path = "/userprofile" component = {UserProfile}/>
         <Route path = "/contactus" component = {UserData}/>
       </div>

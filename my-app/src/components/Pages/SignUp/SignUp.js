@@ -66,7 +66,7 @@ handlePWChange(e){
 
 		return (
 		<div>
-				<Redirect to = "/userprofile" />
+				<Redirect to = "/signupcomplete" />
 
 		</div>
 		)
@@ -99,7 +99,7 @@ handlePWChange(e){
 			<input id = "password" name = "password" value={this.state.pw}
 				onChange={this.handlePWChange}/>
 			<br/>
-			<Link to = "userprofile">
+			<Link to = "/signupcomplete">
 			<button onClick = {this.handleSubmit}> Submit </button>
 			</Link>
 		</form>

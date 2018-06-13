@@ -6,12 +6,49 @@ class UserProfile extends Component {
 
 constructor(props) {
     super(props);
+
+        this.state = {
+                firstName: "",
+                lastName: "",
+		email: "",
+		interests: "",
+	};
 }
 
+componentDidMount() {
+
+
+fetch('https://private-ae364-vdwregistration.apiary-mock.com/api/v1/user/1',
+        {
+        method:"GET",
+        headers: {
+                "Content-Type": "application/json"
+         }})
+
+        .then(results => {
+                return results.json();
+        })
+
+        .then(responseData => {
+                console.log(responseData.data);
+
+                        this.setState({
+                        firstName: responseData.data.firstName,
+                        email: responseData.data.email,
+                        lastName: responseData.data.lastName,
+			interests: responseData.data.interestArea,
+		});
+
+        })
+
+
+
+}
+
+
     render () {
-	
 	return (
-	
+
 	    <div>
 		<div id = "ProfileWrap">
 		    <div id = "UserPhoto">
@@ -24,14 +61,16 @@ constructor(props) {
 			<p><b>Finished Projects: </b></p>
 		    </div>
 		    <div id = "LogInInfo">
-			<p><b>Email: </b>example@email.com</p>
+			<p><b>First Name: </b>{this.state.firstName}</p>
+			<p><b>Last Name: </b>{this.state.lastName}</p>
+			<p><b>Email: </b>{this.state.email}</p>
 			<p><u>Change your email</u></p>
 			<p><b>Password: </b>******</p>
 			<p><u>Change your password</u></p>
 		    </div>
 		    <div id = "Interests">
 			<p><b>Interested in: </b></p>
-			<p>Design, business architecture</p>
+			<p>{this.state.interests}</p>
 			<p><u>Edit</u></p>
 		    </div>
 		    <div id = "Skills">
