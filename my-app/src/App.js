@@ -18,6 +18,9 @@ import TopHeader from './components/Header/TopHeader'
 import SignUp from './components/Pages/SignUp/SignUp'
 import AfterSignUp from './components/Pages/AfterSignUp/AfterSignUp'
 import UserProfile from './components/Pages/UserProfile/UserProfile'
+import ProjectCards from './components/Pages/Projects/ProjectCards/ProjectCards'
+
+
 class App extends Component {
 constructor(props) {
     super(props);
@@ -86,6 +89,7 @@ render() {
 	<Route path = "/signupcomplete" component = {AfterSignUp}/>
         <Route exact = 'true' path = "/userprofile" component = {UserProfile}/>
         <Route path = "/contactus" component = {UserData}/>
+        <Route path = "/projectsavailable" component = {ProjectCards}/>
       </div>
 </Router>
   	);

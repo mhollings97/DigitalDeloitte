@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './UserProfile.css'
 import Image from '../.././Image/Image'
-
+import {Redirect} from 'react-router-dom'
 class UserProfile extends Component {
 
 constructor(props) {
@@ -12,7 +12,10 @@ constructor(props) {
                 lastName: "",
 		email: "",
 		interests: "",
+		redirect: false,
 	};
+	this.handleRedirect = this.handleRedirect.bind(this);
+
 }
 
 componentDidMount() {
@@ -45,8 +48,23 @@ fetch('https://private-ae364-vdwregistration.apiary-mock.com/api/v1/user/1',
 
 }
 
+handleRedirect(){
+
+	this.setState({
+		redirect: !this.state.redirect
+	});
+}
+
 
     render () {
+
+	if(this.state.redirect){
+		return(
+			<Redirect to = "/projectsavailable"/>
+		)
+
+	}
+
 	return (
 
 	    <div>
@@ -87,6 +105,11 @@ fetch('https://private-ae364-vdwregistration.apiary-mock.com/api/v1/user/1',
 		    <div id = "Completed">
 			<p>You have no completed projects.</p>
 		    </div>
+			<div id = "projlink">
+				<button onClick = {this.handleRedirect}> Click here to see available projects! </button>
+			</div>
+
+
 		</div>
 	    </div>
 
