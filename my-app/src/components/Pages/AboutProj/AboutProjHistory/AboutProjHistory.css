@@ -1,0 +1,20 @@
+#HistoryText {
+        text-align: left;
+        position: relative;
+        float: right;
+        width: 35%;
+        margin-right: 15%;
+}
+
+#HistoryHeader {
+	text-align: center;
+}
+
+#Timeline {
+	text-align: left;
+	position: relative;
+	float: left;
+	width: 35%;
+	margin-left: 15%;
+}
+

@@ -1,103 +1,108 @@
 import React, { Component } from 'react';
 import './App.css';
-import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from 'react-router-dom'
 import HomeScreen from './components/Pages/HomeScreen/HomeScreen'
 import AboutUs from './components/Pages/AboutUs/AboutUs'
 import AboutProj from './components/Pages/AboutProj/AboutProj'
 import InputForm from './components/InputForm/InputForm'
+import UserData from './components/UserData/UserData'
+import Header from './components/Buttons/Header/Header'
+import HomeButton from './components/Buttons/Home/HomeButton'
 import TopHeader from './components/Header/TopHeader'
+import SignUp from './components/Pages/SignUp/SignUp'
+import AfterSignUp from './components/Pages/AfterSignUp/AfterSignUp'
+import UserProfile from './components/Pages/UserProfile/UserProfile'
+import ProjectCards from './components/Pages/Projects/ProjectCards/ProjectCards'
+
+
 class App extends Component {
 constructor(props) {
     super(props);
     this.state = {
-        showAU: false,
-    	showHome: true,
-	showAP: false,
-	showCU: false,
-	showLogOn: false
+		showLogOn: false
 	};
-
-        this.redirectAU = this.redirectAU.bind(this);
-        this.redirectHome = this.redirectHome.bind(this);
-        this.redirectCU = this.redirectCU.bind(this);
-        this.redirectAP = this.redirectAP.bind(this);
 	this.toggleLog = this.toggleLog.bind(this);
+	this.handleSubmit = this.toggleLog.bind(this);
 }
-	toggleLog(showLogOn) {
+
+
+        toggleLog(showLogOn) {
             this.setState(prevState => ({
-                showLogOn: !prevState.showLogOn
+                showLogOn: !this.state.showLogOn
           }));
-	}
-
-        redirectAU(showAU) {
-            this.setState(prevState => ({
-          	        showAU: true,
-    			showHome: false,
-			showAP: false,
-			showCU: false
-
-	    }))
-	}
-        redirectHome(showHome) {
-            this.setState(prevState => ({
-          	        showAU: false,
-    			showHome: true,
-			showAP: false,
-			showCU: false
-
-          }));
-	}
-	redirectAP(showAP) {
-            this.setState(prevState => ({
-          	        showAU: false,
-    			showHome: false,
-			showAP: true,
-			showCU: false
-
-          }))
         }
-	redirectCU(showCU) {
-            this.setState(prevState => ({
-          	        showAU: false,
-    			showHome: false,
-			showAP: false,
-			showCU: true
 
-          }))
-	}
 
-  render() {
+
+
+
+render() {
     return (
-    <div>
-	<TopHeader
-		redirectAU = {this.redirectAU}
-		redirectHome = {this.redirectHome}
-		redirectCU = {this.redirectCU}
-		redirectAP = {this.redirectAP}
-		toggleLog = {this.toggleLog}
-	/>
-	{this.state.showLogOn
-		&& <div id = "signIn"> <InputForm/> </div>
+<Router>
+      <div>
+		{this.state.showLogOn
+                	&&
+		<div id = "signIn"> 
+		<InputForm
+		linkButton = {
+			<Link to = {'/signup'} >
+				<button onClick ={this.toggleLog}>Need and Account? Click here to sign up!</button>
+			</Link>
 		}
-	{this.state.showLogOn && <div id = "catcher" onClick = {this.toggleLog}/>}
-    <Router>
-	<div>
-	 {this.state.showHome && <Redirect from = {this.location} to = "/"/>}
-	 <Route exact = {true} path = "/" render={props => <HomeScreen/>} />
+		submitButton = {
+			<Link to = {'/userprofile'} >
+				<button onClick ={this.toggleLog}> Submit </button>
+			</Link>
 
-	 {this.state.showAU && <Redirect from = {this.location} to = "/aboutus"/>}
-	 <Route exact = {true} path = "/aboutus" render={props => <AboutUs/>} />
+		}
 
-	 {this.state.showCU && <Redirect from = {this.location} to = "/contactus"/>}
-	 <Route exact = {true} path = "/contactus" render={props => <div> CONTACT US </div>} />
+		/> </div>}
 
-	 {this.state.showAP && <Redirect from = {this.location} to = "/abouttheproject"/>}
-	 <Route exact = {true} path = "/abouttheproject" render={props => <AboutProj/>} />
+		{this.state.showLogOn
+                	&&
+		<div id = 'catcher' onClick = {this.toggleLog}/>}
 
-	</div>
-    </Router>
-    </div>
-    );
+
+                <div id = "AU">
+                        <Link to = {'/aboutus'} >
+                                <Header title = "About Us" ></Header>
+                        </Link>
+                </div>
+                <div id = "AP">
+                        <Link to = { '/abouttheproject'}>
+                                <Header title = "About the Project"></Header>
+			</Link>
+                </div>
+                <div id = "CU">
+                        <Link to = { '/contactus'}>
+                                <Header title = "Contact Us"></Header>
+                        </Link>
+                </div>
+                <div id = "SI">
+                                <Header func = {this.toggleLog} title = "Sign In"></Header>
+                </div>
+                <div id = "home">
+                        <Link to = {'/'}>
+                        <HomeButton >Deloitte Digital</HomeButton>
+                        </Link>
+    		</div>
+        <Route exact = 'true' path = "/" component= {HomeScreen}/>
+        <Route path = "/aboutus" component= {AboutUs}/>
+	<Route path = '/abouttheproject' component = {AboutProj}/>
+        <Route path = "/signup" component = {SignUp}/>
+	<Route path = "/signupcomplete" component = {AfterSignUp}/>
+        <Route exact = 'true' path = "/userprofile" component = {UserProfile}/>
+        <Route path = "/contactus" component = {UserData}/>
+        <Route path = "/projectsavailable" component = {ProjectCards}/>
+      </div>
+</Router>
+  	);
   }
 }
 

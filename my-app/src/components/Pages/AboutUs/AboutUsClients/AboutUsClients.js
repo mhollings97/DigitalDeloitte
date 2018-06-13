@@ -15,8 +15,10 @@ render () {
 
 	<div>
 	<div id = "ClientsInfo">
-	<TextBox size = "small" message = "Who are our clients"/>
 	<div id = "PhotosBox">
+		<div id = "header">
+		<TextBox size = "small" message = "Who are our clients"/>
+		</div>
 	<div id = "TopRow">
 	    <div id = "Top1">
 		<Image size = "small"/>

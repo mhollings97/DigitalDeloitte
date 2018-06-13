@@ -1,0 +1,30 @@
+#StatsHeading {
+	text-align: center;
+}
+
+#Projects {
+	text-align: left;
+	display: inline-block;
+	position: relative;
+	width: 20%;
+} 
+
+#Members {
+	text-align: center;
+	display: inline-block;
+	position: relative;
+	width: 20%;
+} 
+
+#Leaders {
+	text-align: right;
+	display: inline-block;
+	position: relative;
+	width: 20%;
+}
+
+#StatsText {
+	width: 100%;
+	margin-left: 20%;
+	margin-right: 20%;
+}

@@ -1,11 +1,16 @@
 #HeaderWrap {
-
+	padding-bottom: 10%;
 }
 
 #Info {
 	text-align: left;
+        position: relative;
+        float: right;
+        width: 35%;
+        margin-right: 15%;
 }
 
 #ProjPhoto {
-	text-align: right;
+	text-align: left;
+	width: 50%;
 }

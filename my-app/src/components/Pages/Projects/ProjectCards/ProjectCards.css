@@ -1,0 +1,44 @@
+#AllCards {
+	padding-top: 5%;
+	padding-bottom: 20%;
+        height: 100%; 
+        width: 100%;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(8, 1fr);
+        grid-auto-rows: 100px;
+	grid-template-areas:
+	"x x x x x x x x"
+	"a a a a b b b b"
+	"a a a a b b b b"
+	"a a a a b b b b"
+	"c c c c d d d d"
+	"c c c c d d d d";
+        align-items: start;
+}
+
+#PC1 {
+	grid-area: a;
+        align-self: center;
+        justify-self: center;
+}
+
+#PC2 {
+	grid-area: b;
+        align-self: center;
+        justify-self: center;
+}
+
+#PC3 {
+	grid-area: c;
+        align-self: center;
+        justify-self: center;
+	margin-top: 50%;
+}
+
+#PC4 {
+	grid-area: d;
+        align-self: center;
+        justify-self: center;
+	margin-top: 50%;
+}

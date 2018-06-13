@@ -1,0 +1,19 @@
+#Wrapper {
+	background-color: #696969;
+	text-color: #FFFFFF;
+	width: 100%;
+}
+
+#Beginner {
+	display: inline-block;
+	margin-left: 20%; 
+}
+
+#Consultant {
+	display: inline-block;
+}
+
+#SignOff {
+	display: inline-block;
+	margin-right: 20%;
+}

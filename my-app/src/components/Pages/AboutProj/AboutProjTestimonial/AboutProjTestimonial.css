@@ -1,0 +1,15 @@
+#TestimonialWrapper {
+	width: 100%;
+}
+
+#TestimonialImage {
+	height: 35%;
+	width: 35%;
+	margin-left: 5%;
+}
+
+#TestimonialQuote {
+	text-align: right;
+	float: left;
+	margin-left: 25%;
+}
