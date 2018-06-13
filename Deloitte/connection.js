@@ -704,7 +704,12 @@ function Connection() {
 	}
 
 
-
+	this.getProjectId = function(name)
+	{return Project.findAll({
+		    attributes: ['project_id'],
+		    where: {project_name: name}
+		});
+	}
 
 
 

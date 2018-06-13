@@ -11,7 +11,7 @@ router.post('/', newProject);
 router.get('/', listProject);
 
 async function newProject(ctx, next) {
-    const project = conn.createProject(ctx.body.project_name,
+    await conn.createProject(ctx.body.project_name,
 			     ctx.body.completion_time,
 			     ctx.body.description,
 			     ctx.body.status,
@@ -23,10 +23,23 @@ async function newProject(ctx, next) {
 			     ctx.body.people,
 			     ctx.body.xp_gain,
 			     ctx.body.xp_bonus);
-    ctx.res.status(200).json(project);
+    for(var i = 0; i < ctx.body.skills.length; i++)
+	{await conn.addNS(ctx.body.project_id, ctx.body.skills[i]);}
+
+    var retval = {
+	"status": "success",
+	"code": 200,
+	"message": "Hi, Mike. This is a project.",
+	"apiVersion": 1,
+	"requestUrl": "localhost: 3000/project/",
+	"data":
+    
+    ctx.res = retval;
 }
 
 async function listProject(ctx, next) {
-    const retval = 
+    const retval = conn.getAllProject();
+
+    ctx.res.status(200).json(retval);
 }
 
