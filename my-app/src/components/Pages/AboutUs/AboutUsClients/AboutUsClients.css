@@ -1,0 +1,53 @@
+#TopRow {
+	width: 100%;
+	display: inline-block;
+}
+
+#BottomRow {
+	width: 100%;
+	display: inline-block;
+}
+
+#PhotosBox {
+	width: 100%;
+}
+
+#Top1 {
+	display: inline-block;
+	width: 20%;
+}
+
+#Top2{
+	display: inline-block;
+	width: 20%;
+}
+
+#Top3{
+	display: inline-block;
+	width: 20%;
+}
+
+#Top4{
+	display: inline-block;
+	width: 20%;
+}
+
+#Bottom1 {
+        display: inline-block;
+        width: 20%;
+}
+
+#Bottom2{
+        display: inline-block;
+        width: 20%;
+}
+
+#Bottom3{
+        display: inline-block;
+        width: 20%;
+}
+
+#Bottom4{ 
+        display: inline-block;
+        width: 20%;
+}

@@ -17,6 +17,7 @@ render() {
 	  <div id = "InfoPhoto">
 	    <Image size = "small"/>
 	  </div>
+
 	  <div id = "InfoText">
 	    <p><b>Deloitte Digital</b> was set up a few years ago as part of the global Deloitte network.</p>
 
@@ -30,8 +31,7 @@ render() {
 
 	    <p>We combine leading digital technologies and creative capabilities with the deep industry knowledge and experience Deloitte is known for.</p>
 
-	<Link url = "https://www2.deloitte.com/cz/cs.html" text = "More at: deloittedigital.cz"/>
-	    
+	    <Link url = "https://www2.deloitte.com/cz/cs.html" text = "More at: deloittedigital.cz"/>
 	  </div>
         </div>
     );
