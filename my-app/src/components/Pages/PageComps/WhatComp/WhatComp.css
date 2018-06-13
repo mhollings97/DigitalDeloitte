@@ -1,29 +1,86 @@
 #WhatProj {
 	position: absolute;
+	text-align: center;
 }
 
 #WhatOne{
+	position: relative;
 	display: inline-block;
 	width: 20%;
+	height: 300px;
 }
 
 #WhatTwo{
+	position: relative;
 	display: inline-block;
 	width: 20%;
+	height: 300px;
 }
 
 #WhatThree {
+	position: relative;
 	display: inline-block;
 	width: 20%;
+	height: 300px;
 }
 
 #WhatFour {
+	position: relative;
 	display: inline-block;
 	width: 20%;
+	height: 300px;
 }
 
 #WhatWrap {
 	display: inline-block;
 	position: relative;
+	width: 100%;
 }
 
+#oneimg {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+#onetext {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+#twoimg {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+#twotext {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+#threeimg {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+#threetext {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+#fourimg {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+#fourtext {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}

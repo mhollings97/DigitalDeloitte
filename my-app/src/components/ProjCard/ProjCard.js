@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from '.././Buttons/Link/Link'
 import './ProjCard.css'
 
 class ProjCard extends Component {
@@ -35,7 +36,7 @@ constructor (props) {
 			<p>Reward: 50 ExP</p>
 		    </div>
 		    <div id = "ShowMore">
-			<p>Show More (make into a link)</p>
+			<Link url = "https://www.google.com/" text = "Show More"/>
 		    </div>
 		
 		</div>

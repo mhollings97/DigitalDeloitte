@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ProjDescription from '../.././ProjDescription/ProjDescription'
+import StartWorking from '../../Buttons/./StartWorking/StartWorking'
 import './ProjPage.css'
 
 class ProjPage extends Component {
@@ -11,6 +12,7 @@ render () {
 
     return (
 	<div>
+	  <div id = "bigwrap">
 	    <div id = "projinfo">
 		<p>We compete for the best graphic design poster for the movie "Futuristic Vision"</p>
 		<p>Your task will be to design one or at most three variants of a 100x70 cm film poster. The poster will be dedicated to the film exhibition and will be used to present an unprecedented film called "Next Future". The film deals with a vision of the future where there will be a disproportionate development of new technologies that will fundamentally transform our whole world as we know it.</p>
@@ -22,6 +24,10 @@ render () {
 	    <div id = "descbar">
 	        <ProjDescription/>
 	    </div>
+	    <div id = "startwork">
+		<StartWorking/>
+	    </div>
+	  </div>
 	</div>
     );
 

@@ -1,8 +1,19 @@
 #projinfo {
 	float: left;
-	width: 70%;
+	width: 60%;
+	margin-bottom: 7%;
 }
 
 #descbar {
 	float: right;
+	width: 30%;
+}
+
+#bigwrap {
+	margin-left: 7%;
+	margin-right: 7%;
+}
+
+#startwork {
+	margin-top: 50%;
 }

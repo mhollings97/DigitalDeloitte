@@ -39,6 +39,8 @@ class What extends Component {
 			<Image size = "xlarge"/>
 		    </div>
 		</div>
+                <button id = "WhatBut" onClick = {this.props.toggleWhat}> How will you work with us?</button>
+
 	    </div>
         )
 
