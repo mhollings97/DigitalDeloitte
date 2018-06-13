@@ -48,11 +48,21 @@ render() {
       <div>
 		{this.state.showLogOn
                 	&&
-		<div id = "signIn"> <InputForm linkButton = {
+		<div id = "signIn"> 
+		<InputForm
+		linkButton = {
 			<Link to = {'/signup'} >
 				<button onClick ={this.toggleLog}>Need and Account? Click here to sign up!</button>
 			</Link>
-		}/> </div>}
+		}
+		submitButton = {
+			<Link to = {'/userprofile'} >
+				<button onClick ={this.toggleLog}> Submit </button>
+			</Link>
+
+		}
+
+		/> </div>}
 
 		{this.state.showLogOn
                 	&&
