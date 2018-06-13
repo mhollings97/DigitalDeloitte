@@ -146,6 +146,10 @@ User.prototype.removeProject = function(pid) {
 	return this.conn.removeProject(this.getUser_id(), pid);
 }
 
+User.prototype.createApp = function(s, i, a, l, p, c) {
+	return this.conn.createApp(this.getUser_id(), s, i, a, l, p, c);
+}
+
 //Getters for application
 User.prototype.getSchooling = function() {
 	var tuple = this.conn.getApp(this.getUser_id());

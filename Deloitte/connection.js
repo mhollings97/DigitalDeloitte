@@ -224,6 +224,12 @@ function Connection() {
 				},
 				project_id : {
 					type: Sequelize.INTEGER
+				},
+				eval_grade: {
+					type: Sequelize.INTEGER
+				},
+				eval_date: {
+					type: Sequelize.DATE
 				}
 			});
 			User.hasMany(Sub, {foreignKey: 'user_id'});
@@ -276,7 +282,7 @@ function Connection() {
 	        name: n,
 	        surname: s,
 	        xp: 0,
-	        type: 'Developer'
+	        uType: 'Developer'
 	    }).catch(function(err) {return null})
 	}
 
@@ -729,17 +735,16 @@ function Connection() {
 	//Tags table related functions begin here
 
 	//Adds a tag to list of tags used by Projects                                       
-    this.insertTags = function(t) {
+    this.insertTags = function(t, ty) {
         return Tags.create({
-                tag: t
+                tag: t,
+                tag_type: ty
             }).catch(function(err) {return null});
     }
 
     //Returns the promise of all skills                                                                 
     this.getTags = function() {
-        return Tags.findAll({
-                attributes: ['tag'],
-		}).catch(function(err) {return null});
+        return Tags.findAll({}).catch(function(err) {return null});
 	}
 
 

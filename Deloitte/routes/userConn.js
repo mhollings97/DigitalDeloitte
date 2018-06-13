@@ -198,8 +198,8 @@ async function getUserInterest(ctx, next) {
             	"message": null,
             	"apiVersion": apiVersion,
             	"requestUrl": ctx.request.host + ctx.request.url,
-            	"data": {
-                }
+            	"data": [
+                ]
             }
 
       		for(var i = 0; i < retval.length; i++) {
