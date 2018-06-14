@@ -74,6 +74,10 @@ function User(u, e, f, s, x, sk, t, inConn) {
 			skills = sk;
 		}	
 	}
+	this.setType = function(t) {
+		type = t;
+		this.conn.setType(this.getUser_id(), t);
+	}
 }
 
 //Sets the users password.

@@ -15,6 +15,8 @@ var user9;
 var user10;
 
 var proj = [];
+var check;
+
 var skills = ["Java", "Javascript", "SQL", "Python", "Business", "Research"];
 
 var tags1 = ["Small", "Medium", "Large"];
@@ -88,8 +90,8 @@ conn.createTable().then(async function() {
 		}
 	}).then(async function() {
 		if(user1.getType() != "Ambassador") {
-			await conn.setType(user1.getUser_id(), "Ambassador");
-			await conn.setType(user5.getUser_id(), "Ambassador");
+			await user1.setType("Ambassador");
+			await user5.setType("Ambassador");
 		}
 	}).then(async function() {
 		await conn.insertSkills("Java", "Software");
@@ -132,16 +134,23 @@ conn.createTable().then(async function() {
 		await user8.createApp("Grade School", "Digital Deloitte", "My mother", "LinkedIn.eu", "Personal.us", "My Cover Letter");
 		await user9.createApp("Professor", "Anything but this", "The fear of death", "LinkedIn.us", "Personal.com", "My Cover Letter");
 	}).then(async function() {
-		var check = await conn.getAllProject();
+		check = await conn.getAllProject();
 
 		if(check.length == 0) {
-			await conn.createProject("Digital Deloitte", 16, "Make a website", "Here are the recources you have to work with", new Date(2018, 5, 28), new Date(2018, 6, 13), new Date(2018, 6, 23), 0, 1000, 6, 100, 50);
-			await conn.createProject("Virtual Deloitte", 16, "Make a website, but virtual", "Here are the recources you have to work with, but virtual", new Date(2018, 5, 23), new Date(2018, 6, 21), new Date(2018, 6, 23), 0, 500, 72, 10, 500);
-			await conn.createProject("Lehigh In Prague", 16, "Enjoy your stay", "Here is the tram schedule", new Date(2018, 5, 23), new Date(2018, 6, 14), new Date(2018, 6, 23), 500, 10000, 2, 1000, 5);
-			await conn.createProject("Machine Learning", 16, "They shall destroy us all", "What recourses?", new Date(2018, 3, 12), new Date(2019, 6, 13), new Date(2020, 6, 23), 100, 10000, 24, 1000, 5);
-			await conn.createProject("Not Killing Eachother", 16, "Specifically Jake", "Whatever you can find to survive", new Date(2018, 1, 1), new Date(2018, 7, 13), new Date(2099, 12, 31), 0, 1000, 6, 10, 50);
+			await conn.createProject("Digital Deloitte", 16, "Make a website", "Here are the recources you have to work with", 
+				new Date(2018, 5, 28), new Date(2018, 6, 13), new Date(2018, 6, 23), 0, 1000, 6, 100, 50);
+			await conn.createProject("Virtual Deloitte", 16, "Make a website, but virtual", "Here are the recources you have to work with, but virtual", 
+				new Date(2018, 5, 23), new Date(2018, 6, 21), new Date(2018, 6, 23), 0, 500, 72, 10, 500);
+			await conn.createProject("Lehigh In Prague", 16, "Enjoy your stay", "Here is the tram schedule", 
+				new Date(2018, 5, 23), new Date(2018, 6, 14), new Date(2018, 6, 23), 500, 10000, 2, 1000, 5);
+			await conn.createProject("Machine Learning", 16, "They shall destroy us all", "What recourses?", 
+				new Date(2018, 3, 12), new Date(2019, 6, 13), new Date(2020, 6, 23), 100, 10000, 24, 1000, 5);
+			await conn.createProject("Not Killing Eachother", 16, "Specifically Jake", "Whatever you can find to survive", 
+				new Date(2018, 1, 1), new Date(2018, 7, 13), new Date(2099, 12, 31), 0, 1000, 6, 10, 50);
+
+			check = await conn.getAllProject();
 		}
-		
+	}).then(async function() {	
 		for(var i = 0; i < check.length; i++) {
 			proj.push(await new Proj(check[i].dataValues.project_id, check[i].dataValues.project_name, check[i].dataValues.completion_time, 
 				check[i].dataValues.description, check[i].dataValues.status, check[i].dataValues.join_deadline, check[i].dataValues.rev_deadline, 
@@ -181,13 +190,15 @@ conn.createTable().then(async function() {
 		}
 
 		for(var i = 0; i < 3; i++) {
-			conn.addProject(user2.getUser_id(), proj[i % proj.length].getProj_id(), user2.getType());
-			conn.addProject(user3.getUser_id(), proj[(i + 1) % proj.length].getProj_id(), user3.getType());
-			conn.addProject(user4.getUser_id(), proj[(i + 2) % proj.length].getProj_id(), user4.getType());
-			conn.addProject(user6.getUser_id(), proj[(i + 3) % proj.length].getProj_id(), user6.getType());
-			conn.addProject(user7.getUser_id(), proj[(i + 4) % proj.length].getProj_id(), user7.getType());
-			conn.addProject(user8.getUser_id(), proj[(i + 5) % proj.length].getProj_id(), user8.getType());
-			conn.addProject(user9.getUser_id(), proj[(i + 6) % proj.length].getProj_id(), user9.getType());
-			conn.addProject(user10.getUser_id(), proj[(i + 7) % proj.length].getProj_id(), user10.getType());			
+			await conn.addProject(user2.getUser_id(), proj[i % proj.length].getProj_id(), user2.getType());
+			await conn.addProject(user3.getUser_id(), proj[(i + 1) % proj.length].getProj_id(), user3.getType());
+			await conn.addProject(user4.getUser_id(), proj[(i + 2) % proj.length].getProj_id(), user4.getType());
+			await conn.addProject(user6.getUser_id(), proj[(i + 3) % proj.length].getProj_id(), user6.getType());
+			await conn.addProject(user7.getUser_id(), proj[(i + 4) % proj.length].getProj_id(), user7.getType());
+			await conn.addProject(user8.getUser_id(), proj[(i + 5) % proj.length].getProj_id(), user8.getType());
+			await conn.addProject(user9.getUser_id(), proj[(i + 6) % proj.length].getProj_id(), user9.getType());
+			await conn.addProject(user10.getUser_id(), proj[(i + 7) % proj.length].getProj_id(), user10.getType());
 		}
-	})
+	}).then(async function() {
+		await conn.closeConnection();
+})
