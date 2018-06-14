@@ -316,7 +316,7 @@ async function removeUser(ctx, next) {
 
 	await conn.deleteUser(ctx.params.id).then(function(retval) {
 		if(retval == null) {
-			ctx.status = 400;
+			ctx.status = 404;
 			var ret = {
 	            "status": "Failure",
 	            "code": ctx.status,
@@ -345,4 +345,163 @@ async function removeUser(ctx, next) {
 
 	await next();
 } 
+
+router.get('/user/:id/project', getAllUserProj);
+
+async function getAllUserProj(ctx, next) {
+	await conn.getProjectsbyUser(ctx.params.id).then(async function(retval) {
+		if(retval == null || retval.length == 0) {
+			ctx.status = 404;
+			var ret = {
+				"status": "failure",
+	            "code": ctx.status,
+	            "message": "User has no projects",
+	            "apiVersion": apiVersion,
+	            "requestUrl": ctx.request.host + ctx.request.url,
+	            "data": {}
+	        }
+	        ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+				"status": "success",
+	            "code": ctx.status,
+	            "message": "Project retrieval successful",
+	            "apiVersion": 1,
+	            "requestUrl": ctx.request.host + ctx.request.url,
+	            "data": {
+	                "projectData": []
+	            }
+	        }
+
+	        for(var i = 0; i < retval.length; i++) {
+	        	ret.data.projectData[i] = {
+	        		"project_id": retval[i].dataValues.project_id,
+                    "project_name": retval[i].dataValues.project_name,
+                    "completion_time": retval[i].dataValues.completion_time + " Days",
+                    "description": retval[i].dataValues.description,
+                    "status": retval[i].dataValues.status,
+                    "join_deadline": retval[i].dataValues.join_deadline.toISOString().split('T')[0],
+                    "rev_deadline": retval[i].dataValues.rev_deadline.toISOString().split('T')[0],
+                    "sub_deadline": retval[i].dataValues.sub_deadline.toISOString().split('T')[0],
+                    "min_diff": retval[i].dataValues.min_diff,
+                    "max_diff": retval[i].dataValues.max_diff,
+                    "people": retval[i].dataValues.people,
+                    "xp_gain": retval[i].dataValues.xp_gain,
+                    "xp_bonus": retval[i].dataValues.xp_bonus,
+                    "skills": [],
+                    "tags": []
+	        	}
+
+	        	await conn.getProjectSkills(retval[i].dataValues.project_id).then(function(retSkills) {
+	        		if(retSkills == null || retSkills.length == 0) {
+	        			ret.data.projectData[i].skills = "Project has no skills"
+	        		}
+	        		else{
+	        			for(var j = 0; j < retSkills.length; j++) {
+	        				ret.data.projectData[i].skills[j] = {
+	        					"name": retSkills[j].dataValues.skill
+	        				};
+	        			}	
+	        		}
+	        	})
+
+	        	await conn.getProjectTags(retval[i].dataValues.project_id).then(function(retTags) {
+	        		if(retTags == null || retTags.length == 0) {
+	        			ret.data.projectData[i].tags = "Project has no tags"
+	        		}
+	        		else{
+	        			for(var k = 0; k < retTags.length; k++) {
+	        				ret.data.projectData[i].tags[k] = {
+	        					"name": retTags[k].dataValues.tag
+	        				};
+	        			}	
+	        		}
+	        	})
+	        }
+
+	        ctx.body = ret;
+		}
+	})
+
+	await next();
+}
+
+router.get('/user/:uid/project/:pid', getUserProj);
+
+async function getUserProj(ctx, next) {
+	await conn.getSpecificProjectbyUser(ctx.params.uid, ctx.params.pid).then(async function(retval) {
+		if(retval == null || retval.length == 0) {
+			ctx.status = 404;
+			var ret = {
+				"status": "failure",
+	            "code": ctx.status,
+	            "message": "User does not have that project",
+	            "apiVersion": apiVersion,
+	            "requestUrl": ctx.request.host + ctx.request.url,
+	            "data": {}
+	        }
+	        ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+				"status": "success",
+	            "code": ctx.status,
+	            "message": "Project retrieval successful",
+	            "apiVersion": 1,
+	            "requestUrl": ctx.request.host + ctx.request.url,
+	            "data": {
+	            	"project_id": retval[0].dataValues.project_id,
+                    "project_name": retval[0].dataValues.project_name,
+                    "completion_time": retval[0].dataValues.completion_time + " Days",
+                    "description": retval[0].dataValues.description,
+                    "status": retval[0].dataValues.status,
+                    "join_deadline": retval[0].dataValues.join_deadline.toISOString().split('T')[0],
+                    "rev_deadline": retval[0].dataValues.rev_deadline.toISOString().split('T')[0],
+                    "sub_deadline": retval[0].dataValues.sub_deadline.toISOString().split('T')[0],
+                    "min_diff": retval[0].dataValues.min_diff,
+                    "max_diff": retval[0].dataValues.max_diff,
+                    "people": retval[0].dataValues.people,
+                    "xp_gain": retval[0].dataValues.xp_gain,
+                    "xp_bonus": retval[0].dataValues.xp_bonus,
+                    "skills": [],
+                    "tags": []
+	            }
+	        }
+
+        	await conn.getProjectSkills(retval[0].dataValues.project_id).then(function(retSkills) {
+        		if(retSkills == null || retSkills.length == 0) {
+        			ret.data.skills = "Project has no skills"
+        		}
+        		else{
+        			for(var j = 0; j < retSkills.length; j++) {
+        				ret.data.skills[j] = {
+        					"name": retSkills[j].dataValues.skill
+        				};
+        			}	
+        		}
+        	})
+
+        	await conn.getProjectTags(retval[0].dataValues.project_id).then(function(retTags) {
+        		if(retTags == null || retTags.length == 0) {
+        			ret.data.tags = "Project has no tags"
+        		}
+        		else{
+        			for(var k = 0; k < retTags.length; k++) {
+        				ret.data.tags[k] = {
+        					"name": retTags[k].dataValues.tag
+        				};
+        			}	
+        		}
+        	})
+
+	        ctx.body = ret;
+		}
+	})
+
+	await next();
+}
+
 module.exports = router;

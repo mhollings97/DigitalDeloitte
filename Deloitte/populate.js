@@ -137,15 +137,15 @@ conn.createTable().then(async function() {
 		check = await conn.getAllProject();
 
 		if(check.length == 0) {
-			await conn.createProject("Digital Deloitte", 16, "Make a website", "Here are the recources you have to work with", 
+			await conn.createProject("Digital Deloitte", 16, "Make a website", "Never going to be done.", 
 				new Date(2018, 5, 28), new Date(2018, 6, 13), new Date(2018, 6, 23), 0, 1000, 6, 100, 50);
-			await conn.createProject("Virtual Deloitte", 16, "Make a website, but virtual", "Here are the recources you have to work with, but virtual", 
+			await conn.createProject("Virtual Deloitte", 16, "Make a website, but virtual", "Never going to be done, but virtual", 
 				new Date(2018, 5, 23), new Date(2018, 6, 21), new Date(2018, 6, 23), 0, 500, 72, 10, 500);
-			await conn.createProject("Lehigh In Prague", 16, "Enjoy your stay", "Here is the tram schedule", 
+			await conn.createProject("Lehigh In Prague", 16, "Enjoy your stay", "Almost", 
 				new Date(2018, 5, 23), new Date(2018, 6, 14), new Date(2018, 6, 23), 500, 10000, 2, 1000, 5);
-			await conn.createProject("Machine Learning", 16, "They shall destroy us all", "What recourses?", 
+			await conn.createProject("Machine Learning", 16, "They shall destroy us all", "One class left", 
 				new Date(2018, 3, 12), new Date(2019, 6, 13), new Date(2020, 6, 23), 100, 10000, 24, 1000, 5);
-			await conn.createProject("Not Killing Eachother", 16, "Specifically Jake", "Whatever you can find to survive", 
+			await conn.createProject("Not Killing Eachother", 16, "Specifically Jake", "In Progress", 
 				new Date(2018, 1, 1), new Date(2018, 7, 13), new Date(2099, 12, 31), 0, 1000, 6, 10, 50);
 
 			check = await conn.getAllProject();

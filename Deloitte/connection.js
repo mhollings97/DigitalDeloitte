@@ -439,9 +439,20 @@ function Connection() {
 	this.getProjectsbyUser = function(id) {
 		return Project.findAll({
 			include: [{
-				model: User,
+				model: Works,
 				required: true,
 				where: {user_id: id}
+			}]
+		}).catch(function(err) {return null})
+	}
+
+	this.getSpecificProjectbyUser = function(uid, pid) {
+		return Project.findAll({
+			where: {project_id: pid},
+			include: [{
+				model: Works,
+				required: true,
+				where: {user_id: uid}
 			}]
 		}).catch(function(err) {return null})
 	}
@@ -508,7 +519,6 @@ function Connection() {
 		        skill: skillset
 		    }}).catch(function(err) {return null});
 	}
-
 
 
 
@@ -592,13 +602,13 @@ function Connection() {
 	//Project related table functions begin here
 
 	//createProject adds a new Project to the database                                     
-    this.createProject = function(name, complete, desc, rec, join, rev, sub, min, max, p,
+    this.createProject = function(name, complete, desc, stat, join, rev, sub, min, max, p,
 			      xp, bonus) {
         return Project.create({
                 project_name: name,
                 completion_time: complete,
                 description: desc,
-                rec_desc: rec,
+                status: stat,
                 join_deadline: join,
                 rev_deadline: rev,
                 sub_deadline: sub,
@@ -613,7 +623,7 @@ function Connection() {
 
 
 	//Update project fields        
-    this.updateProject = function(id, name, complete, desc, rec, join, rev, sub, min, max, p, xp, bonus) {
+    this.updateProject = function(id, name, complete, desc, stat, join, rev, sub, min, max, p, xp, bonus) {
     	try{
 	        var i = [];
 	        if(name != null) {
@@ -635,7 +645,7 @@ function Connection() {
 		    }
 
 		    if(rec != null) {
-		        i.push(Project.update({rec_desc: rec},
+		        i.push(Project.update({status: stat},
 		            {where: {project_id: {[Op.eq]:id}}
 					}));
 		    }
@@ -714,10 +724,20 @@ function Connection() {
 	{return Project.findAll({
 		    attributes: ['project_id'],
 		    where: {project_name: name}
-		});
+		}).catch(function(err) {return null});
 	}
 
+	this.getProjectSkills = function(pid) {
+		return NS.findAll({
+			where: {project_id : pid}
+		}).catch(function(err) {return null})
+	}
 
+	this.getProjectTags = function(pid) {
+		return HT.findAll({
+			where: {project_id : pid}
+		}).catch(function(err) {return null})
+	}
 
 
 
