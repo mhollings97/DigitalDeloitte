@@ -29,7 +29,7 @@ constructor(props) {
 handleSubmit(event){
 event.preventDefault();
 console.log("submit form");
-fetch('https://private-efbab-vdwregistration.apiary-mock.com/api/v1/user', {
+fetch('http://localhost:3069/api/v1/user', {
                 method: 'POST',
                 headers : new Headers(),
                 body:JSON.stringify(

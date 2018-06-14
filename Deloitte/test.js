@@ -52,11 +52,10 @@ function pullSkills(results) {
     currentUser.setSkills(skills);
     console.log(currentUser.toString());
 }
-/*
-conn.updateUser(1, "egc320@lehigh.edu","password", "Evan", "Choy", 9000); 
-*/
-login("egc320@lehigh.edu", "password").then(() => doSomething(currentUser.addSkill, "JavaScript"));
-//createUser(Math.random().toString(36).substring(7) + "@gmail.com", Math.random().toString(36).substring(7), Math.random().toString(36).substring(7));
-setTimeout(conn.closeConnection, 3000);
 
+//conn.updateUser(1, "egc320@lehigh.edu","password", "Evan", "Choy", 9000); 
+
+//login("egc320@lehigh.edu", "password").then(() => doSomething(currentUser.addSkill, "JavaScript"));
+//createUser(Math.random().toString(36).substring(7) + "@gmail.com", Math.random().toString(36).substring(7), Math.random().toString(36).substring(7));
+//setTimeout(conn.closeConnection, 3000);
 

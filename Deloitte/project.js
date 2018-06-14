@@ -5,12 +5,12 @@
 //View, Add, and Remove Skills.
 //View, Add, and Remove Tags.
 //View, Get, Add, and Remove Assets.
-function Project(pid, pn, c, d, r, j, re, s, min, max, p, xG, xB, s, t, inConn) {
+function Project(pid, pn, c, d, stat, j, re, s, min, max, p, xG, xB, sk, t, inConn) {
 	var proj_id = pid;
 	var p_name = pn;
 	var comp_time = c;
 	var desc = d;
-	var rec = r;
+	var status = stat;
 	var joinD = j;
 	var revD = re;
 	var subD = s;
@@ -23,11 +23,11 @@ function Project(pid, pn, c, d, r, j, re, s, min, max, p, xG, xB, s, t, inConn) 
 	var tags;
 	this.conn = inConn;
 
-	if(s == null) {
+	if(sk == null) {
 		skills = [];
 	}
 	else {
-		skills = s;
+		skills = sk;
 	}
 
 	if(t == null) {
@@ -49,8 +49,8 @@ function Project(pid, pn, c, d, r, j, re, s, min, max, p, xG, xB, s, t, inConn) 
 	this.getDesc = function() {
 		return desc;
 	}
-	this.getRec = function() {
-		return rec;
+	this.getStat = function() {
+		return status;
 	}
 	this.getJoin_Dead = function() {
 		return joinD;
@@ -102,8 +102,8 @@ function Project(pid, pn, c, d, r, j, re, s, min, max, p, xG, xB, s, t, inConn) 
 		desc = d;
 		this.conn.updateProject(this.getProj_id(), null, null, d, null, null, null, null, null, null, null, null, null);
 	}
-	this.setRec = function(r) {
-		rec = r;
+	this.setStat = function(s) {
+		status = s;
 		this.conn.updateProject(this.getProj_id(), null, null, null, r, null, null, null, null, null, null, null, null);
 	}
 	this.setJoin_Dead = function(j) {
@@ -169,12 +169,7 @@ Project.prototype.getDevs = function() {
 //Returns a list of Submissions that the project has recieved.
 //User, file location, and date.
 Project.prototype.viewSubs = function() {
-
-}
-
-//Adds a submission to the list, given the user_id and location.
-Project.prototype.addSub = function(u, l) {
-
+	return this.conn.getSub(null, this.getProj_id());
 }
 
 //Adds a skill to the list.
@@ -221,6 +216,21 @@ Project.prototype.removeTag = function(t) {
 		}
 	}
 	return null;
+}
+
+//Adds an asset to the project.
+Project.prototype.addAsset = function(type, loc, desc, date) {
+	return this.conn.addAsset(this.getProj_id(), type, loc, desc, date);
+}
+
+//Gets an asset by its type, or all assets if type is null
+Project.prototype.getAsset = function(type) {
+	return this.conn.getAsset(this.getProj_id(), type);
+}
+
+//Removes an asset based on its location
+Project.prototype.removeAsset = function(loc) {
+	return this.conn.deleteAsset(this.getProj_id(), loc);
 }
 
 //toString function for testing.

@@ -2,7 +2,7 @@ function Connection() {
 
     //Declaration of global table variables
 	var sequelize = null;
-	const Sequelize = require ('sequelize');
+	const Sequelize = require ('sequelize'); //this is good
 	var User = null;
 	var Skills = null;
 	var HS = null;
@@ -60,7 +60,6 @@ function Connection() {
 				},
 				email: {
 					type: Sequelize.STRING,
-					allowNull: false,
 					unique: true
 				},
 				password: Sequelize.STRING,
@@ -80,13 +79,20 @@ function Connection() {
 				skill: {
 					type: Sequelize.STRING,
 					primaryKey: true
+				},
+				skill_type: {
+					type: Sequelize.STRING,
+					allowNull: false
 				}
 			});
 
 			//Define hasSkills table
 			HS = sequelize.define('hasSkills', {
 				user_id:{type: Sequelize.INTEGER, primaryKey: true},
-				skill: {type: Sequelize.STRING, primaryKey: true}
+				skill: {type: Sequelize.STRING, primaryKey: true},
+				proficiency: {
+					type: Sequelize.INTEGER
+				}
 			    });
 			User.hasMany(HS, {foreignKey: 'user_id'});
 			Skills.hasMany(HS, {foreignKey: 'skill'});
@@ -101,7 +107,7 @@ function Connection() {
 				project_name: Sequelize.STRING,
 				completion_time: Sequelize.INTEGER,
 				description: Sequelize.STRING,
-				rec_desc: Sequelize.STRING,
+				status: Sequelize.STRING,
 				join_deadline: {
 				    type: Sequelize.DATE,
 				    allowNull: false
@@ -204,6 +210,7 @@ function Connection() {
 			Sub = sequelize.define('submissions', {
 				sub_id: {
 					type: Sequelize.INTEGER,
+					autoIncrement: true,
 					primaryKey: true
 				},
 				sub_loc: {
@@ -217,6 +224,12 @@ function Connection() {
 				},
 				project_id : {
 					type: Sequelize.INTEGER
+				},
+				eval_grade: {
+					type: Sequelize.INTEGER
+				},
+				eval_date: {
+					type: Sequelize.DATE
 				}
 			});
 			User.hasMany(Sub, {foreignKey: 'user_id'});
@@ -260,76 +273,126 @@ function Connection() {
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//User table related functions begin here
 
-	this.createUser = function(e, n, s) {
+	this.createUser = function(e, p, n, s) {
 		//createUser adds a new User to the database
 		//A nonapproved user (no interview) will have NULL password until approved
 	    return User.create({
 	        email: e,
-	        password: null,
+	        password: p,
 	        name: n,
 	        surname: s,
 	        xp: 0,
-	        type: 'Developer'
-	    })
+	        uType: 'Developer'
+	    }).catch(function(err) {return null})
 	}
 
 	//getUser returns array of strings of User tuple
-	this.getUser = function(emailaddr) {
+	this.getUser = function(emailaddr, pass) {
 		return User.findAll({
 			where: {
-				email: emailaddr
+			    email: emailaddr,
+				password: pass
 			}
-		})
+		}).catch(function(err) {return null})
+	}
+
+	this.getUserById = function(id) {
+		return User.findAll({
+			where: {
+			    user_id: id
+			}
+		}).catch(function(err) {return null})
 	}
 
 	const Op = Sequelize.Op;
 
-        this.getUserSkills = function(id) {
-            return HS.findAll({
-		    attributes: ['skill'],
-		    where: { user_id: {[Op.eq]: id}}
-                });
+    this.getUserSkills = function(id) {
+        return HS.findAll({
+	    attributes: ['skill'],
+	    where: { user_id: {[Op.eq]: id}}
+            }).catch(function(err) {return null});
 
-        }
+    }
+
+    //Returns the users skills based on t.
+    //t can be interest, skills, or software.
+    this.getUserSkillsByType = function(id, t) {
+    	return Skills.findAll({
+    		attributes: ['skill'],
+    		where: {skill_type: t},
+    		include: [{
+				model: HS,
+				required: true,
+				where: {
+					user_id: id
+				}
+			}]
+    	})
+    }
 
 	//Update user fields
 	this.updateUser = function(id, e, p, n, s, x) {
-	    var i = [];
-            if(e != null)
-                {
-		    i.push(User.update({email: e}, 
-				       {where: {user_id: {[Op.eq]:id}}
-				       }))
-		}
+		try{
+		    var i = [];
+            if(e != null) {
+		    	i.push(User.update({email: e}, 
+				    {where: {user_id: {[Op.eq]:id}}}))
+			}
 
-            if(p != null)
-                {
-		    i.push(User.update({password: p}, 
-				       {where: {user_id: {[Op.eq]:id}}
-				       }))
-		}
+            if(p != null) {
+		    	i.push(User.update({password: p}, 
+				    {where: {user_id: {[Op.eq]:id}}}))
+			}
 
-            if(n != null)
-                {
-		    i.push(User.update({name: n}, 
-	                               {where: {user_id: {[Op.eq]:id}}
-				       }))
-		}
+            if(n != null) {
+		    	i.push(User.update({name: n}, 
+	                {where: {user_id: {[Op.eq]:id}}}))
+			}
 
-            if(s != null)
-                {
-		    i.push(User.update({surname: s}, 
-	                               {where: {user_id: {[Op.eq]:id}}}))
-		}
+            if(s != null) {
+		    	i.push(User.update({surname: s}, 
+	                {where: {user_id: {[Op.eq]:id}}}))
+			}
 
-            if(x != null)
-                {
-		    i.push(User.update({xp: x}, 
-	                               {where: {user_id: {[Op.eq]:id}}}))
-		}
-	    
-	    return Promise.all(i);
-        }
+            if(x != null) {
+		    	i.push(User.update({xp: x}, 
+	                {where: {user_id: {[Op.eq]:id}}}))
+			}
+
+		    return Promise.all(i);
+       } catch (err) {return null};
+    }
+
+    //Sets the type of the user.
+    //Must be one of the types in typeSet.
+    this.setType = function(id, t) {
+    	var typeSet = ["Developer", "Ambassador", "Admin"];
+
+    	try{
+        	if(typeSet.indexOf(t) >= 0) {
+        		return User.update({uType: t}, {where: {user_id: {[Op.eq]: id}}});
+        	}
+        	else {
+        		return Promise.resolve(null);
+        	}
+
+        	return null;
+    	} catch (err) {
+    		return null;
+    	}	
+    }
+
+    //Clears the email of a user so that it can be used again.
+    this.deleteUser = function(id) {
+    	try {
+    		return User.update({email: null}, 
+    			{where: {user_id: id}})
+    	} catch (err) {
+    		return null;
+    	}
+    }
+
+
 
 
 
@@ -346,18 +409,17 @@ function Connection() {
 	//Skills table related functions begin here
 
 	//Adds a skill to list of tags used by Projects and users
-	this.insertSkills = function(s) {
+	this.insertSkills = function(s, t) {
 	    return Skills.create({
-		    skill: s
-		});
+		    skill: s,
+		    skill_type: t
+		}).catch(function(err) {return null});
 	}
 
 	//Returns the promise of all skills
 	this.getSkills = function() {
-	    return Skills.findAll({
-                    attributes: ['skill'],
-                });
-
+	    return Skills.findAll({})
+	    	.catch(function(err) {return null});
 	}
 
 
@@ -377,11 +439,22 @@ function Connection() {
 	this.getProjectsbyUser = function(id) {
 		return Project.findAll({
 			include: [{
-				model: User,
+				model: Works,
 				required: true,
 				where: {user_id: id}
 			}]
-		})
+		}).catch(function(err) {return null})
+	}
+
+	this.getSpecificProjectbyUser = function(uid, pid) {
+		return Project.findAll({
+			where: {project_id: pid},
+			include: [{
+				model: Works,
+				required: true,
+				where: {user_id: uid}
+			}]
+		}).catch(function(err) {return null})
 	}
 
 	//Adds that a user is working on a project.
@@ -390,7 +463,7 @@ function Connection() {
 			user_id: uid,
 			project_id: pid,
 			role: r
-		})
+		}).catch(function(err) {return null})
 	}
 
 	//Removes that a user is working on a project.
@@ -399,7 +472,7 @@ function Connection() {
 			where: {
 				user_id: uid,
 				project_id: pid
-			}})
+			}}).catch(function(err) {return null})
 	}
 
 	//Returns whose working on a project based on their role
@@ -413,7 +486,7 @@ function Connection() {
 					role: r
 				}
 			}]
-		});
+		}).catch(function(err) {return null});
 	}
 
 
@@ -429,11 +502,12 @@ function Connection() {
 	//hasSkills related table functions begin here
 
 	//Adds skill for specific user
-	this.addHS = function(inId, s) {
+	this.addHS = function(inId, s, p) {
 	    return HS.create({
 		    user_id: inId,
-		    skill: s
-                })
+		    skill: s,
+		    proficiency: p
+                }).catch(function(err) {return null})
 	}
 
 	//Removes user/skill tuple from hasSkill table
@@ -443,9 +517,8 @@ function Connection() {
 		    where: {
 			user_id: user,
 		        skill: skillset
-		    }});
+		    }}).catch(function(err) {return null});
 	}
-
 
 
 
@@ -464,7 +537,7 @@ function Connection() {
         return NS.create({
                 project_id: pid,
                 skill: s
-            })
+            }).catch(function(err) {return null})
     }
 
     //Removes project/skill tuple from needSkill table                                                    
@@ -474,10 +547,17 @@ function Connection() {
                 where: {
                     project_id: pid,
                     skill: s
-                }});
+                }}).catch(function(err) {return null});
     }
 
 
+    this.getNS = function(pid)
+	{
+	    return NS.findAll({
+		    attributes: ['skill'],
+		    where: {project_id: pid}
+		});
+	}
 
 
 
@@ -501,7 +581,7 @@ function Connection() {
 			link_In: l,
 			per_Ln: p,
 			CV_Loc: c 
-	    })
+	    }).catch(function(err) {return null})
 	}
 
 	//Returns a tuple given the user id.
@@ -510,7 +590,7 @@ function Connection() {
 			where: {
 				user_id: id
 			}
-		})
+		}).catch(function(err) {return null})
 	}
 
 
@@ -529,127 +609,105 @@ function Connection() {
 	//Project related table functions begin here
 
 	//createProject adds a new Project to the database                                     
-        this.createProject = function(name, complete, desc, rec, join, rev, sub, min, max, p,
-				      xp, bonus) {
-            return Project.create({
-                    project_name: name,
-                    completion_time: complete,
-                    description: desc,
-                    rec_desc: rec,
-                    join_deadline: join,
-                    rev_deadline: rev,
-                    sub_deadline: sub,
-                    min_diff: min,
-                    max_diff: max,
-                    people: p,
-                    xp_gain: xp,
-                    xp_bonus: bonus
-                });
-        }
+    this.createProject = function(name, complete, desc, stat, join, rev, sub, min, max, p,
+			      xp, bonus) {
+        return Project.create({
+                project_name: name,
+                completion_time: complete,
+                description: desc,
+                status: stat,
+                join_deadline: join,
+                rev_deadline: rev,
+                sub_deadline: sub,
+                min_diff: min,
+                max_diff: max,
+                people: p,
+                xp_gain: xp,
+                xp_bonus: bonus
+            }).catch(function(err) {return null});
+    }
 
 
 
 	//Update project fields        
-        this.updateProject = function(id, name, complete, desc, rec, join, rev, sub, min, max, p, xp, bonus) {
-            var i = [];
-            if(name != null)
-                {
-                    i.push(Project.update({project_name: name},
-                                       {where: {project_id: {[Op.eq]:id}}
-                    
-				       }));
-		}
-
-	    if(complete != null)
-                {
-                    i.push(Project.update({completion_time: complete},
-	                  {where: {project_id: {[Op.eq]:id}}
-
-			  }));
-		}
-
-	    if(desc != null)
-                {
-                    i.push(Project.update({description: desc},
-	                  {where: {project_id: {[Op.eq]:id}}
-
-			  }));
-                }
-
-	    if(rec != null)
-                {
-                    i.push(Project.update({rec_desc: rec},
+    this.updateProject = function(id, name, complete, desc, stat, join, rev, sub, min, max, p, xp, bonus) {
+    	try{
+	        var i = [];
+	        if(name != null) {
+	            i.push(Project.update({project_name: name},
 	                {where: {project_id: {[Op.eq]:id}}
+				    }));
+			}
 
-			}));
-                }
+		    if(complete != null) {
+		        i.push(Project.update({completion_time: complete},
+		            {where: {project_id: {[Op.eq]:id}}
+				    }));
+			}
 
-	    if(join != null)
-                {
-                    i.push(Project.update({join_deadline: join},
-	                  {where: {project_id: {[Op.eq]:id}}
+		    if(desc != null) {
+		        i.push(Project.update({description: desc},
+		            {where: {project_id: {[Op.eq]:id}}
+				    }));
+		    }
 
-			  }));
-                }
+		    if(rec != null) {
+		        i.push(Project.update({status: stat},
+		            {where: {project_id: {[Op.eq]:id}}
+					}));
+		    }
 
-            if(rev != null)
-                {
-                    i.push(Project.update({rev_deadline: rev},
-	                  {where: {project_id: {[Op.eq]:id}}
+		    if(join != null) {
+                i.push(Project.update({join_deadline: join},
+                    {where: {project_id: {[Op.eq]:id}}
+				    }));
+		    }
 
-			  }));
-                }
+	        if(rev != null) {
+                i.push(Project.update({rev_deadline: rev},
+                	{where: {project_id: {[Op.eq]:id}}
+			  		}));
+		    }
 
-	    if(sub != null)
-                {
-                    i.push(Project.update({sub_deadline: sub},
-	                   {where: {project_id: {[Op.eq]:id}}
+		    if(sub != null) {
+                i.push(Project.update({sub_deadline: sub},
+                   {where: {project_id: {[Op.eq]:id}}
+				   }));
+	        }
 
-			   }));
-                }
-
-            if(p != null)
-                {
-                    i.push(Project.update({people: p},
+	        if(p != null) {
+	            i.push(Project.update({people: p},
 	               {where: {project_id: {[Op.eq]:id}}
+			       }));
+            }
 
-		       }));
-                }
-
-	    if(min != null)
-                {
-                    i.push(Project.update({min_diff: min},
-	                  {where: {project_id: {[Op.eq]:id}}
-
-			  }));
-                }
+		    if(min != null) {
+                i.push(Project.update({min_diff: min},
+                  {where: {project_id: {[Op.eq]:id}}
+				  }));
+		    }
 
 
-	    if(max != null)
-                {
-                    i.push(Project.update({max_diff: max},
-	                  {where: {project_id: {[Op.eq]:id}}
+		    if(max != null) {
+                i.push(Project.update({max_diff: max},
+                  {where: {project_id: {[Op.eq]:id}}
+				  }));
+		    }
 
-			  }));
-                }
+		    if(xp != null) {
+                i.push(Project.update({xp_gain: xp},
+                 {where: {project_id: {[Op.eq]:id}}
+				 }));
+		    }
 
-	    if(xp != null)
-                {
-                    i.push(Project.update({xp_gain: xp},
-	                 {where: {project_id: {[Op.eq]:id}}
+		    if(bonus != null) {
+                i.push(Project.update({xp_bonus: bonus},
+                  {where: {project_id: {[Op.eq]:id}}
+		  		}));
+            }
 
-			 }));
-                }
-
-	    if(bonus != null)
-                {
-                    i.push(Project.update({xp_bonus: bonus},
-	                  {where: {project_id: {[Op.eq]:id}}
-
-			  }));
-                }
-
-	    return Promise.all(i);
+		    return Promise.all(i);
+		} catch (err) {return null}
 	}
 
 	//Find a specific Project
@@ -659,10 +717,35 @@ function Connection() {
                         where: {
 			project_id: pid
                         }
-		    })
+		    }).catch(function(err) {return null})
+	}
+
+        //Find a specific Project                                                                                  
+	this.getAllProject = function()
+	{
+            return Project.findAll({}).catch(function(err) {return null})
 	}
 
 
+	this.getProjectId = function(name)
+	{return Project.findAll({
+		    attributes: ['project_id'],
+		    where: {project_name: name}
+		}).catch(function(err) {return null});
+	}
+
+	this.getProjectSkills = function(pid) {
+		return NS.findAll({
+			where: {project_id : pid}
+		}).catch(function(err) {return null})
+	}
+
+	this.getProjectTags = function(pid) {
+		return HT.findAll({
+			attributes: ['tag'],
+			where: {project_id : pid}
+		}).catch(function(err) {return null})
+	}
 
 
 
@@ -680,18 +763,16 @@ function Connection() {
 	//Tags table related functions begin here
 
 	//Adds a tag to list of tags used by Projects                                       
-        this.insertTags = function(t) {
-            return Tags.create({
-                    tag: t
-                });
-        }
+    this.insertTags = function(t, ty) {
+        return Tags.create({
+                tag: t,
+                tag_type: ty
+            }).catch(function(err) {return null});
+    }
 
-        //Returns the promise of all skills                                                                 
-        this.getTags = function() {
-            return Tags.findAll({
-                    attributes: ['tag'],
-		});
-
+    //Returns the promise of all skills                                                                 
+    this.getTags = function() {
+        return Tags.findAll({}).catch(function(err) {return null});
 	}
 
 
@@ -706,22 +787,22 @@ function Connection() {
 	//hasTags table related functions begin here
 	
 	//Adds tag for specific project                                                                  
-        this.addHT = function(pid, t) {
-            return HT.create({
+    this.addHT = function(pid, t) {
+        return HT.create({
+                project_id: pid,
+                tag: t
+            }).catch(function(err) {return null})
+    }
+
+    //Removes project/tag tuple from hasTag table                                                      
+    this.deleteHT = function(pid, t)
+    {
+        return HT.destroy({
+                where: {
                     project_id: pid,
                     tag: t
-                })
-        }
-
-        //Removes project/tag tuple from hasTag table                                                      
-        this.deleteHT = function(pid, t)
-        {
-            return HT.destroy({
-                    where: {
-                        project_id: pid,
-                        tag: t
-                    }});
-        }
+                }}).catch(function(err) {return null});
+    }
 	
 
 
@@ -736,15 +817,14 @@ function Connection() {
 	//submissions table related functions begin here
 	
 	//Adds submission for specific project  
-        this.addSub = function(id, loc, date, uid, pid) {
-            return Sub.create({
-                    sub_id: id,
+    this.addSub = function(loc, date, uid, pid) {
+        return Sub.create({
 		    sub_loc: loc,
 		    sub_date: date,
 		    user_id: uid,
 		    project_id: pid
-                })
-        }
+            }).catch(function(err) {return null})
+    }
 
 
 	//gets information on submissions for a project
@@ -755,18 +835,71 @@ function Connection() {
 		    return Sub.findAll({
 				where: {user_id: uid,
 					project_id: pid}
-			});
+			}).catch(function(err) {return null});
 		}
 
 	    
 	    if(uid != null)
 		{
-		    return (Sub.findAll({where: {user_id: uid}}));
+		    return (Sub.findAll({where: {user_id: uid}}).catch(function(err) {return null}));
 		}
 
 	    if(pid != null)
-		{ return Sub.findAll({where: {project_id: pid}}); }
+		{ 
+			return Sub.findAll({where: {project_id: pid}}).catch(function(err) {return null}); 
+		}
+    }
 
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//asset table related functions begin here
+    
+    //Adds an asset to the asset table
+    this.addAsset = function(pid, type, loc, desc, date) {
+    	return Assets.create({
+    		project_id: pid,
+    		asset_type: type,
+    		asset_loc: loc,
+    		asset_desc: desc,
+    		asset_update: date
+    	}).catch(function(err) {return null})
+    }
+
+    //Gets an asset by a type if specified, or gets all assets if null
+    this.getAsset = function(pid, type) {
+    	if(type != null) {
+    		return Assets.findAll({
+    			where: {project_id: pid,
+    					asset_type: type}
+    		}).catch(function(err) {return null})
+    	}
+    	else {
+    		return Assets.findAll({
+    			where: {project_id: pid}
+    		}).catch(function(err) {return null})
+    	}
+    }
+
+    //Deletes an asset from the table
+    this.deleteAsset = function(pid, loc) {
+    	return Assets.destroy({
+    		where: {project_id: pid,
+    				asset_loc: loc}
+    	}).catch(function(err) {return null})
+    }
 }
 module.exports = Connection;

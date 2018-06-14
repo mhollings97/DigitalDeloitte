@@ -74,6 +74,10 @@ function User(u, e, f, s, x, sk, t, inConn) {
 			skills = sk;
 		}	
 	}
+	this.setType = function(t) {
+		type = t;
+		this.conn.setType(this.getUser_id(), t);
+	}
 }
 
 //Sets the users password.
@@ -82,11 +86,11 @@ User.prototype.setPassword = function(p) {
 }
 
 //Allows a user to add a skill.
-User.prototype.addSkill = function(s) {
+User.prototype.addSkill = function(s, p) {
 	var temp = this.getSkills();
 	temp.push(s);
 	this.setSkills(temp);
-	return this.conn.addHS(this.getUser_id(), s);
+	return this.conn.addHS(this.getUser_id(), s, p);
 }
 
 //Allows a User to remove a skill.
@@ -144,6 +148,10 @@ User.prototype.addProject = function(pid) {
 //Remove a project
 User.prototype.removeProject = function(pid) {
 	return this.conn.removeProject(this.getUser_id(), pid);
+}
+
+User.prototype.createApp = function(s, i, a, l, p, c) {
+	return this.conn.createApp(this.getUser_id(), s, i, a, l, p, c);
 }
 
 //Getters for application
