@@ -551,6 +551,13 @@ function Connection() {
     }
 
 
+    this.getNS = function(pid)
+	{
+	    return NS.findAll({
+		    attributes: ['skill'],
+		    where: {project_id: pid}
+		});
+	}
 
 
 
