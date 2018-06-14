@@ -742,6 +742,7 @@ function Connection() {
 
 	this.getProjectTags = function(pid) {
 		return HT.findAll({
+			attributes: ['tag'],
 			where: {project_id : pid}
 		}).catch(function(err) {return null})
 	}
