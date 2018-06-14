@@ -67,7 +67,8 @@ router.post('/user', createUser);
 
 //Creates a user tuple
 async function createUser(ctx, next) {
-	await conn.createUser(ctx.request.body.email, ctx.request.body.password, ctx.request.body.firstName, ctx.request.body.lastName).then(async function(retval) { 
+	var theBody = JSON.parse(ctx.request.body);
+	await conn.createUser(theBody.email, theBody.password, theBody.firstName, theBody.lastName).then(async function(retval) { 
 	    if(retval == null) {
 			ctx.status = 401;
 	   	 	var ret = {
@@ -83,7 +84,7 @@ async function createUser(ctx, next) {
 			ctx.body = ret;
 	    }
 	    else {
-		    await conn.getUser(ctx.request.body.email, ctx.request.body.password).then(function(result) {
+		    await conn.getUser(theBody.email, theBody.password).then(function(result) {
 					ctx.status = 200;
 					var ret = {
 						"status": "success",
