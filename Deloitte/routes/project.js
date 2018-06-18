@@ -1,3 +1,11 @@
+//TODO:
+/*
+	-View projects that would apply specifically to the user (XP, Skills)
+	-Adding and removing projects from a user
+	-Submit something to a project, earn XP for completion
+
+*/
+
 var Router = require('koa-router');
 var router = Router({prefix: '/project' });
 
@@ -39,7 +47,8 @@ async function newProject(ctx, next) {
 					 ctx.body = ret;
 				     }
 				     else {
-					 await conn.getProjectId(j.project_name).then(async function (r){
+					 var pid = await conn.getProjectId(j.project_name);
+					 await conn.getProject(pid[0].dataValues.project_id).then(async function (r){
 						 ctx.status = 200;
 						 var ret = {
 						     "status": "success",
@@ -48,7 +57,7 @@ async function newProject(ctx, next) {
 						     "apiVersion": 1,
 						     "requestUrl": ctx.request.host + ctx.request.url,
 						     "data": {
-							 "project_id": r[0].dataValues.id,
+							 "project_id": r[0].dataValues.project_id,
 							 "project_name": r[0].dataValues.project_name,
 							 "completion_time": r[0].dataValues.completion_time,
 							 "description": r[0].dataValues.description,
@@ -69,16 +78,16 @@ async function newProject(ctx, next) {
 						 for(var i = 0; i < j.skills.length; i++)
 						     {
 							 ret.data.skills.push(j.skills[i]);
-							 await conn.addNS(r[0].dataValues.id, j.skills[i]);
+							 await conn.addNS(r[0].dataValues.project_id, j.skills[i]);
 						     }
 
 						 for(var x = 0; x < j.tags.length; x++)
 						     {
 							 ret.data.tags.push(j.tags[x]);
-							 await conn.addHT(id, ctx.body.tags[j]);
+							 await conn.addHT(r[0].dataValues.project_id, j.tags[j]);
 						     }
     
-						 ctx.res = retval;
+						 ctx.body = ret;
 					     }
 					     )}
 				 }
@@ -130,7 +139,7 @@ async function listProject(ctx, next) {
 	}
     };
 
-    ctx.res = retval;
+    ctx.body = retval;
 }
 
 module.exports = router;

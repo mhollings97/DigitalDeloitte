@@ -392,7 +392,14 @@ function Connection() {
     	}
     }
 
-
+    this.addXP = function(id, nxp) {
+		try{
+    		return User.update({xp: nxp}, 
+    			{where: {user_id: id}})
+    	} catch (err) {
+    		return Promise.resolve(null);
+    	}
+    }
 
 
 

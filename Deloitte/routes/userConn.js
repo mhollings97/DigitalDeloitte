@@ -1,3 +1,8 @@
+//TODO
+/*
+	-Updating all user information (XP)
+*/
+
 var Router = require('koa-router');
 var router = Router({
 	prefix: '/api/v1'
@@ -14,10 +19,10 @@ router.post('/auth', verify);
 //If it does, returns the user information
 //If it does not, return an error message.
 async function verify(ctx, next){
-    console.log(ctx.request.body.username);
+	var theBody = JSON.parse(ctx.request.body);
     var a = ctx.session.views || 0;
     ctx.session.views = ++a;
-    await conn.getUser(ctx.request.body.username, ctx.request.body.password).then(result => {
+    await conn.getUser(theBody.username, theBody.password).then(result => {
 	    if(result == null || result.length == 0)
 		{
 		    ctx.status = 401;
@@ -107,6 +112,172 @@ async function createUser(ctx, next) {
 	await next();
 }
 
+router.post('/user/:id/update', updateUser);
+
+async function updateUser(ctx, next) {
+	var theBody = JSON.parse(ctx.request.body);
+	await conn.updateUser(ctx.params.id, theBody.email, theBody.password, theBody.firstName, theBody.lastName, null).then(function(retval) {
+		if(retval == null) {
+			ctx.status = 401;
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "User update failed",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "User failed to update"
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+		    	"status": "successful",
+            	"code": ctx.status,
+            	"message": "User update successful",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+      		  	}
+			}
+			ctx.body = ret;
+		}
+	});
+
+	await next();
+}
+
+router.post('/user/:id/addskill', addUserSkill)
+
+async function addUserSkill(ctx, next) {
+	var theBody = JSON.parse(ctx.request.body);
+
+	await conn.addHS(ctx.params.id, theBody.skill, theBody.proficiency).then(function(retval) {
+		if(retval == null) {
+			ctx.status = 401;
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "Adding skill failed",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "User failed to add skill"
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+		    	"status": "successful",
+            	"code": ctx.status,
+            	"message": "Skill successful added",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+      		  	}
+			}
+			ctx.body = ret;
+		}
+	})
+	await next();
+}
+
+router.post('/user/:id/removeskill', removeUserSkill)
+
+async function removeUserSkill(ctx, next) {
+	var theBody = JSON.parse(ctx.request.body);
+
+	await conn.deleteHS(ctx.params.id, theBody.skill).then(function(retval) {
+		if(retval == null) {
+			ctx.status = 401;
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "Removing skill failed",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "User failed to remove skill"
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+		    	"status": "successful",
+            	"code": ctx.status,
+            	"message": "Skill successful removed",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+      		  	}
+			}
+			ctx.body = ret;
+		}
+	})
+
+	await next();
+}
+
+router.post('/user/:id/updateskill', updateUserSkill)
+
+async function updateUserSkill(ctx, next) {
+	var theBody = JSON.parse(ctx.request.body);
+
+	await conn.deleteHS(ctx.params.id, theBody.skill).then(function(retval) {
+		if(retval == null) {
+			ctx.status = 401;
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "Updating skill failed",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "User failed to update skill"
+      		  	}
+			}
+			ctx.body = ret;
+		}
+	})
+
+	await conn.addHS(ctx.params.id, theBody.skill, theBody.proficiency).then(function(retval) {
+		if(retval == null) {
+			ctx.status = 401;
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "Updating skill failed",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "User failed to update skill"
+      		  	}
+      		}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+		    	"status": "successful",
+            	"code": ctx.status,
+            	"message": "Skill successfully updated",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+      		  	}
+			}
+			ctx.body = ret;
+		}
+	})
+	await next();
+}
+
 router.get('/user/:id', getUserData);
 
 //Returns the users data based on the id.
@@ -177,7 +348,7 @@ router.get('/user/:id/interest', getUserInterest);
 async function getUserInterest(ctx, next) {
 
 	await conn.getUserSkillsByType(ctx.params.id, "Interest").then(function(retval) {
-		if(retval == null || retval.length == 0) {
+		if(retval == null) {
 			ctx.status = 404;
 			var ret = {
 		    	"status": "not-authorized",
@@ -186,8 +357,21 @@ async function getUserInterest(ctx, next) {
             	"apiVersion": apiVersion,
             	"requestUrl": ctx.request.host + ctx.request.url,
             	"data": {
-                	"error": "User has no interest."
+                	"error": "Read unsuccessful."
       		  	}
+			}
+			ctx.body = ret;
+		}
+		else if(retval.length == 0) {
+			ctx.status = 201;
+			var ret = {
+		    	"status": "success",
+            	"code": ctx.status,
+            	"message": "User has no interest",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                }
 			}
 			ctx.body = ret;
 		}
@@ -221,7 +405,7 @@ router.get('/user/:id/skills', getUserSkills);
 async function getUserSkills(ctx, next) {
 	
 	await conn.getUserSkillsByType(ctx.params.id, "Skill").then(function(retval) {
-		if(retval == null || retval.length == 0) {
+		if(retval == null) {
 			ctx.status = 404;
 			var ret = {
 		    	"status": "not-authorized",
@@ -230,8 +414,21 @@ async function getUserSkills(ctx, next) {
             	"apiVersion": apiVersion,
             	"requestUrl": ctx.request.host + ctx.request.url,
             	"data": {
-                	"error": "User has no skill."
+                	"error": "Read unsuccessful"
       		  	}
+			}
+			ctx.body = ret;
+		}
+		else if(retval.length == 0) {
+			ctx.status = 201;
+			var ret = {
+		    	"status": "success",
+            	"code": ctx.status,
+            	"message": "User has no skills",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                }
 			}
 			ctx.body = ret;
 		}
@@ -268,7 +465,7 @@ router.get('/user/:id/software', getUserSoftware);
 async function getUserSoftware(ctx, next) {
 
 	await conn.getUserSkillsByType(ctx.params.id, "Software").then(function(retval) {
-		if(retval == null || retval.length == 0) {
+		if(retval == null) {
 			ctx.status = 404;
 			var ret = {
 		    	"status": "not-authorized",
@@ -277,8 +474,21 @@ async function getUserSoftware(ctx, next) {
             	"apiVersion": apiVersion,
             	"requestUrl": ctx.request.host + ctx.request.url,
             	"data": {
-                	"error": "User has no software."
+                	"error": "Read unsuccessful"
       		  	}
+			}
+			ctx.body = ret;
+		}
+		else if(retval.length == 0) {
+			ctx.status = 201;
+			var ret = {
+		    	"status": "success",
+            	"code": ctx.status,
+            	"message": "User has no software",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                }
 			}
 			ctx.body = ret;
 		}
@@ -351,17 +561,30 @@ router.get('/user/:id/project', getAllUserProj);
 
 async function getAllUserProj(ctx, next) {
 	await conn.getProjectsbyUser(ctx.params.id).then(async function(retval) {
-		if(retval == null || retval.length == 0) {
+		if(retval == null) {
 			ctx.status = 404;
 			var ret = {
 				"status": "failure",
 	            "code": ctx.status,
-	            "message": "User has no projects",
+	            "message": "User project failed to be retrieved",
 	            "apiVersion": apiVersion,
 	            "requestUrl": ctx.request.host + ctx.request.url,
 	            "data": {}
 	        }
 	        ctx.body = ret;
+		}
+		else if(retval.length == 0) {
+			ctx.status = 201;
+			var ret = {
+		    	"status": "success",
+            	"code": ctx.status,
+            	"message": "User has no projects",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                }
+			}
+			ctx.body = ret;
 		}
 		else {
 			ctx.status = 200;
@@ -433,17 +656,30 @@ router.get('/user/:uid/project/:pid', getUserProj);
 
 async function getUserProj(ctx, next) {
 	await conn.getSpecificProjectbyUser(ctx.params.uid, ctx.params.pid).then(async function(retval) {
-		if(retval == null || retval.length == 0) {
+		if(retval == null) {
 			ctx.status = 404;
 			var ret = {
 				"status": "failure",
 	            "code": ctx.status,
-	            "message": "User does not have that project",
+	            "message": "User project failed to be retrieved",
 	            "apiVersion": apiVersion,
 	            "requestUrl": ctx.request.host + ctx.request.url,
 	            "data": {}
 	        }
 	        ctx.body = ret;
+		}
+		else if(retval.length == 0) {
+			ctx.status = 201;
+			var ret = {
+		    	"status": "success",
+            	"code": ctx.status,
+            	"message": "User does not have that project",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                }
+			}
+			ctx.body = ret;
 		}
 		else {
 			ctx.status = 200;
@@ -502,6 +738,42 @@ async function getUserProj(ctx, next) {
 		}
 	})
 
+	await next();
+}
+
+router.post('/user/:id/addxp', updateXP)
+
+async function updateXP(ctx, next) {
+	var theBody = JSON.parse(ctx.request.body);
+	await conn.addXP(ctx.params.id, theBody.xp).then(function(retval) {
+		if(retval == null) {
+			ctx.status = 401;
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "Adding xp failed",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "User failed to gain xp"
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+		    	"status": "successful",
+            	"code": ctx.status,
+            	"message": "XP successfully added",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+      		  	}
+			}
+			ctx.body = ret;
+		}
+	})
 	await next();
 }
 
