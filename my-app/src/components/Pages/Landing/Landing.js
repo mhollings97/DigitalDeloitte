@@ -17,10 +17,10 @@ render() {
         <div id = "landingText">
         	<div id = "largeTB">
 			<TextBox size = "large" message = "WE DON'T WANT YOU TO GO TO YOUR WORK" />
-		</div>
-    <div id = "grnbox2">
+      <div id = "grnbox2">
       <div id = "grnbox"/>
       </div>
+		</div>
           	<div id = "smallTB">
 			<TextBox message = "JUST WORK FROM ANYWHERE WITH US" />
 	  	</div>
