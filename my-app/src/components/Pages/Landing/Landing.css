@@ -33,6 +33,55 @@
 	bottom: 0;
 }
 
+#grnbox2{
+	border-width: 0px;
+    position: absolute;
+    left: 295px;
+    top: 103px;
+    width: 165px;
+    height: 9px;
+}
+
+#grnbox{
+	border-width: 0px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 165px;
+    height: 9px;
+    background: inherit;
+    background-color: rgba(154, 205, 102, 1);
+    border: none;
+    border-radius: 0px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#grnbox3{
+    border-width: 0px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 95px;
+    height: 6px;
+    background: inherit;
+    background-color: rgba(154, 205, 102, 1);
+    border: none;
+    border-radius: 0px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#grnbox4{
+	border-width: 0px;
+    position: absolute;
+    left: 568px;
+    top: 175px;
+    width: 95px;
+    height: 6px;
+}
 
 #signIn{
 	background-color: white;
