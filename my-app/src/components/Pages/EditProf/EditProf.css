@@ -11,6 +11,15 @@
         text-align: center;
 }
 
+#firstName {
+	padding-top: 2%;
+}
+
+#submitchanges {
+	padding-top: 4%;
+	padding-bottom: 2%;
+}
+
 #SCbutton {
     width: 260px;
     border-radius: 25px;

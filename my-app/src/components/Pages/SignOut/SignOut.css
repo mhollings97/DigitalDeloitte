@@ -7,6 +7,10 @@
 	text-align: center;
 }
 
+#SBI {
+	padding-bottom: 2%;
+}
+
 #SBIbutton {
     width: 260px;
     border-radius: 25px;

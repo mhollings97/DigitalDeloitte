@@ -89,6 +89,10 @@ constructor(props) {
 		<div id = "EditProfContainer">
 			<EditProf/>
 		</div>
+	
+		<div id = "ProjPageContainer">
+			<ProjPage/>
+		</div>
             </div>
         </div>
     </Router>

@@ -7,6 +7,10 @@
         text-align: center;
 }	
 
+#PSbutton {
+	padding-bottom: 2%;
+}
+
 #allprojs {
     width: 260px;
     border-radius: 25px;
