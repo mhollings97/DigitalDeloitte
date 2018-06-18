@@ -78,21 +78,6 @@ constructor(props) {
                         <Offer/>
                 </div>
 
-		<div id = "SignOutContainer">
-			<SignOut/>
-		</div>
-
-		<div id = "PostSubmitContainer">
-			<PostSubmit/>
-		</div>
-
-		<div id = "EditProfContainer">
-			<EditProf/>
-		</div>
-	
-		<div id = "ProjPageContainer">
-			<ProjPage/>
-		</div>
             </div>
         </div>
     </Router>
