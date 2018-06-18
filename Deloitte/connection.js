@@ -746,11 +746,11 @@ function Connection() {
 
 	this.getAppProjects = function(uid) {
 		return NS.findAll({
-			attributes['project_id'],
-			include[{
+			attributes: ['project_id'],
+			include: [{
 				model: HS,
 				required: true,
-				where {user_id: uid}
+				where: {user_id: uid}
 			    }]
 		}).catch(function(err) {return null})
 	}

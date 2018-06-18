@@ -16,7 +16,8 @@ conn.createTable();
 
 //Routes will go here  
 router.post('/', newProject);
-//router.get('/', listProject);
+router.get('/', listProject);
+router.get('/:uid', myProjects);
 
 async function newProject(ctx, next) {
     var j = JSON.parse(ctx.request.body);
@@ -96,50 +97,114 @@ async function newProject(ctx, next) {
 
 async function listProject(ctx, next) {
     var retPD = [];
-    await conn.getAllProject();
 
-    var projects = ctx.body;
+    await conn.getAllProject().then(async function(projects) {
 
-    for(var i = 0; i < projects.length; i++)
-	{
-	    var temp = {
-		"project_id": projects[i].project_id,
-		"project_name": projects[i].project_name,
-		"completion_time": projects[i].completion_time,
-		"status": projects[i].status,
-		"join_deadline": projects[i].join_deadline,
-		"rev_deadline": projects[i].rev_deadline,
-		"sub_deadline": projects[i].sub_deadline,
-		"min_diff": projects[i].min_diff,
-		"max_diff": projects[i].max_diff,
-		"people": projects[i].people,
-		"xp_gain": projects[i].xp_gain,
-		"xp_bonus": projects[i].xp_bonus,
-		"skills": [],
-		"tags": []
+	    for(var i = 0; i < projects.length; i++)
+		{
+		    var temp = {
+			"project_id": projects[i].project_id,
+			"project_name": projects[i].project_name,
+			"completion_time": projects[i].completion_time,
+			"status": projects[i].status,
+			"join_deadline": projects[i].join_deadline,
+			"rev_deadline": projects[i].rev_deadline,
+			"sub_deadline": projects[i].sub_deadline,
+			"min_diff": projects[i].min_diff,
+			"max_diff": projects[i].max_diff,
+			"people": projects[i].people,
+			"xp_gain": projects[i].xp_gain,
+			"xp_bonus": projects[i].xp_bonus,
+			"skills": [],
+			"tags": []
+		    };
+
+		    await conn.getNS(projects[i].project_id);
+		    temp.skills = ctx.body.skills;
+
+		    await conn.getProjectTags(projects[i].project_id);
+		    temp.tags = ctx.body.tags;
+
+		    retPD.push(temp);
+		}
+
+	    var retval = {
+		"status": "success",
+		"code": 200,
+		"message": "Hi, Mike. This is all the projects.",
+		"apiVersion": 1,
+		"requestUrl": "localhost: 3000/project/",
+		"data": {
+		    "projectData": retPD
+		}
 	    };
+    
+	    ctx.body = retval;
+	})
+}
 
-	    await conn.getNS(projects[i].project_id);
-	    temp.skills = ctx.body;
+async function myProjects(ctx, next) {
+    var pid = await conn.getAppProjects(ctx.params.uid);
+    var retPD = [];
 
-	    await conn.getProjectTags(projects[i].project_id);
-	    temp.tags = ctx.body;
-
-	    retPD.push(i);
+    if(pid == null)
+	{
+	    ctx.status = 401;
+	    var ret = {
+		"status": "not-authorized",
+		"code": ctx.status,
+		"message": "User creation unsuccessful",
+		"apiVersion": 1,
+		"requestUrl": ctx.request.host + ctx.request.url,
+		"data": {
+		    "error": "Project failed to create"
+		}
+	    }
+	    ctx.body = ret;
 	}
+    else {
+	ctx.status = 200;
+	for(var i = 0; i < pid.length; i++) {
+	    await conn.getProject(i).then(async function (projects){
+		    var temp = {
+			"project_id": projects[i].project_id,
+			"project_name": projects[i].project_name,
+			"completion_time": projects[i].completion_time,
+			"status": projects[i].status,
+			"join_deadline": projects[i].join_deadline,
+			"rev_deadline": projects[i].rev_deadline,
+			"sub_deadline": projects[i].sub_deadline,
+			"min_diff": projects[i].min_diff,
+			"max_diff": projects[i].max_diff,
+			"people": projects[i].people,
+			"xp_gain": projects[i].xp_gain,
+			"xp_bonus": projects[i].xp_bonus,
+			"skills": [],
+			"tags": []
+		    };
 
-    var retval = {
-        "status": "success",
-        "code": 200,
-        "message": "Hi, Mike. This is all the projects.",
-        "apiVersion": 1,
-        "requestUrl": "localhost: 3000/project/",
-        "data": {
+		    await conn.getNS(projects[i].project_id);
+		    temp.skills = ctx.body.skills;
+
+		    await conn.getProjectTags(projects[i].project_id);
+		    temp.tags = ctx.body.tags;
+
+		    retPD.push(temp);
+		})
+		}
+	var retval = {
+	    "status": "success",
+	    "code": 200,
+	    "message": "Hi, Mike. This is all the projects.",
+	    "apiVersion": 1,
+	    "requestUrl": "localhost: 3000/project/",
+	    "data": {
 	    "projectData": retPD
-	}
-    };
+	    }
+	};
 
-    ctx.body = retval;
+	ctx.body = retval;
+    }
 }
 
 module.exports = router;
