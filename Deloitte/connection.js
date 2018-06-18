@@ -744,9 +744,14 @@ function Connection() {
 		}).catch(function(err) {return null});
 	}
 
-	this.getProjectSkills = function(pid) {
+	this.getAppProjects = function(uid) {
 		return NS.findAll({
-			where: {project_id : pid}
+			attributes['project_id'],
+			include[{
+				model: HS,
+				required: true,
+				where {user_id: uid}
+			    }]
 		}).catch(function(err) {return null})
 	}
 
