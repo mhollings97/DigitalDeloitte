@@ -1,8 +1,3 @@
-//TODO
-/*
-	-Updating all user information (XP)
-*/
-
 var Router = require('koa-router');
 var router = Router({
 	prefix: '/api/v1'
@@ -14,6 +9,20 @@ var apiVersion = 1;
 conn.createTable();
 
 router.post('/auth', verify);
+router.post('/user', createUser);
+router.post('/user/:id/update', updateUser);
+router.post('/user/:id/addskill', addUserSkill)
+router.post('/user/:id/removeskill', removeUserSkill)
+router.post('/user/:id/updateskill', updateUserSkill)
+router.get('/user/:id', getUserData);
+router.get('/user/:id/interest', getUserInterest);
+router.get('/user/:id/skills', getUserSkills);
+router.get('/user/:id/software', getUserSoftware);
+router.delete('/user/:id', removeUser);
+router.get('/user/:id/project', getAllUserProj);
+router.get('/user/:uid/project/:pid', getUserProj);
+router.post('/user/:id/addxp', updateXP)
+
 
 //Checks if the username matches the password on record.
 //If it does, returns the user information
@@ -68,8 +77,6 @@ async function verify(ctx, next){
     await next;
 }
 
-router.post('/user', createUser);
-
 //Creates a user tuple
 async function createUser(ctx, next) {
 	var theBody = JSON.parse(ctx.request.body);
@@ -112,8 +119,6 @@ async function createUser(ctx, next) {
 	await next();
 }
 
-router.post('/user/:id/update', updateUser);
-
 async function updateUser(ctx, next) {
 	var theBody = JSON.parse(ctx.request.body);
 	await conn.updateUser(ctx.params.id, theBody.email, theBody.password, theBody.firstName, theBody.lastName, null).then(function(retval) {
@@ -148,8 +153,6 @@ async function updateUser(ctx, next) {
 
 	await next();
 }
-
-router.post('/user/:id/addskill', addUserSkill)
 
 async function addUserSkill(ctx, next) {
 	var theBody = JSON.parse(ctx.request.body);
@@ -186,8 +189,6 @@ async function addUserSkill(ctx, next) {
 	await next();
 }
 
-router.post('/user/:id/removeskill', removeUserSkill)
-
 async function removeUserSkill(ctx, next) {
 	var theBody = JSON.parse(ctx.request.body);
 
@@ -223,8 +224,6 @@ async function removeUserSkill(ctx, next) {
 
 	await next();
 }
-
-router.post('/user/:id/updateskill', updateUserSkill)
 
 async function updateUserSkill(ctx, next) {
 	var theBody = JSON.parse(ctx.request.body);
@@ -278,8 +277,6 @@ async function updateUserSkill(ctx, next) {
 	await next();
 }
 
-router.get('/user/:id', getUserData);
-
 //Returns the users data based on the id.
 async function getUserData(ctx, next) {
 	await conn.getUserById(ctx.params.id).then(async function(retval) {
@@ -300,15 +297,19 @@ async function getUserData(ctx, next) {
 		else {
 			await conn.getApp(ctx.params.id).then(async function(application) {
 				if(application == null || application.length == 0) {
-					ctx.status = 401;
+					ctx.status = 201;
 			   	 	var ret = {
-				    	"status": "not-authorized",
+				    	"status": "successful",
 		            	"code": ctx.status,
-		            	"message": "Application retrieval unsuccessful",
+		            	"message": "Id has no application",
 		            	"apiVersion": apiVersion,
 		            	"requestUrl": ctx.request.host + ctx.request.url,
 		            	"data": {
-		                	"error": "Id has no application."
+		                	"firstName": retval[0].dataValues.name,
+							"lastName": retval[0].dataValues.surname,
+							"email": retval[0].dataValues.email,
+							"type": retval[0].dataValues.uType,
+							"xp": retval[0].dataValues.xp
 		      		  	}
 					}
 					ctx.body = ret;	
@@ -341,8 +342,6 @@ async function getUserData(ctx, next) {
 	});
 	await next();
 }
-
-router.get('/user/:id/interest', getUserInterest);
 
 //Returns a list of user interest
 async function getUserInterest(ctx, next) {
@@ -398,8 +397,6 @@ async function getUserInterest(ctx, next) {
 	})
 	await next();
 }
-
-router.get('/user/:id/skills', getUserSkills);
 
 //Returns a list of user skills
 async function getUserSkills(ctx, next) {
@@ -459,8 +456,6 @@ async function getUserSkills(ctx, next) {
 	await next();
 }
 
-router.get('/user/:id/software', getUserSoftware);
-
 //returns a list of user software.
 async function getUserSoftware(ctx, next) {
 
@@ -519,8 +514,6 @@ async function getUserSoftware(ctx, next) {
 	await next();
 }
 
-router.delete('/user/:id', removeUser);
-
 //Sets a users email as null, marking them as removed from the database
 //Still keeps the data for memory purposes.
 async function removeUser(ctx, next) {
@@ -556,8 +549,6 @@ async function removeUser(ctx, next) {
 
 	await next();
 } 
-
-router.get('/user/:id/project', getAllUserProj);
 
 async function getAllUserProj(ctx, next) {
 	await conn.getProjectsbyUser(ctx.params.id).then(async function(retval) {
@@ -652,8 +643,6 @@ async function getAllUserProj(ctx, next) {
 	await next();
 }
 
-router.get('/user/:uid/project/:pid', getUserProj);
-
 async function getUserProj(ctx, next) {
 	await conn.getSpecificProjectbyUser(ctx.params.uid, ctx.params.pid).then(async function(retval) {
 		if(retval == null) {
@@ -740,8 +729,6 @@ async function getUserProj(ctx, next) {
 
 	await next();
 }
-
-router.post('/user/:id/addxp', updateXP)
 
 async function updateXP(ctx, next) {
 	var theBody = JSON.parse(ctx.request.body);
