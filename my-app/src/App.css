@@ -12,8 +12,9 @@
 }
 
 #catcher{
-        width: 90% !important;
-        height: 750px;
+        width: 100% !important;
+        margin-left: -5% !important;
+        height: 100%;
         background-color: lightgray;
         border-left: 1px solid lightgray;
         opacity: .75;
