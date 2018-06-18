@@ -11,3 +11,17 @@
         outline:none;
         color: #2eb82e;
 }
+
+#abtus:hover {
+ 	background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color: #2eb82e;
+    font-weight: bold;
+    border-bottom-width:2px;
+    border-bottom-color: #2eb82e;
+    border-bottom-style: solid;
+}

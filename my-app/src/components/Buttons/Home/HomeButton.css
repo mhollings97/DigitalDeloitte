@@ -10,9 +10,21 @@
 #Button{
 	font-kerning: normal;
 	font-size: 24px;
+	font-weight: bold;
+	background-color: transparent;
+	border: 0px;
+	border-bottom-width:3px;
+    border-bottom-color: transparent;
+    border-bottom-style: solid;
 }
 
 #Button:hover {
 	cursor: pointer;
+    border-bottom-width:3px;
+    border-bottom-color: #2eb82e;
+    border-bottom-style: solid;
 }
 
+#Button:focus {
+	outline: none;
+}

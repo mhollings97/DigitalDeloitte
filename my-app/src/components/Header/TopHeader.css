@@ -1,19 +1,19 @@
 #AU {
     position: absolute;
-    right: 317px;
+    right: calc(10% + 317px);
 }
 
 #AP {
     position: absolute;
-    right: 173px;
+    right: calc(10% + 173px);
 }
 
 #CU {
     position: absolute;
-    right: 73px;
+    right: calc(10% + 73px);
 }
 
 #SI {
     position: absolute;
-    right: 5px;
+    right: calc(10% + 5px);
 }
