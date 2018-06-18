@@ -16,11 +16,17 @@ render() {
       <div id = "LandingContainer">
         <div id = "landingText">
         	<div id = "largeTB">
-			<TextBox size = "large" message = "We don't want you to go to work" />
+			<TextBox size = "large" message = "WE DON'T WANT YOU TO GO TO YOUR WORK" />
 		</div>
+    <div id = "grnbox2">
+      <div id = "grnbox"/>
+      </div>
           	<div id = "smallTB">
-			<TextBox size = "medium" message = "Just work from anywhere with us" />
+			<TextBox message = "JUST WORK FROM ANYWHERE WITH US" />
 	  	</div>
+      <div id = "grnbox4">
+      <div id = "grnbox3"/>
+      </div>
   	</div>
 
 	<div  id = "GB">
