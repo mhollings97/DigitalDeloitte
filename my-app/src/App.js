@@ -68,7 +68,7 @@ render() {
                 	&&
 		<div id = 'catcher' onClick = {this.toggleLog}/>}
 
-
+<div id = "head">
                 <div id = "AU">
                         <Link to = {'/aboutus'} >
                                 <Header title = "About Us" ></Header>
@@ -92,6 +92,9 @@ render() {
                         <HomeButton >Deloitte Digital</HomeButton>
                         </Link>
     		</div>
+        </div>
+        <div id = "cont">
+        <div id = "bord">
         <Route exact = 'true' path = "/" component= {HomeScreen}/>
         <Route path = "/aboutus" component= {AboutUs}/>
 	<Route path = '/abouttheproject' component = {AboutProj}/>
@@ -100,6 +103,8 @@ render() {
         <Route exact = 'true' path = "/userprofile" component = {UserProfile}/>
         <Route path = "/contactus" component = {UserData}/>
         <Route path = "/projectsavailable" component = {ProjectCards}/>
+        </div>
+        </div>
       </div>
 </Router>
   	);
