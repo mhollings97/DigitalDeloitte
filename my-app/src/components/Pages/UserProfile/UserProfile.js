@@ -16,7 +16,7 @@ constructor(props) {
 	};
 	this.handleRedirect = this.handleRedirect.bind(this);
 	this.handleSORedirect = this.handleSORedirect.bind(this);
-
+	this.handleERedirect = this.handleERedirect.bind(this);
 }
 
 componentDidMount() {
@@ -63,6 +63,12 @@ handleSORedirect(){
         });
 }
 
+handleERedirect(){
+
+        this.setState({
+                Eredirect: !this.state.Eredirect,
+        });
+}
 
     render () {
 
@@ -81,6 +87,12 @@ handleSORedirect(){
 
         }
 
+        if(this.state.Eredirect){
+                return(
+                        <Redirect to = "/editprofile"/>
+                )
+
+        }
 	return (
 
 	    <div>
@@ -116,7 +128,7 @@ handleSORedirect(){
 			<p>InDesign</p>
 		    </div>
 		    <div id = "Editing">
-			<button id = "editprofile">Edit Information</button>
+			<button id = "editprofile" onClick = {this.handleERedirect}>Edit Information</button>
 		    </div>	
 		    <div id = "SignOut">
 			<button id = "signingout" onClick = {this.handleSORedirect}>Sign Out</button>
