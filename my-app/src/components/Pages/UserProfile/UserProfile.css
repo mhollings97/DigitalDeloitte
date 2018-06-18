@@ -13,7 +13,8 @@
     	"a a b b c c"
     	"d d e e f f"
     	"d d e e f f"
-	"g g g g g g";
+	"g g g g g g"
+	"h h h h h h";
 	align-items: start;
 }
 
@@ -56,7 +57,41 @@
 }
 
 #Completed {
-	grid-area: g;
+	grid-area: h;
         align-self: center;
         justify-self: center;
+}
+
+#Editing {
+	grid-area: g;
+	align-self: center;
+	justify-self: center;
+}
+
+#editprofile {
+    width: 260px;
+    border-radius: 25px;
+    border: 2px solid #000000;
+    padding: 20px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration:  0.4s;
+
+}
+
+#editprofile:hover {
+
+    background-color: #73AD21;
+    color: black;
+    cursor: pointer;
+
+}
+
+#editprofile:active,
+#editprofile:focus,
+#editprofile.active {
+
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+          box-shadow: none;
 }

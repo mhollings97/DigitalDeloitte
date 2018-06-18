@@ -1,29 +1,14 @@
-#projinfo {
-	float: left;
-	width: 60%;
-	margin-bottom: 7%;
-}
-
-#descbar {
-	float: right;
-	width: 30%;
-}
-
-#bigwrap {
-	margin-left: 7%;
-	margin-right: 7%;
-}
-
-#startworking {
+#sendbutton {
     width: 260px;
     border-radius: 25px;
     border: 2px solid #000000;
     padding: 20px;
     -webkit-transition-duration: 0.4s;
     transition-duration:  0.4s;
+
 }
 
-#startworking:hover {
+#sendbutton:hover {
 
     background-color: #73AD21;
     color: black;
@@ -31,12 +16,13 @@
 
 }
 
-#startworking:active,
-#startworking:focus,
-#startworking.active {
+#sendbutton:active,
+#sendbutton:focus,
+#sendbutton.active {
 
         background-image: none;
         outline: 0;
         -webkit-box-shadow: none;
           box-shadow: none;
 }
+

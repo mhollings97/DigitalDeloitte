@@ -16,6 +16,9 @@ import Projects from '.././Projects/Projects'
 import UserProfile from '.././UserProfile/UserProfile'
 import AfterSignUp from '.././AfterSignUp/AfterSignUp'
 import ProjPage from '.././ProjPage/ProjPage'
+import SignOut from '.././SignOut/SignOut'
+import PostSubmit from '.././PostSubmit/PostSubmit'
+import EditProf from '.././EditProf/EditProf'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 class HomeScreen extends Component {
 constructor(props) {
@@ -74,6 +77,18 @@ constructor(props) {
                 <div id = "OfferContainer">
                         <Offer/>
                 </div>
+
+		<div id = "SignOutContainer">
+			<SignOut/>
+		</div>
+
+		<div id = "PostSubmitContainer">
+			<PostSubmit/>
+		</div>
+
+		<div id = "EditProfContainer">
+			<EditProf/>
+		</div>
             </div>
         </div>
     </Router>

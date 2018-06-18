@@ -1,29 +1,23 @@
-#projinfo {
-	float: left;
-	width: 60%;
-	margin-bottom: 7%;
+#SignOutWrap {
+	background-color: #e5e5e5;
+	outline-style: solid;
+	outline-color: #39771f;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
 
-#descbar {
-	float: right;
-	width: 30%;
-}
-
-#bigwrap {
-	margin-left: 7%;
-	margin-right: 7%;
-}
-
-#startworking {
+#SBIbutton {
     width: 260px;
     border-radius: 25px;
     border: 2px solid #000000;
     padding: 20px;
     -webkit-transition-duration: 0.4s;
     transition-duration:  0.4s;
+
 }
 
-#startworking:hover {
+#SBIbutton:hover {
 
     background-color: #73AD21;
     color: black;
@@ -31,12 +25,14 @@
 
 }
 
-#startworking:active,
-#startworking:focus,
-#startworking.active {
+#SBIbutton:active,
+#SBIbutton:focus,
+#SBIbutton.active {
 
         background-image: none;
         outline: 0;
         -webkit-box-shadow: none;
           box-shadow: none;
 }
+
+

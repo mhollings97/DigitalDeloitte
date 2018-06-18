@@ -1,20 +1,17 @@
-#projinfo {
-	float: left;
-	width: 60%;
-	margin-bottom: 7%;
+#EditProfWrap {
+
 }
 
-#descbar {
-	float: right;
-	width: 30%;
+#edits {
+        background-color: #e5e5e5;
+        outline-style: solid;
+        outline-color: #39771f;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
 }
 
-#bigwrap {
-	margin-left: 7%;
-	margin-right: 7%;
-}
-
-#startworking {
+#SCbutton {
     width: 260px;
     border-radius: 25px;
     border: 2px solid #000000;
@@ -23,7 +20,7 @@
     transition-duration:  0.4s;
 }
 
-#startworking:hover {
+#SCbutton:hover {
 
     background-color: #73AD21;
     color: black;
@@ -31,9 +28,9 @@
 
 }
 
-#startworking:active,
-#startworking:focus,
-#startworking.active {
+#SCbutton:active,
+#SCbutton:focus,
+#SCbutton.active {
 
         background-image: none;
         outline: 0;
