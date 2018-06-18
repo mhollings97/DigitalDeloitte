@@ -41,6 +41,7 @@ app.listen(3000, function(){
 
 var logger = require('koa-logger');
 var koa = require('koa');
+var Cors = require('@koa/cors');
 var router = require('koa-router');
 var bodyParser = require('koa-body');
 
@@ -63,6 +64,7 @@ app.keys = ['Deloitte Digital'];
 var project = require('./routes/project.js');
 
 //Use the Router on the sub route /movies
+app.use(cors());
 app.use(session(app));
 app.use(user.routes());
 app.use(project.routes());
