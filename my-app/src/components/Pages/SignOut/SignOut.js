@@ -14,10 +14,7 @@ render () {
 	    <div id = "SignOutWrap">
 	      <div id = "SOtext">
 		<h2>You have been logged out.</h2>
-		<h3>Click below to log back in.</h3>
-	      </div>
-	      <div id = "SBI">
-		<button id = "SBIbutton">Sign In</button>
+		<h3>Come back soon!</h3>
 	      </div>
 	    </div>
 	</div>

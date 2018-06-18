@@ -6,15 +6,26 @@
 }
 
 #largeTB{
-	width: 50%;
-	font-color: green;
+	margin-top: 200px !important;
+	width: 580px;
+	color: #333333;
 	margin: 0 auto;
+	font-family: 'OpenSans-Bold', 'Open Sans Bold', 'Open Sans';
+	font-weight: 700;
+    font-style: normal;
+    font-size: 48px !important;
+    text-align: center;
 }
 
 #smallTB{
-        width: 35%;
-        font-color: green;
+        width: 380px;
+        color: #333333;
         margin: 0 auto;
+        font-family: 'OpenSans-Bold', 'Open Sans Bold', 'Open Sans';
+    	font-weight: 700;
+    	font-style: normal;
+    	font-size: 16px !important;
+    	text-align: center;
 }
 
 #GB{
@@ -22,6 +33,55 @@
 	bottom: 0;
 }
 
+#grnbox2{
+	border-width: 0px;
+    position: absolute;
+    margin-left: 0.5%;
+    top: 103px;
+    width: 165px;
+    height: 9px;
+}
+
+#grnbox{
+	border-width: 0px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 165px;
+    height: 9px;
+    background: inherit;
+    background-color: rgba(154, 205, 102, 1);
+    border: none;
+    border-radius: 0px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#grnbox3{
+    border-width: 0px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 95px;
+    height: 6px;
+    background: inherit;
+    background-color: rgba(154, 205, 102, 1);
+    border: none;
+    border-radius: 0px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#grnbox4{
+	border-width: 0px;
+    position: absolute;
+    left: 49.3%;
+    top: 175px;
+    width: 95px;
+    height: 6px;
+}
 
 #signIn{
 	background-color: white;
@@ -37,7 +97,7 @@
 }
 
 #catcher{
-	width: 100%;
+	width: 90% !important;
 	height: 750px;
 	background-color: lightgray;
 	opacity: .75;

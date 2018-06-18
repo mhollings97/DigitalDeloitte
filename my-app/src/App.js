@@ -19,7 +19,8 @@ import SignUp from './components/Pages/SignUp/SignUp'
 import AfterSignUp from './components/Pages/AfterSignUp/AfterSignUp'
 import UserProfile from './components/Pages/UserProfile/UserProfile'
 import ProjectCards from './components/Pages/Projects/ProjectCards/ProjectCards'
-
+import SignOut from './components/Pages/SignOut/SignOut'
+import ProjPage from './components/Pages/ProjPage/ProjPage'
 
 class App extends Component {
 constructor(props) {
@@ -100,6 +101,8 @@ render() {
         <Route exact = 'true' path = "/userprofile" component = {UserProfile}/>
         <Route path = "/contactus" component = {UserData}/>
         <Route path = "/projectsavailable" component = {ProjectCards}/>
+	<Route path = "/signedout" component = {SignOut}/>
+	<Route path = "/projectdescription" component = {ProjPage}/>
       </div>
 </Router>
   	);

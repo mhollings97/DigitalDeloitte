@@ -45,16 +45,22 @@ render () {
 	    <div id = "interests">
 		<p>Interests:</p>
 		<input type = "text" interests = {this.state.interests}/>
+                <input type = "text" interests = {this.state.interests}/>
+                <input type = "text" interests = {this.state.interests}/>
 	    </div>
 
 	    <div id = "skills">
 		<p>Skills:</p>
 		<input type = "text" skills = {this.state.skills}/>
+                <input type = "text" skills = {this.state.skills}/>
+                <input type = "text" skills = {this.state.skills}/>
 	    </div>
 
 	    <div id = "software">
 		<p>Software:</p>
 		<input type = "text" software = {this.state.software}/>
+                <input type = "text" software = {this.state.software}/>
+                <input type = "text" software = {this.state.software}/>
 	    </div>
 
 	    <div id = "submitchanges">

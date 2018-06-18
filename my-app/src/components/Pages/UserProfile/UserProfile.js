@@ -15,6 +15,7 @@ constructor(props) {
 		redirect: false,
 	};
 	this.handleRedirect = this.handleRedirect.bind(this);
+	this.handleSORedirect = this.handleSORedirect.bind(this);
 
 }
 
@@ -51,8 +52,15 @@ fetch('https://private-ae364-vdwregistration.apiary-mock.com/api/v1/user/1',
 handleRedirect(){
 
 	this.setState({
-		redirect: !this.state.redirect
+		redirect: !this.state.redirect,
 	});
+}
+
+handleSORedirect(){
+
+        this.setState({
+                SOredirect: !this.state.SOredirect,
+        });
 }
 
 
@@ -64,6 +72,14 @@ handleRedirect(){
 		)
 
 	}
+
+
+        if(this.state.SOredirect){
+                return(
+                        <Redirect to = "/signedout"/>
+                )
+
+        }
 
 	return (
 
@@ -102,6 +118,9 @@ handleRedirect(){
 		    <div id = "Editing">
 			<button id = "editprofile">Edit Information</button>
 		    </div>	
+		    <div id = "SignOut">
+			<button id = "signingout" onClick = {this.handleSORedirect}>Sign Out</button>
+		    </div>
 		    <div id = "Completed">
 			<p>You have no completed projects.</p>
 		    </div>
