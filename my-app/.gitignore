@@ -3,6 +3,9 @@
 # testing
 /coverage
 
+#cache
+/node_modules/.cache/*
+
 # production
 /build
 
