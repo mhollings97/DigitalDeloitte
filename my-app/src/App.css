@@ -12,7 +12,7 @@
 }
 
 #catcher{
-        width: 100%;
+        width: 80% !important;
         height: 750px;
         background-color: lightgray;
         border-left: 1px solid lightgray;
