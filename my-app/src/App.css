@@ -35,7 +35,7 @@
         left:0px;
         right:0px;
         padding-left: 10%;
-        padding-right: 10%;
+        padding-right: calc(10% - 2px);
         bottom:0px;
         overflow-y:scroll;
 }
