@@ -112,12 +112,12 @@ handlePWChange(e){
 				onChange={this.handleLNChange}/>
 			<br/>
 			<p> Email </p>
-			<input id = "email" name = "email" value={this.state.email}
+			<input id = "SUemail" name = "email" value={this.state.email}
 				onChange={this.handleEChange}/>
 			<br/>
 
 			<p> Password </p>
-			<input id = "password" name = "password" value={this.state.pw}
+			<input id = "SUpassword" name = "password" value={this.state.pw}
 				onChange={this.handlePWChange}/>
 			<br/>
 			<Link to = "/signupcomplete">
