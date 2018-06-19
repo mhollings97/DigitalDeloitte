@@ -28,7 +28,7 @@ render() {
 		</div>
 		<div id = "Apply">
 			<Apply/>
-			<button id = "HowBut" onClick = {this.props.toggleDD}> How we select out candidates </button>
+			<button id = "HowBut" onClick = {this.props.toggleDD}> How we select our candidates </button>
 		</div>
 	</div>
 

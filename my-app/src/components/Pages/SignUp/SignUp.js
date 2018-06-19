@@ -52,8 +52,10 @@ fetch('http://localhost:3069/api/v1/user', {
 
 .then((res) => res.json())
 
-.then((data) =>  {
-	console.log("THIS IS A TEST");
+.then((response) =>  {
+	console.log(response);
+	
+
 
 })
 
