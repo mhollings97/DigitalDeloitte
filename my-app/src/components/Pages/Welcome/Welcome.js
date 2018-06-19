@@ -20,8 +20,15 @@ render() {
     return (
 	<div id = "WelcomeWrapper">
 		<div id = "TopText">
-			<TextBox size = "small" message = "What is this about?"/>
-			<TextBox size = "large" message = "Welcome to our new platform, our workplace for external employees"/>
+		<div id = "smallTBx">
+			<TextBox message = "WHAT IS THIS?"/>
+		</div>
+		<div id = "largeTBx">
+			<TextBox message = "Welcome to our new platform, "/>
+			<div id = "bottomp">
+			<TextBox message = "our workplace for external employees."/>
+			</div>
+		</div>
 		</div>
 		<div>
 			<WelcComp/>
