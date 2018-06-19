@@ -392,7 +392,17 @@ function Connection() {
     	}
     }
 
-
+    this.addXP = function(id, nxp) {
+		return this.getUserById(id).then(function(retval) {
+			nxp += retval[0].dataValues.xp;
+		}).then(function() {
+		try{
+    		return User.update({xp: nxp}, 
+    			{where: {user_id: id}})
+    	} catch (err) {
+    		return Promise.resolve(null);
+    	}})
+    }
 
 
 
@@ -422,8 +432,9 @@ function Connection() {
 	    	.catch(function(err) {return null});
 	}
 
-
-
+	this.getSkillsByType = function(t) {
+		return Skills.findAll({where: {skill_type: t}}).catch(function(err) {return null})
+	}
 
 
 
@@ -734,9 +745,14 @@ function Connection() {
 		}).catch(function(err) {return null});
 	}
 
-	this.getProjectSkills = function(pid) {
+	this.getAppProjects = function(uid) {
 		return NS.findAll({
-			where: {project_id : pid}
+			attributes: ['project_id'],
+			include: [{
+				model: HS,
+				required: true,
+				where: {user_id: uid}
+			    }]
 		}).catch(function(err) {return null})
 	}
 

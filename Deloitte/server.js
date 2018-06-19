@@ -60,10 +60,14 @@ app.use(bodyParser({
 var user = require('./routes/userConn.js');
 app.keys = ['Deloitte Digital'];
 
+
+var project = require('./routes/project.js');
+
 //Use the Router on the sub route /movies
 app.use(Cors());
 app.use(session(app));
 app.use(user.routes());
+app.use(project.routes());
 //app.use();
 
 app.listen(3069);
