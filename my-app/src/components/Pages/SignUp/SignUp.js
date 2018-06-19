@@ -121,14 +121,12 @@ handlePWChange(e){
 				onChange={this.handlePWChange}/>
 			<br/>
 			<Link to = "/signupcomplete">
-			<button id = 'SUbutton' onClick = {this.handleSubmit}> Submit </button>
+			<div id = "SUbuttonwrap">	
+			  <button id = 'SUbutton' onClick = {this.handleSubmit}> Submit </button>
+			</div>
 			</Link>
 		</form>
 
-	    </div>
-	    <div id = "ConditionsBox">
-	    </div>
-	    <div id = "SignInRedirect">
 	    </div>
 	  </div>
 	</div>

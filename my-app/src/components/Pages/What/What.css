@@ -44,7 +44,26 @@
 }
 
 #HeadingText{
-	text-align: center;
+	padding-top: 100px;
+	width: 380px;
+        color: #333333;
+        margin: 0 auto;
+        font-family: 'OpenSans-Bold', 'Open Sans Bold', 'Open Sans';
+    	font-weight: 700;
+    	font-style: normal;
+    	font-size: 16px !important;
+    	text-align: center;
+}
+
+#MainHeading {
+    width: 700px;
+	color: #333333;
+	margin: 0 auto;
+	font-family: 'OpenSans-Bold', 'Open Sans Bold', 'Open Sans';
+	font-weight: 700;
+    font-style: normal;
+    font-size: 30px !important;
+    text-align: center;
 }
 
 #WhatBut {

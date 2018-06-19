@@ -1,4 +1,5 @@
 #ProjectCard {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	background-color: #C0C0C0;
         outline-style: solid;
         outline-color: #000000;
@@ -29,12 +30,15 @@
 }
 
 #ShowMore {
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
 #showmore {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 15px;
     width: 125px;
     border-radius: 25px;
     border: 2px solid #000000;

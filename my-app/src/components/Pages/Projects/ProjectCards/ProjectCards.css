@@ -1,6 +1,4 @@
 #AllCards {
-	padding-top: 5%;
-	padding-bottom: 20%;
         height: 100%; 
         width: 100%;
         display: grid;
@@ -18,18 +16,21 @@
 }
 
 #PC1 {
+	width: 85%;
 	grid-area: a;
         align-self: center;
         justify-self: center;
 }
 
 #PC2 {
+	width: 85%;
 	grid-area: b;
         align-self: center;
         justify-self: center;
 }
 
 #PC3 {
+	width: 85%;
 	grid-area: c;
         align-self: center;
         justify-self: center;
@@ -37,6 +38,7 @@
 }
 
 #PC4 {
+	width: 85%;
 	grid-area: d;
         align-self: center;
         justify-self: center;

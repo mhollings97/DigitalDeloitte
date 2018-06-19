@@ -28,36 +28,42 @@
 }
 
 #LogInInfo {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
 	grid-area: b;
   	align-self: center;
   	justify-self: center;
 }
 
 #ExperienceInfo {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
 	grid-area: c;
         align-self: center;
         justify-self: center;
 }
 
 #Interests {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
 	grid-area: d;
         align-self: center;
         justify-self: center;
 }
 
 #Skills {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
 	grid-area: e;
         align-self: center;
         justify-self: center;
 }
 
 #Software {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
 	grid-area: f;
         align-self: center;
         justify-self: center;
 }
 
 #Completed {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
 	grid-area: h;
         align-self: center;
         justify-self: center;
@@ -76,7 +82,9 @@
 }
 
 #editprofile {
-    width: 260px;
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+    width: 160px;
+    font-size: 15px;
     border-radius: 25px;
     border: 2px solid #000000;
     padding: 20px;
@@ -104,7 +112,9 @@
 }
 
 #signingout {
-    width: 260px;
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+    width: 160px;
+    font-size: 15px;
     border-radius: 25px;
     border: 2px solid #000000;
     padding: 20px;
@@ -136,6 +146,8 @@
 
 #availprojs {
     width: 200px;
+    font-size: 13px;
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
     border-radius: 25px;
     border: 2px solid #000000;
     padding: 20px;
