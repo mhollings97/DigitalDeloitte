@@ -27,6 +27,22 @@
 	text-align: center;
 }
 
+#smallwrd {
+	margin-left: -40%;
+}
+
+#bigwrd {
+	margin-left: -32%;
+}
+
+#biggerwrd {
+	margin-left: -20%;
+}
+	
+#biggestwrd {
+	margin-left: -5%;
+}
+
 #HeadingText{
 	text-align: center;
 }
