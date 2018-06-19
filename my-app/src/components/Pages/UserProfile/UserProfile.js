@@ -137,7 +137,7 @@ handleERedirect(){
 			<p>You have no completed projects.</p>
 		    </div>
 			<div id = "projlink">
-				<button onClick = {this.handleRedirect}> Click here to see available projects! </button>
+				<button id = "availprojs" onClick = {this.handleRedirect}> Click here to see available projects! </button>
 			</div>
 
 

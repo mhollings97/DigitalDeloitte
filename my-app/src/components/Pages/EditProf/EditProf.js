@@ -24,43 +24,43 @@ render () {
 	<form id = "edits">
 	    <div id = "firstName">
 		<p>First name:</p>
-		<input type = "text" firstName = {this.state.firstName}/>
+		<input id = "FN" type = "text" firstName = {this.state.firstName}/>
 	    </div>
 	
 	    <div id = "lastName">
 		<p>Last name:</p>
-		<input type = "text" lastName = {this.state.lastName}/>
+		<input id = "LN" type = "text" lastName = {this.state.lastName}/>
 	    </div>
 
 	    <div id = "email">
 		<p>Email:</p>
-		<input type = "text" email = {this.state.email}/>
+		<input id = "EM" type = "text" email = {this.state.email}/>
 	    </div>
 
 	    <div id = "password">
 		<p>Password:</p>
-		<input type = "text" password = {this.state.password}/>
+		<input id = "PW" type = "text" password = {this.state.password}/>
 	    </div>
 
 	    <div id = "interests">
 		<p>Interests:</p>
-		<input type = "text" interests = {this.state.interests}/>
-                <input type = "text" interests = {this.state.interests}/>
-                <input type = "text" interests = {this.state.interests}/>
+		<input id = "I1" type = "text" interests = {this.state.interests}/>
+                <input id = "I2" type = "text" interests = {this.state.interests}/>
+                <input id = "I3" type = "text" interests = {this.state.interests}/>
 	    </div>
 
 	    <div id = "skills">
 		<p>Skills:</p>
-		<input type = "text" skills = {this.state.skills}/>
-                <input type = "text" skills = {this.state.skills}/>
-                <input type = "text" skills = {this.state.skills}/>
+		<input id = "SK1" type = "text" skills = {this.state.skills}/>
+                <input id = "SK2" type = "text" skills = {this.state.skills}/>
+                <input id = "SK3" type = "text" skills = {this.state.skills}/>
 	    </div>
 
 	    <div id = "software">
 		<p>Software:</p>
-		<input type = "text" software = {this.state.software}/>
-                <input type = "text" software = {this.state.software}/>
-                <input type = "text" software = {this.state.software}/>
+		<input id = "SO1" type = "text" software = {this.state.software}/>
+                <input id = "SO2" type = "text" software = {this.state.software}/>
+                <input id = "SO3" type = "text" software = {this.state.software}/>
 	    </div>
 
 	    <div id = "submitchanges">

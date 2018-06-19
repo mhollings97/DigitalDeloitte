@@ -1,5 +1,5 @@
 #EditProfWrap {
-
+	padding-top: 2%;
 }
 
 #edits {
@@ -13,6 +13,15 @@
 
 #firstName {
 	padding-top: 2%;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+#lastName{
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+#email {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 #submitchanges {
@@ -20,7 +29,24 @@
 	padding-bottom: 2%;
 }
 
+#interests {
+	width: 100%;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+#skills {
+	width: 100%;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+#software {
+	width: 100%;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
 #SCbutton {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 15px;
     width: 260px;
     border-radius: 25px;
     border: 2px solid #000000;
@@ -45,4 +71,86 @@
         outline: 0;
         -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+#FN {
+	border: 3px solid green;
+	border-radius: 25px;
+}
+
+#LN {
+	border: 3px solid green;
+	border-radius: 25px;
+}
+
+#EM {
+	border: 3px solid green;
+	border-radius: 25px;
+}
+
+#PW {
+	border: 3px solid green;
+	border-radius: 25px;
+}
+
+
+#I1 {
+	border: 3px solid green;
+	width: 25%;
+	margin-right: 5%;
+	border-radius: 25px;
+}
+
+#I2 {
+	border: 3px solid green;
+	width: 25%;
+	margin-right: 5%;
+	border-radius: 25px;
+}
+
+#I3 {
+	border: 3px solid green;
+	width: 25%;
+	border-radius: 25px;
+}
+
+#SK1 {
+	border: 3px solid green;
+	width: 25%;
+	margin-right: 5%;
+	border-radius: 25px;
+}
+
+#SK2 {
+	border: 3px solid green;
+	width: 25%;
+	margin-right: 5%;
+	border-radius: 25px;
+}
+
+#SK3 {
+	border: 3px solid green;
+	width: 25%;
+	border-radius: 25px;
+	border-radius: 25px;
+}
+
+#SO1 {
+	border: 3px solid green;
+	width: 25%;
+	margin-right: 5%;
+	border-radius: 25px;
+}
+	
+#SO2 {
+	border: 3px solid green;
+	width: 25%;
+	margin-right: 5%;
+	border-radius: 25px;
+}
+
+#SO3 {
+	border: 3px solid green;
+	width: 25%;
+	border-radius: 25px;
 }
