@@ -1,8 +1,23 @@
 #IntroHeading {
-    text-align: center;
+    padding-top: 50px;
+    width: 380px;
+        color: #333333;
+        margin: 0 auto;
+        font-family: 'OpenSans-Bold', 'Open Sans Bold', 'Open Sans';
+    	font-weight: 700;
+    	font-style: normal;
+    	font-size: 16px !important;
+    	text-align: center;
 }
 
 #MainHeading {
+    width: 700px;
+	color: #333333;
+	margin: 0 auto;
+	font-family: 'OpenSans-Bold', 'Open Sans Bold', 'Open Sans';
+	font-weight: 700;
+    font-style: normal;
+    font-size: 30px !important;
     text-align: center;
 }
 
@@ -10,8 +25,15 @@
     position: relative;
     float: right;
     text-align: left;
-    width: 35%;
+    width: 30%;
     margin-right: 15%;
+	margin-top: 0px;
+	font-family: 'OpenSans', 'Open Sans';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 28px;
+    word-wrap: break-word;
 }
 
 #Image {

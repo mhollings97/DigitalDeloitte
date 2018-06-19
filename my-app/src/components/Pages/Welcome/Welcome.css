@@ -1,5 +1,5 @@
 #WelcomeWrapper{
-	height: 750px;
+	height: 650px;
 }
 
 #TopText{
@@ -47,6 +47,7 @@
     	outline:none;
 	color: green;
 	text-decoration: underline;
+	margin-bottom: -50px;
 }
 
 #WDD{

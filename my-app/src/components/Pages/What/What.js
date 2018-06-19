@@ -14,8 +14,10 @@ class What extends Component {
 	return (
 	    <div>
 		<div id = "HeadingText">
-		<TextBox size = "small" message = "WHAT ARE WE WORKING ON?"/>
-		<TextBox size = "large" message = "There is a range of interesting projects that you can immedaitely contribute to."/>
+		<TextBox message = "WHAT ARE WE WORKING ON?"/>
+		</div>
+		<div id = "MainHeading">
+		<TextBox message = "There is a range of interesting projects that you can immedaitely contribute to."/>
 		</div>
 		<div id = "AllBoxes">
 		    

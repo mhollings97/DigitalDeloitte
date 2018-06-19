@@ -16,30 +16,39 @@
 }
 
 #firstName {
+        padding-top: 1% !important;
+        padding-bottom: 1% !important;
         font-family: "Trebuchet MS", Helvetica, sans-serif;
         border: 3px solid green;
         border-radius: 25px;
+        text-align: center;
 }
 
 #lastName {
-        padding-top: 2%;
+        padding-top: 1% !important;
+        padding-bottom: 1% !important;
         font-family: "Trebuchet MS", Helvetica, sans-serif;
         border: 3px solid green;
         border-radius: 25px;
+        text-align: center;
 }
 
-#SUemail {
-        padding-top: 2%;
+#email {
+        padding-top: 1% !important;
+        padding-bottom: 1% !important;
         font-family: "Trebuchet MS", Helvetica, sans-serif;
         border: 3px solid green;
         border-radius: 25px;
+        text-align: center;
 }
 
-#SUpassword {
-        padding-top: 2%;
+#password {
+        padding-top: 1% !important;
+        padding-bottom: 1% !important;
         font-family: "Trebuchet MS", Helvetica, sans-serif;
         border: 3px solid green;
         border-radius: 25px;
+        text-align: center;
 }
 
 

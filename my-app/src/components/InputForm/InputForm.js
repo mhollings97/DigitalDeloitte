@@ -33,9 +33,8 @@ console.log("Did I make it here?");
 
      event.preventDefault();
 
-     fetch('localhost:3069/api/v1/auth', {
+     fetch('http://localhost:3050/api/v1/auth', {
              method: "POST",
-                 headers: {"Content-Type": "application/json"},
              body: JSON.stringify(object)
          })
 
@@ -48,7 +47,7 @@ console.log("Did I make it here?");
 
                  if(responseData.code === 200)
                      {
-                     this.setState({redirect: !this.state.redirect});
+			sessionStorage.setItem('user_id' , responseData.data.userData.user_id);
                      }
 
                  else {
@@ -72,7 +71,7 @@ console.log("Did I make it here?");
               <p> Password </p>
               <input type = "text" password = {this.state.password} onChange= {this.handlePWChange}/> 
             </div >
-	    <div id = "buttonS">
+	    <div onClick = {this.handleSubmit} id = "buttonS">
 		{this.props.submitButton}
 	    </div>
 	    <div id = "SignUp">
