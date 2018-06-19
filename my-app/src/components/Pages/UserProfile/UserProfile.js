@@ -22,26 +22,17 @@ constructor(props) {
 componentDidMount() {
 
 
-fetch('https://private-ae364-vdwregistration.apiary-mock.com/api/v1/user/1',
+fetch('http://localhost:3069/api/v1/user/' + sessionStorage.getItem('user_id'),
         {
         method:"GET",
         headers: {
                 "Content-Type": "application/json"
          }})
 
-        .then(results => {
-                return results.json();
-        })
 
         .then(responseData => {
-                console.log(responseData.data);
+                console.log(responseData);
 
-                        this.setState({
-                        firstName: responseData.data.firstName,
-                        email: responseData.data.email,
-                        lastName: responseData.data.lastName,
-			interests: responseData.data.interestArea,
-		});
 
         })
 

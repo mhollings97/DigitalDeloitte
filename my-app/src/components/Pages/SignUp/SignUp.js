@@ -53,10 +53,19 @@ fetch('http://localhost:3069/api/v1/user', {
 .then((res) => res.json())
 
 .then((response) =>  {
+
+	if(response.code === 200){
+
 	console.log(response);
-	
+	var dispatch = {
+		type: 'SIGNUP',
+		id: response.data.user_id
+	}
 
+	console.log(dispatch)
+	sessionStorage.setItem('user_id', response.data.user_id);
 
+	}
 })
 
 .catch((err)=>console.log(err));
