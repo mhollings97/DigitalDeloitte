@@ -1,11 +1,3 @@
-//TODO:
-/*
-	-View projects that would apply specifically to the user (XP, Skills)
-	-Adding and removing projects from a user
-	-Submit something to a project, earn XP for completion
-
-*/
-
 var Router = require('koa-router');
 var router = Router({prefix: '/api/v1' });
 
@@ -14,11 +6,15 @@ var conn = new Connection();
 
 conn.createTable();
 
-//Routes will go here  
+//Project related functions
+//Creates a new project and returns the information
 router.post('/project', newProject);
+//List all projects that are in a database.
 router.get('/project', listProject);
+//List all projects that a user has matching skills for.
 router.get('/project/:uid', myProjects);
 
+//Creates a new project
 async function newProject(ctx, next) {
     var j = JSON.parse(ctx.request.body);
     await conn.createProject(j.project_name,
@@ -54,7 +50,7 @@ async function newProject(ctx, next) {
 						 var ret = {
 						     "status": "success",
 						     "code": 200,
-						     "message": "Hi, Mike. This is a project.",
+						     "message": "New project created.",
 						     "apiVersion": 1,
 						     "requestUrl": ctx.request.host + ctx.request.url,
 						     "data": {
@@ -63,9 +59,9 @@ async function newProject(ctx, next) {
 							 "completion_time": r[0].dataValues.completion_time,
 							 "description": r[0].dataValues.description,
 							 "status": r[0].dataValues.status,
-							 "join_deadline": r[0].dataValues.join_deadline,
-							 "rev_deadline": r[0].dataValues.rev_deadline,
-							 "sub_deadline": r[0].dataValues.sub_deadline,
+							 "join_deadline": r[0].dataValues.join_deadline.toISOString().split('T')[0],
+							 "rev_deadline": r[0].dataValues.rev_deadline.toISOString().split('T')[0],
+							 "sub_deadline": r[0].dataValues.sub_deadline.toISOString().split('T')[0],
 							 "min_diff": r[0].dataValues.min_diff,
 							 "max_diff": r[0].dataValues.max_diff,
 							 "people": r[0].dataValues.people,
@@ -85,7 +81,7 @@ async function newProject(ctx, next) {
 						 for(var x = 0; x < j.tags.length; x++)
 						     {
 							 ret.data.tags.push(j.tags[x]);
-							 await conn.addHT(r[0].dataValues.project_id, j.tags[j]);
+							 await conn.addHT(r[0].dataValues.project_id, j.tags[x]);
 						     }
     
 						 ctx.body = ret;
@@ -95,54 +91,74 @@ async function newProject(ctx, next) {
 				 )
 	}
 
+//List all projects
 async function listProject(ctx, next) {
     var retPD = [];
 
     await conn.getAllProject().then(async function(projects) {
-
-	    for(var i = 0; i < projects.length; i++)
-		{
-		    var temp = {
-			"project_id": projects[i].project_id,
-			"project_name": projects[i].project_name,
-			"completion_time": projects[i].completion_time,
-			"status": projects[i].status,
-			"join_deadline": projects[i].join_deadline,
-			"rev_deadline": projects[i].rev_deadline,
-			"sub_deadline": projects[i].sub_deadline,
-			"min_diff": projects[i].min_diff,
-			"max_diff": projects[i].max_diff,
-			"people": projects[i].people,
-			"xp_gain": projects[i].xp_gain,
-			"xp_bonus": projects[i].xp_bonus,
-			"skills": [],
-			"tags": []
+    	if(projects == null) {
+    		ctx.status = 401;
+    		var retval = {
+				"status": "not-authorized",
+			     "code": ctx.status,
+			     "message": "User creation unsuccessful",
+			     "apiVersion": 1,
+			     "requestUrl": ctx.request.host + ctx.request.url,
+			     "data": {
+				 	"error": "Project failed to create"
+			     }
 		    };
+	    
+		    ctx.body = retval;
+    	}
+    	else{
+		    for(var i = 0; i < projects.length; i++)
+			{
+			    var temp = {
+				"project_id": projects[i].project_id,
+				"project_name": projects[i].project_name,
+				"completion_time": projects[i].completion_time,
+				"status": projects[i].status,
+				"join_deadline": projects[i].join_deadline.toISOString().split('T')[0],
+				"rev_deadline": projects[i].rev_deadline.toISOString().split('T')[0],
+				"sub_deadline": projects[i].sub_deadline.toISOString().split('T')[0],
+				"min_diff": projects[i].min_diff,
+				"max_diff": projects[i].max_diff,
+				"people": projects[i].people,
+				"xp_gain": projects[i].xp_gain,
+				"xp_bonus": projects[i].xp_bonus,
+				"skills": [],
+				"tags": []
+			    };
 
-		    await conn.getNS(projects[i].project_id);
-		    temp.skills = ctx.body.skills;
+			    await conn.getNS(projects[i].project_id);
+			    temp.skills = ctx.body.skills;
 
-		    await conn.getProjectTags(projects[i].project_id);
-		    temp.tags = ctx.body.tags;
+			    await conn.getProjectTags(projects[i].project_id);
+			    temp.tags = ctx.body.tags;
 
-		    retPD.push(temp);
+			    retPD.push(temp);
+			}
+
+			ctx.status = 200;
+		    var retval = {
+				"status": "success",
+				"code": ctx.status,
+				"message": "Project retrieval successful",
+				"apiVersion": 1,
+				"requestUrl": ctx.request.host + ctx.request.url,
+				"data": {
+				    "projectData": retPD
+				}
+		    };
+	    
+		    ctx.body = retval;
+
 		}
-
-	    var retval = {
-		"status": "success",
-		"code": 200,
-		"message": "Hi, Mike. This is all the projects.",
-		"apiVersion": 1,
-		"requestUrl": "localhost: 3000/project/",
-		"data": {
-		    "projectData": retPD
-		}
-	    };
-    
-	    ctx.body = retval;
 	})
 }
 
+//List projects with matching skills to a user.
 async function myProjects(ctx, next) {
     var pid = await conn.getAppProjects(ctx.params.uid);
     var retPD = [];
@@ -153,41 +169,48 @@ async function myProjects(ctx, next) {
 	    var ret = {
 		"status": "not-authorized",
 		"code": ctx.status,
-		"message": "Project Retrieval unsuccessful",
+		"message": "Project retrieval unsuccessful",
 		"apiVersion": 1,
 		"requestUrl": ctx.request.host + ctx.request.url,
 		"data": {
-		    "error": "Failed to retrieve relevant projects"
+		    "error": "Failed to retrieve relevant projects."
 		}
 	    }
 	    ctx.body = ret;
 	}
     else {
 	ctx.status = 200;
-	for(var i = 0; i < pid.length; i++) {
-	    await conn.getProject(i).then(async function (projects){
+	for(var i = 0; i < pid[0].length; i++) {
+	    await conn.getProject(pid[0][i].project_id).then(async function (projects){
 		    var temp = {
-			"project_id": projects[i].project_id,
-			"project_name": projects[i].project_name,
-			"completion_time": projects[i].completion_time,
-			"status": projects[i].status,
-			"join_deadline": projects[i].join_deadline,
-			"rev_deadline": projects[i].rev_deadline,
-			"sub_deadline": projects[i].sub_deadline,
-			"min_diff": projects[i].min_diff,
-			"max_diff": projects[i].max_diff,
-			"people": projects[i].people,
-			"xp_gain": projects[i].xp_gain,
-			"xp_bonus": projects[i].xp_bonus,
+			"project_id": projects[0].dataValues.project_id,
+			"project_name": projects[0].dataValues.project_name,
+			"completion_time": projects[0].dataValues.completion_time,
+			"status": projects[0].dataValues.status,
+			"join_deadline": projects[0].dataValues.join_deadline.toISOString().split('T')[0],
+			"rev_deadline": projects[0].dataValues.rev_deadline.toISOString().split('T')[0],
+			"sub_deadline": projects[0].dataValues.sub_deadline.toISOString().split('T')[0],
+			"min_diff": projects[0].dataValues.min_diff,
+			"max_diff": projects[0].dataValues.max_diff,
+			"people": projects[0].dataValues.people,
+			"xp_gain": projects[0].dataValues.xp_gain,
+			"xp_bonus": projects[0].dataValues.xp_bonus,
 			"skills": [],
 			"tags": []
 		    };
 
-		    await conn.getNS(projects[i].project_id);
-		    temp.skills = ctx.body.skills;
+		    await conn.getNS(projects[0].dataValues.project_id).then(function(s) {;
+		    	for(var j = 0; j < s.length; j++) {
+		    		console.log(s[j])
+		    		temp.skills.push(s[j].dataValues.skill);
+		    	}
+			})
 
-		    await conn.getProjectTags(projects[i].project_id);
-		    temp.tags = ctx.body.tags;
+		    await conn.getProjectTags(projects[0].dataValues.project_id).then(function(t) {;
+		    	for(var j = 0; j < t.length; j++) {
+		    		temp.tags.push(t[j].dataValues.tag);
+		    	}
+			})
 
 		    retPD.push(temp);
 		})
@@ -195,9 +218,9 @@ async function myProjects(ctx, next) {
 	var retval = {
 	    "status": "success",
 	    "code": 200,
-	    "message": "Hi, Mike. This is all the projects.",
+	    "message": "Successfully retrieved relevant projects.",
 	    "apiVersion": 1,
-	    "requestUrl": "localhost: 3000/project/",
+	    "requestUrl": ctx.request.host + ctx.request.url,
 	    "data": {
 	    "projectData": retPD
 	    }

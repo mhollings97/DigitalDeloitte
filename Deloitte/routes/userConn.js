@@ -9,26 +9,46 @@ var apiVersion = 1;
 conn.createTable();
 
 //User Related Functions
+//Handles logging in
 router.post('/auth', verify);
+//Creates a new user
 router.post('/user', createUser);
+//Gives a user an application
 router.post('/user/:id/apply', createApplication);
+//Updates a users profile
 router.post('/user/:id/update', updateUser);
+//Adds a user skill
 router.post('/user/:id/addskill', addUserSkill)
+//Removes a user skill
 router.post('/user/:id/removeskill', removeUserSkill)
+//Updates a user skill with a new proficiency
 router.post('/user/:id/updateskill', updateUserSkill)
+//Returns a users data. 200 status if application is there, 201 otherwise
 router.get('/user/:id', getUserData);
+//Returns a users interest
 router.get('/user/:id/interest', getUserInterest);
+//Returns a users skills
 router.get('/user/:id/skills', getUserSkills);
+//Returns a users software
 router.get('/user/:id/software', getUserSoftware);
+//Removes a user, setting their email to null in the database
+//This allows their email to be used again but saves their information
 router.delete('/user/:id', removeUser);
+//Returns all projects that a user is working on.
 router.get('/user/:id/project', getAllUserProj);
+//Returns a specific project that a user is working on
 router.get('/user/:uid/project/:pid', getUserProj);
+//Adds xp to the user based on the value send in
 router.post('/user/:id/addxp', updateXP);
+//Adds a given project to a user
 router.post('/user/:uid/addproject/:pid', addProject);
 
 //General list related functions.
+//Returns all interest in the database
 router.get('/interest', viewInterest);
+//Returns all skills in the database
 router.get('/skills', viewSkills);
+//Returns all software in the database
 router.get('/software', viewSoftware);
 
 
@@ -128,6 +148,7 @@ async function createUser(ctx, next) {
 	await next();
 }
 
+//Creates a users application
 async function createApplication(ctx, next) {
 	var theBody = JSON.parse(ctx.request.body);
 	await conn.createApp(ctx.params.id, theBody.schooling, theBody.interest, 
@@ -349,6 +370,7 @@ async function getUserData(ctx, next) {
 		            	"apiVersion": apiVersion,
 		            	"requestUrl": ctx.request.host + ctx.request.url,
 		            	"data": {
+		            		"user_id": retval[0].dataValues.user_id,
 		                	"firstName": retval[0].dataValues.name,
 							"lastName": retval[0].dataValues.surname,
 							"email": retval[0].dataValues.email,
@@ -367,6 +389,7 @@ async function getUserData(ctx, next) {
 						"apiVersion": apiVersion,
 						"requestUrl": ctx.request.host + ctx.request.url,
 						"data": {
+							"user_id": retval[0].dataValues.user_id,
 							"firstName": retval[0].dataValues.name,
 							"lastName": retval[0].dataValues.surname,
 							"email": retval[0].dataValues.email,
