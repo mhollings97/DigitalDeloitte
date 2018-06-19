@@ -15,11 +15,11 @@ class Who extends Component {
 	    
 	<div>
 	    <div id = "IntroHeading">
-		<TextBox size = "small" message = "WHO IS THIS FOR?" /> 
+		<TextBox message = "WHO IS THIS FOR?" /> 
 	    </div>
 		
 	    <div id = "MainHeading">
-		<TextBox size = "large" message = "If you like digital, you will like us." />
+		<TextBox message = "If you like digital, you will like us." />
 	    </div>
 
 	    <div id = "Paragraphs">
