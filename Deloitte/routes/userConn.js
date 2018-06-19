@@ -10,6 +10,7 @@ conn.createTable();
 
 router.post('/auth', verify);
 router.post('/user', createUser);
+router.post('/user/:id/apply', createApplication);
 router.post('/user/:id/update', updateUser);
 router.post('/user/:id/addskill', addUserSkill)
 router.post('/user/:id/removeskill', removeUserSkill)
@@ -21,8 +22,8 @@ router.get('/user/:id/software', getUserSoftware);
 router.delete('/user/:id', removeUser);
 router.get('/user/:id/project', getAllUserProj);
 router.get('/user/:uid/project/:pid', getUserProj);
-router.post('/user/:id/addxp', updateXP)
-
+router.post('/user/:id/addxp', updateXP);
+router.post('/user/:uid/addproject/:pid', addProject);
 
 //Checks if the username matches the password on record.
 //If it does, returns the user information
@@ -116,6 +117,41 @@ async function createUser(ctx, next) {
 	});
 
 
+	await next();
+}
+
+async function createApplication(ctx, next) {
+	var theBody = JSON.parse(ctx.request.body);
+	await conn.createApp(ctx.params.id, theBody.schooling, theBody.interest, 
+		theBody.text, theBody.linkedIn, theBody.perLn, theBody.cv).then(function(retval) {
+		if(retval == null) {
+			ctx.status = 401;
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "Adding application failed",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "User failed to add an application"
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+		    	"status": "successful",
+            	"code": ctx.status,
+            	"message": "Application successfully added",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+      		  	}
+			}
+			ctx.body = ret;
+		}
+	})
 	await next();
 }
 
@@ -753,6 +789,40 @@ async function updateXP(ctx, next) {
 		    	"status": "successful",
             	"code": ctx.status,
             	"message": "XP successfully added",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+      		  	}
+			}
+			ctx.body = ret;
+		}
+	})
+	await next();
+}
+
+async function addProject(ctx, next) {
+	var theBody = JSON.parse(ctx.request.body);
+	await conn.addProject(ctx.params.uid, ctx.params.pid, theBody.role).then(function(retval) {
+		if(retval == null) {
+			ctx.status = 401;
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "Adding project failed",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "User failed to add a project"
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+		    	"status": "successful",
+            	"code": ctx.status,
+            	"message": "Project successfully added",
             	"apiVersion": apiVersion,
             	"requestUrl": ctx.request.host + ctx.request.url,
             	"data": {

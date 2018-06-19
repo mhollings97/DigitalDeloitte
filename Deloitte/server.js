@@ -41,7 +41,7 @@ app.listen(3000, function(){
 
 var logger = require('koa-logger');
 var koa = require('koa');
-var Cors = require('@koa/cors');
+var Cors = require('koa2-cors');
 var router = require('koa-router');
 var bodyParser = require('koa-body');
 
