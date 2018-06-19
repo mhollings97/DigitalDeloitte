@@ -51,7 +51,7 @@ handleRedirect(){
 }
 
 handleSORedirect(){
-
+	sessionStorage.setItem('user_id', -1);
         this.setState({
                 SOredirect: !this.state.SOredirect,
         });
