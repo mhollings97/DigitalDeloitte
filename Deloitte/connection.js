@@ -432,8 +432,9 @@ function Connection() {
 	    	.catch(function(err) {return null});
 	}
 
-
-
+	this.getSkillsByType = function(t) {
+		return Skills.findAll({where: {skill_type: t}}).catch(function(err) {return null})
+	}
 
 
 

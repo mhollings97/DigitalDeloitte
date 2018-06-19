@@ -8,6 +8,7 @@ var apiVersion = 1;
 
 conn.createTable();
 
+//User Related Functions
 router.post('/auth', verify);
 router.post('/user', createUser);
 router.post('/user/:id/apply', createApplication);
@@ -24,6 +25,12 @@ router.get('/user/:id/project', getAllUserProj);
 router.get('/user/:uid/project/:pid', getUserProj);
 router.post('/user/:id/addxp', updateXP);
 router.post('/user/:uid/addproject/:pid', addProject);
+
+//General list related functions.
+router.get('/interest', viewInterest);
+router.get('/skills', viewSkills);
+router.get('/software', viewSoftware);
+
 
 //Checks if the username matches the password on record.
 //If it does, returns the user information
@@ -106,6 +113,7 @@ async function createUser(ctx, next) {
 			            "apiVersion": apiVersion,
 			            "requestUrl": ctx.request.host + ctx.request.url,
 			            "data": {
+			            	"user_id": result[0].dataValues.user_id,
 			                "firstName": result[0].dataValues.name,
 			                "lastName": result[0].dataValues.surname,
 			                "email": result[0].dataValues.email
@@ -832,6 +840,114 @@ async function addProject(ctx, next) {
 		}
 	})
 	await next();
+}
+
+async function viewInterest(ctx, next) {
+	await conn.getSkillsByType("Interest").then(function(retval) {
+		if(retval == null) {
+			ctx.status = 401;
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "Failed to retrieve interests",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "Failed to retrieve interests"
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+	   	 	var ret = {
+		    	"status": "success",
+            	"code": ctx.status,
+            	"message": "Successfully retrieved interests",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": [
+            	]
+			}
+
+			for(var i = 0; i < retval.length; i++) {
+				ret.data[i] = {"name": retval[i].dataValues.skill,}
+			}
+			ctx.body = ret;	
+		}
+	})
+}
+
+async function viewSkills(ctx, next) {
+	await conn.getSkillsByType("Skill").then(function(retval) {
+		if(retval == null) {
+			ctx.status = 401;
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "Failed to retrieve skills",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "Failed to retrieve skills"
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+	   	 	var ret = {
+		    	"status": "success",
+            	"code": ctx.status,
+            	"message": "Successfully retrieved skills",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": [
+            	]
+			}
+
+			for(var i = 0; i < retval.length; i++) {
+				ret.data[i] = {"name": retval[i].dataValues.skill,}
+			}
+			ctx.body = ret;	
+		}
+	})
+}
+
+async function viewSoftware(ctx, next) {
+	await conn.getSkillsByType("Software").then(function(retval) {
+		if(retval == null) {
+			ctx.status = 401;
+	   	 	var ret = {
+		    	"status": "not-authorized",
+            	"code": ctx.status,
+            	"message": "Failed to retrieve softwares",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": {
+                	"error": "Failed to retrieve softwares"
+      		  	}
+			}
+			ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+	   	 	var ret = {
+		    	"status": "success",
+            	"code": ctx.status,
+            	"message": "Successfully retrieved softwares",
+            	"apiVersion": apiVersion,
+            	"requestUrl": ctx.request.host + ctx.request.url,
+            	"data": [
+            	]
+			}
+
+			for(var i = 0; i < retval.length; i++) {
+				ret.data[i] = {"name": retval[i].dataValues.skill,}
+			}
+			ctx.body = ret;	
+		}
+	})
 }
 
 module.exports = router;

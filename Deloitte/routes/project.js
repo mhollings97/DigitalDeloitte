@@ -7,7 +7,7 @@
 */
 
 var Router = require('koa-router');
-var router = Router({prefix: '/project' });
+var router = Router({prefix: '/api/v1' });
 
 var Connection = require("../connection");
 var conn = new Connection();
@@ -15,9 +15,9 @@ var conn = new Connection();
 conn.createTable();
 
 //Routes will go here  
-router.post('/', newProject);
-router.get('/', listProject);
-router.get('/:uid', myProjects);
+router.post('/project', newProject);
+router.get('/project', listProject);
+router.get('/project/:uid', myProjects);
 
 async function newProject(ctx, next) {
     var j = JSON.parse(ctx.request.body);
@@ -153,11 +153,11 @@ async function myProjects(ctx, next) {
 	    var ret = {
 		"status": "not-authorized",
 		"code": ctx.status,
-		"message": "User creation unsuccessful",
+		"message": "Project Retrieval unsuccessful",
 		"apiVersion": 1,
 		"requestUrl": ctx.request.host + ctx.request.url,
 		"data": {
-		    "error": "Project failed to create"
+		    "error": "Failed to retrieve relevant projects"
 		}
 	    }
 	    ctx.body = ret;
