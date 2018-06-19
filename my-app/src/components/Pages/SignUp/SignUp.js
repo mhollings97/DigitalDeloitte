@@ -45,7 +45,7 @@ console.log(object);
 event.preventDefault();
 
 
-fetch('http://localhost:3069/api/v1/user', {
+fetch('http://localhost:3050/api/v1/user', {
         method: 'POST',
         body: JSON.stringify(object)
 })

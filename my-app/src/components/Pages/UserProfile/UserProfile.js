@@ -22,7 +22,7 @@ constructor(props) {
 componentDidMount() {
 
 
-fetch('http://localhost:3069/api/v1/user/' + sessionStorage.getItem('user_id'),
+fetch('http://localhost:3050/api/v1/user/' + sessionStorage.getItem('user_id'),
         {
         method:"GET",
         headers: {
@@ -32,8 +32,11 @@ fetch('http://localhost:3069/api/v1/user/' + sessionStorage.getItem('user_id'),
 	.then((res) => res.json())
         .then(responseData => {
                 console.log(responseData);
-
-
+		this.setState({
+			firstName: responseData.data.firstName,
+			lastName: responseData.data.lastName,
+			email: responseData.data.email,
+		})
         })
 
 
