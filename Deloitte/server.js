@@ -64,7 +64,7 @@ app.keys = ['Deloitte Digital'];
 var project = require('./routes/project.js');
 
 //Use the Router on the sub route /movies
-app.use(cors());
+app.use(Cors());
 app.use(session(app));
 app.use(user.routes());
 app.use(project.routes());
