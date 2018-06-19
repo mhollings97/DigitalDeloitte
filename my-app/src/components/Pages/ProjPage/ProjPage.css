@@ -1,8 +1,47 @@
+#bigwrap {
+	margin-left: 7%;
+	margin-right: 7%;
+	padding-top: 3%;
+	float: center;
+}
+
 #projinfo {
 	float: left;
-	width: 70%;
+	width: 60%;
+	margin-bottom: 7%;
 }
 
 #descbar {
 	float: right;
+	width: 35%;
+}
+
+#startwork {
+}
+
+#startworking {
+    width: 260px;
+    border-radius: 25px;
+    border: 2px solid #000000;
+    padding: 20px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration:  0.4s;
+}
+
+#startworking:hover {
+
+    background-color: #73AD21;
+    color: black;
+    cursor: pointer;
+
+}
+
+#startworking:active,
+#startworking:focus,
+#startworking.active {
+
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+          box-shadow: none;
 }

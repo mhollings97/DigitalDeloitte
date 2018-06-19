@@ -1,0 +1,30 @@
+#SW {
+    width: 260px;
+    border-radius: 25px;
+    border: 2px solid #000000;
+    padding: 20px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration:  0.4s;
+
+}
+
+#SW:hover {
+
+    background-color: #73AD21;
+    color: black;
+    cursor: pointer;
+
+}
+
+#SW:active,
+#SW:focus,
+#SW.active {
+
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+
+

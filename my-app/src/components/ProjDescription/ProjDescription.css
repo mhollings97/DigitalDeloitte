@@ -1,20 +1,27 @@
 #descriptionwrap {
 	background-color: #ededed;
-	width: 30%;
+	width: 50%;
 	height: 25%;
+	text-align: center;
+	border: solid;
 }
 
 #projtype {
+	width: 25%;
 }
 
 #time {
+	width: 25%;
 }
 
 #deadlines {
+	width: 25%;
 }
 
 #requirements {
+	width: 25%;
 }
 
 #reward {
+	width: 25%;
 }

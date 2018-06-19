@@ -20,25 +20,35 @@ class What extends Component {
 		<div id = "AllBoxes">
 		    
 		    <div id = "Small">
+		    <div id = "smallwrd">
 			<TextBox size = "small" message = "SMALL"/>
+			</div>
 			<Image size = "small"/>
 		    </div>
 
 		    <div id = "Big">
+		    <div id = "bigwrd">
 			<TextBox size = "small" message = "BIG"/>
+			</div>
 			<Image size = "medium"/>
 		    </div>
 
 		    <div id = "Bigger">
+		    <div id = "biggerwrd">
 			<TextBox size = "small" message = "BIGGER"/>
+			</div>
 			<Image size = "large"/>
 		    </div>
 
 	 	    <div id = "Biggest">
+	 	    <div id = "biggestwrd">
 			<TextBox size = "small" message = "BIGGEEEEST"/>
+			</div>
 			<Image size = "xlarge"/>
 		    </div>
 		</div>
+                <button id = "WhatBut" onClick = {this.props.toggleWhat}> How will you work with us?</button>
+
 	    </div>
         )
 

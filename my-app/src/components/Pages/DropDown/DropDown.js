@@ -18,9 +18,7 @@ render() {
         <div id = "DropDownWrapper">
 		<TextBox size = "large" message = "First you have to tell us something about you"/>
 		<DDComp/>
-
         </div>
-
     );
   }
 }

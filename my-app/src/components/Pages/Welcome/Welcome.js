@@ -20,15 +20,22 @@ render() {
     return (
 	<div id = "WelcomeWrapper">
 		<div id = "TopText">
-			<TextBox size = "small" message = "What is this about?"/>
-			<TextBox size = "large" message = "Welcome to our new platform, our workplace for external employees"/>
+		<div id = "smallTBx">
+			<TextBox message = "WHAT IS THIS?"/>
+		</div>
+		<div id = "largeTBx">
+			<TextBox message = "Welcome to our new platform, "/>
+			<div id = "bottomp">
+			<TextBox message = "our workplace for external employees."/>
+			</div>
+		</div>
 		</div>
 		<div>
 			<WelcComp/>
 		</div>
 		<div id = "Apply">
 			<Apply/>
-			<button id = "HowBut" onClick = {this.props.toggleDD}> How we select out candidates </button>
+			<button id = "HowBut" onClick = {this.props.toggleDD}> How we select our candidates </button>
 		</div>
 	</div>
 

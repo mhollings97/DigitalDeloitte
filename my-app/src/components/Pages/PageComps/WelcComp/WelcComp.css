@@ -11,8 +11,16 @@
 }
 
 #par{
-	width: 185px;
+	width: 272px;
+	height: 201px;
+	margin-top: 50px;
 	text-align: left;
 	padding-left: 10%;
+	    font-family: 'OpenSans', 'Open Sans';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 28px;
+    word-wrap: break-word;
 }
 

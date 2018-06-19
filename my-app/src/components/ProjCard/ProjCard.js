@@ -1,14 +1,37 @@
 import React, { Component } from 'react';
+import Link from '.././Buttons/Link/Link'
 import './ProjCard.css'
+import {Redirect} from 'react-router-dom'
 
 class ProjCard extends Component {
 
 constructor (props) {
     super(props);
+
+        this.state = {
+                redirect: false,
+        };
+
+        this.handleRedirect = this.handleRedirect.bind(this);
+
+}
+
+
+handleRedirect(){
+
+        this.setState({
+                redirect: !this.state.redirect,
+        });
 }
 
     render () {
 
+        if(this.state.redirect){
+                return(
+                        <Redirect to = "/projectdescription"/>
+                )
+
+        }
 	return (
 	
 	    <div>
@@ -35,7 +58,7 @@ constructor (props) {
 			<p>Reward: 50 ExP</p>
 		    </div>
 		    <div id = "ShowMore">
-			<p>Show More (make into a link)</p>
+			<button id = "showmore" onClick = {this.handleRedirect}>Show More</button>
 		    </div>
 		
 		</div>

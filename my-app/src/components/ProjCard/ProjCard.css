@@ -29,6 +29,35 @@
 }
 
 #ShowMore {
-	outline-style: solid;
-	outline-color: #39771f;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
+
+#showmore {
+    width: 125px;
+    border-radius: 25px;
+    border: 2px solid #000000;
+    padding: 20px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration:  0.4s;
+}
+
+#showmore:hover {
+
+    background-color: #73AD21;
+    color: black;
+    cursor: pointer;
+
+}
+
+#showmore:active,
+#showmore:focus,
+#showmore.active {
+
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+          box-shadow: none;
+}
+

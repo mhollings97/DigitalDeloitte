@@ -15,32 +15,24 @@ constructor(props) {
 		redirect: false,
 	};
 	this.handleRedirect = this.handleRedirect.bind(this);
-
+	this.handleSORedirect = this.handleSORedirect.bind(this);
+	this.handleERedirect = this.handleERedirect.bind(this);
 }
 
 componentDidMount() {
 
 
-fetch('https://private-ae364-vdwregistration.apiary-mock.com/api/v1/user/1',
+fetch('http://localhost:3069/api/v1/user/' + sessionStorage.getItem('user_id'),
         {
         method:"GET",
         headers: {
                 "Content-Type": "application/json"
          }})
 
-        .then(results => {
-                return results.json();
-        })
 
         .then(responseData => {
-                console.log(responseData.data);
+                console.log(responseData);
 
-                        this.setState({
-                        firstName: responseData.data.firstName,
-                        email: responseData.data.email,
-                        lastName: responseData.data.lastName,
-			interests: responseData.data.interestArea,
-		});
 
         })
 
@@ -51,10 +43,23 @@ fetch('https://private-ae364-vdwregistration.apiary-mock.com/api/v1/user/1',
 handleRedirect(){
 
 	this.setState({
-		redirect: !this.state.redirect
+		redirect: !this.state.redirect,
 	});
 }
 
+handleSORedirect(){
+
+        this.setState({
+                SOredirect: !this.state.SOredirect,
+        });
+}
+
+handleERedirect(){
+
+        this.setState({
+                Eredirect: !this.state.Eredirect,
+        });
+}
 
     render () {
 
@@ -65,6 +70,20 @@ handleRedirect(){
 
 	}
 
+
+        if(this.state.SOredirect){
+                return(
+                        <Redirect to = "/signedout"/>
+                )
+
+        }
+
+        if(this.state.Eredirect){
+                return(
+                        <Redirect to = "/editprofile"/>
+                )
+
+        }
 	return (
 
 	    <div>
@@ -82,14 +101,11 @@ handleRedirect(){
 			<p><b>First Name: </b>{this.state.firstName}</p>
 			<p><b>Last Name: </b>{this.state.lastName}</p>
 			<p><b>Email: </b>{this.state.email}</p>
-			<p><u>Change your email</u></p>
 			<p><b>Password: </b>******</p>
-			<p><u>Change your password</u></p>
 		    </div>
 		    <div id = "Interests">
 			<p><b>Interested in: </b></p>
 			<p>{this.state.interests}</p>
-			<p><u>Edit</u></p>
 		    </div>
 		    <div id = "Skills">
 			<p><b>Skills:</b></p>
@@ -102,11 +118,17 @@ handleRedirect(){
 			<p>Photoshop</p>
 			<p>InDesign</p>
 		    </div>
+		    <div id = "Editing">
+			<button id = "editprofile" onClick = {this.handleERedirect}>Edit Information</button>
+		    </div>	
+		    <div id = "SignOut">
+			<button id = "signingout" onClick = {this.handleSORedirect}>Sign Out</button>
+		    </div>
 		    <div id = "Completed">
 			<p>You have no completed projects.</p>
 		    </div>
 			<div id = "projlink">
-				<button onClick = {this.handleRedirect}> Click here to see available projects! </button>
+				<button id = "availprojs" onClick = {this.handleRedirect}> Click here to see available projects! </button>
 			</div>
 
 

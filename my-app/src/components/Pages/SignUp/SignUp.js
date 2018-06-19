@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import InputForm from '../.././InputForm/InputForm'
 import CheckBox from '../.././CheckBox/CheckBox'
+
 import './SignUp.css'
 import {Link, Redirect, Route, BrowserRouter as Router } from 'react-router-dom'
 import UserProfile from '../UserProfile/UserProfile'
@@ -27,23 +28,49 @@ constructor(props) {
 
 
 handleSubmit(event){
+
+var formData = new FormData();
+
+var object = {
+	"firstName": this.state.firstName,
+	"lastName": this.state.lastName,
+	"email": this.state.email,
+	"password": this.state.pw
+};
+
+sessionStorage.setItem('firstName', object.firstName);
+
+console.log(sessionStorage.getItem('firstName'));
+console.log(object);
 event.preventDefault();
-console.log("submit form");
+
+
 fetch('http://localhost:3069/api/v1/user', {
-                method: 'POST',
-                headers : new Headers(),
-                body:JSON.stringify(
-                  {
-                    "firstName": "John",
-                    "lastName": "Doe",
-                    "email": "xyz@mail.com",
-                    "password": "abc123",
-                  }
-                )
-            }).then((res) => res.json())
-            .then((data) =>  console.log(data))
-            .catch((err)=>console.log(err));
-console.log("here");
+        method: 'POST',
+        body: JSON.stringify(object)
+})
+
+.then((res) => res.json())
+
+.then((response) =>  {
+
+	if(response.code === 200){
+
+	console.log(response);
+	var dispatch = {
+		type: 'SIGNUP',
+		id: response.data.user_id
+	}
+
+	console.log(dispatch)
+	sessionStorage.setItem('user_id', response.data.user_id);
+
+	}
+})
+
+.catch((err)=>console.log(err));
+
+
 	this.setState({ redirect: true});
 }
 

@@ -16,21 +16,34 @@ import Projects from '.././Projects/Projects'
 import UserProfile from '.././UserProfile/UserProfile'
 import AfterSignUp from '.././AfterSignUp/AfterSignUp'
 import ProjPage from '.././ProjPage/ProjPage'
+import SignOut from '.././SignOut/SignOut'
+import PostSubmit from '.././PostSubmit/PostSubmit'
+import EditProf from '.././EditProf/EditProf'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 class HomeScreen extends Component {
 constructor(props) {
     super(props);
     this.state = {
-        showDD: false
+        showDD: false,
+	showWhat: false
     };
 
         this.toggleDD = this.toggleDD.bind(this);
+        this.toggleWhat = this.toggleWhat.bind(this);
 }
         toggleDD(showDD) {
             this.setState(prevState => ({
                 showDD: !prevState.showDD
           }));
 }
+
+
+        toggleWhat(showWhat) {
+            this.setState(prevState => ({
+                showWhat: !prevState.showWhat
+          }));
+}
+
 
   render() {
     return (
@@ -51,10 +64,10 @@ constructor(props) {
                         <Who/>
                 </div>
                 <div id = "WhatContainer">
-                        <What toggleDD = {this.toggleDD}/>
+                        <What toggleWhat = {this.toggleWhat}/>
                 </div>
                 <div>
-                        {this.state.showDD && <WhatDrop/>}
+                        {this.state.showWhat && <WhatDrop/>}
                 </div>
 
                 <div id = "ExpectContainer">
@@ -64,6 +77,7 @@ constructor(props) {
                 <div id = "OfferContainer">
                         <Offer/>
                 </div>
+
             </div>
         </div>
     </Router>

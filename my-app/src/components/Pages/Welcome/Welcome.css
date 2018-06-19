@@ -11,6 +11,32 @@
 	width: 100%;
 }
 
+#smallTBx{
+        width: 380px;
+        color: #333333;
+        margin: 0 auto;
+        font-family: 'OpenSans-Bold', 'Open Sans Bold', 'Open Sans';
+    	font-weight: 700;
+    	font-style: normal;
+    	font-size: 16px !important;
+    	text-align: center;
+}
+
+#largeTBx{
+	width: 700px;
+	color: #333333;
+	margin: 0 auto;
+	font-family: 'OpenSans-Bold', 'Open Sans Bold', 'Open Sans';
+	font-weight: 700;
+    font-style: normal;
+    font-size: 30px !important;
+    text-align: center;
+}
+
+#bottomp{
+	margin-top: -30px;
+}
+
 #HowBut{
 	padding-top: 15px;
 	background-color: Transparent;
