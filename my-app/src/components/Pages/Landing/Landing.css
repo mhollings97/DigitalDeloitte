@@ -97,8 +97,9 @@
 }
 
 #catcher{
-	width: 90% !important;
-	height: 750px;
+	width: 100% !important;
+    margin-left: -5% !important;
+    height: 100%;
 	background-color: lightgray;
 	opacity: .75;
 	position: absolute;

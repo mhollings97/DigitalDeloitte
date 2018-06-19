@@ -21,6 +21,7 @@ import UserProfile from './components/Pages/UserProfile/UserProfile'
 import ProjectCards from './components/Pages/Projects/ProjectCards/ProjectCards'
 import SignOut from './components/Pages/SignOut/SignOut'
 import ProjPage from './components/Pages/ProjPage/ProjPage'
+import EditProf from './components/Pages/EditProf/EditProf'
 
 class App extends Component {
 constructor(props) {
@@ -68,7 +69,7 @@ render() {
 		{this.state.showLogOn
                 	&&
 		<div id = 'catcher' onClick = {this.toggleLog}/>}
-
+      <div id = "head">
 
                 <div id = "AU">
                         <Link to = {'/aboutus'} >
@@ -93,6 +94,9 @@ render() {
                         <HomeButton >Deloitte Digital</HomeButton>
                         </Link>
     		</div>
+        </div> 
+        <div id = "cont"> 
+        <div id = "bord"> 
         <Route exact = 'true' path = "/" component= {HomeScreen}/>
         <Route path = "/aboutus" component= {AboutUs}/>
 	<Route path = '/abouttheproject' component = {AboutProj}/>
@@ -103,6 +107,9 @@ render() {
         <Route path = "/projectsavailable" component = {ProjectCards}/>
 	<Route path = "/signedout" component = {SignOut}/>
 	<Route path = "/projectdescription" component = {ProjPage}/>
+	<Route path = "/editprofile" component = {EditProf}/>
+  </div> 
+        </div>
       </div>
 </Router>
   	);
