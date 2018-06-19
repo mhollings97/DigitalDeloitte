@@ -1,11 +1,78 @@
 #SignUpForm {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 #SignUpHeader {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
 }	
 
 #SignUpWrapper {
 	border-style: solid;
         border-color: #6bc446;
 	background-color: #ededed;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+}
+
+#firstName {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        border: 3px solid green;
+        border-radius: 25px;
+}
+
+#lastName {
+        padding-top: 2%;
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        border: 3px solid green;
+        border-radius: 25px;
+}
+
+#email {
+        padding-top: 2%;
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        border: 3px solid green;
+        border-radius: 25px;
+}
+
+#password {
+        padding-top: 2%;
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        border: 3px solid green;
+        border-radius: 25px;
+}
+
+
+#SUbutton {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 15px;
+    width: 140px;
+    border-radius: 25px;
+    border: 2px solid #000000;
+    padding: 20px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration:  0.4s;
+}
+
+#SUbutton:hover {
+
+    background-color: #73AD21;
+    color: black;
+    cursor: pointer;
+
+}
+
+#SUbutton:active,
+#SUbutton:focus,
+#SUbutton.active {
+
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#SUbuttonwrap {
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
