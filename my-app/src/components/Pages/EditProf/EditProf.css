@@ -11,16 +11,16 @@
         text-align: center;
 }
 
-#firstName {
+#EPfirstName {
 	padding-top: 2%;
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
-#lastName{
+#EPlastName{
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
-#email {
+#EPemail {
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 

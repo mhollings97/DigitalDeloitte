@@ -63,11 +63,11 @@ console.log("Did I make it here?");
       <div>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <div id ="email">
+            <div id ="SIemail">
               <p> Email </p>
               <input type = "text" email = {this.state.email} onChange= {this.handleEChange}/> 
             </div >
-            <div id ="password">
+            <div id ="SIpassword">
               <p> Password </p>
               <input type = "text" password = {this.state.password} onChange= {this.handlePWChange}/> 
             </div >

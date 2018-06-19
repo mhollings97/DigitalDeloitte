@@ -22,22 +22,22 @@ render () {
     return (
       <div id = "EditProfWrap">
 	<form id = "edits">
-	    <div id = "firstName">
+	    <div id = "EPfirstName">
 		<p>First name:</p>
 		<input id = "FN" type = "text" firstName = {this.state.firstName}/>
 	    </div>
 	
-	    <div id = "lastName">
+	    <div id = "EPlastName">
 		<p>Last name:</p>
 		<input id = "LN" type = "text" lastName = {this.state.lastName}/>
 	    </div>
 
-	    <div id = "email">
+	    <div id = "EPemail">
 		<p>Email:</p>
 		<input id = "EM" type = "text" email = {this.state.email}/>
 	    </div>
 
-	    <div id = "password">
+	    <div id = "EPpassword">
 		<p>Password:</p>
 		<input id = "PW" type = "text" password = {this.state.password}/>
 	    </div>
