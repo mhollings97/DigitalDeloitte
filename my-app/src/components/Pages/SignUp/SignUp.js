@@ -104,11 +104,11 @@ handlePWChange(e){
 		<form method="post"
 		>
 			<p> First Name </p>
-			<input id = "firstName" name = "firstName" value={this.state.firstName}
+			<input id = "SUfirstName" name = "firstName" value={this.state.firstName}
 				onChange={this.handleFNChange}/>
 			<br/>
 			<p> Last Name </p>
-			<input id = "lastName" name = "lastName" value={this.state.lastName}
+			<input id = "SUlastName" name = "lastName" value={this.state.lastName}
 				onChange={this.handleLNChange}/>
 			<br/>
 			<p> Email </p>
