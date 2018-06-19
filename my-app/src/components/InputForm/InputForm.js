@@ -25,7 +25,37 @@ constructor(props) {
 
   handleSubmit(event) {
 
-	this.setState({redirect: !this.state.redirect});
+console.log("Did I make it here?");
+     var object = {
+         "username": this.state.email,
+         "password": this.state.password
+     }
+
+     event.preventDefault();
+
+     fetch('localhost:3069/api/v1/auth', {
+             method: "POST",
+                 headers: {"Content-Type": "application/json"},
+             body: JSON.stringify(object)
+         })
+
+         .then((res) => res.json())
+
+
+         .then(responseData => {
+
+                 console.log(responseData);
+
+                 if(responseData.code === 200)
+                     {
+                     this.setState({redirect: !this.state.redirect});
+                     }
+
+                 else {
+                     //TODO: INSERT ERROR MESSAGE
+                     console.log("You forgot to log the error message");
+                 }
+             })
   }
 
   render() {

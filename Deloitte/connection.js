@@ -746,14 +746,7 @@ function Connection() {
 	}
 
 	this.getAppProjects = function(uid) {
-		return NS.findAll({
-			attributes: ['project_id'],
-			include: [{
-				model: HS,
-				required: true,
-				where: {user_id: uid}
-			    }]
-		}).catch(function(err) {return null})
+		return sequelize.query("SELECT distinct project_id FROM hasskills join needsskills using (skill) WHERE user_id = ?", {replacements: [uid]}).catch(function(err) {return null});
 	}
 
 	this.getProjectTags = function(pid) {

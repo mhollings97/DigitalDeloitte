@@ -57,12 +57,6 @@ fetch('http://localhost:3069/api/v1/user', {
 	if(response.code === 200){
 
 	console.log(response);
-	var dispatch = {
-		type: 'SIGNUP',
-		id: response.data.user_id
-	}
-
-	console.log(dispatch)
 	sessionStorage.setItem('user_id', response.data.user_id);
 
 	}
@@ -127,7 +121,7 @@ handlePWChange(e){
 				onChange={this.handlePWChange}/>
 			<br/>
 			<Link to = "/signupcomplete">
-			<button onClick = {this.handleSubmit}> Submit </button>
+			<button id = 'SUbutton' onClick = {this.handleSubmit}> Submit </button>
 			</Link>
 		</form>
 
