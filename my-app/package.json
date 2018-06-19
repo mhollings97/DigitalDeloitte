@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "ajax": "0.0.4",
+    "koa2-cors": "^2.0.5",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4",
