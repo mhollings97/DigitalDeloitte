@@ -29,7 +29,7 @@ fetch('http://localhost:3069/api/v1/user/' + sessionStorage.getItem('user_id'),
                 "Content-Type": "application/json"
          }})
 
-
+	.then((res) => res.json())
         .then(responseData => {
                 console.log(responseData);
 
