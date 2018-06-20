@@ -11,6 +11,8 @@ conn.createTable();
 router.post('/project', newProject);
 //List all projects that are in a database.
 router.get('/project', listProject);
+//Returns a specific project
+router.get('/project/get/:pid', getProject);
 //List all projects that a user has matching skills for.
 router.get('/project/:uid', myProjects);
 
@@ -131,11 +133,17 @@ async function listProject(ctx, next) {
 				"tags": []
 			    };
 
-			    await conn.getNS(projects[i].project_id);
-			    temp.skills = ctx.body.skills;
+			    await conn.getNS(projects[i].project_id).then(function(retS) {
+					for(var i = 0; i < retS.length; i++) {
+						temp.skills[i] = retS[i].dataValues.skill;		
+					}	    	
+			    });
 
-			    await conn.getProjectTags(projects[i].project_id);
-			    temp.tags = ctx.body.tags;
+			    await conn.getProjectTags(projects[i].project_id).then(function(retT) {
+					for(var i = 0; i < retT.length; i++) {
+						temp.tags[i] = retT[i].dataValues.tag;		
+					}	    	
+			    });
 
 			    retPD.push(temp);
 			}
@@ -228,6 +236,80 @@ async function myProjects(ctx, next) {
 
 	ctx.body = retval;
     }
+}
+
+async function getProject(ctx, next) {
+	await conn.getProject(ctx.params.pid).then(async function(retval) {
+		if(retval == null) {
+			ctx.status = 404;
+			var ret = {
+				"status": "failure",
+	            "code": ctx.status,
+	            "message": "Project failed to be retrieved",
+	            "apiVersion": apiVersion,
+	            "requestUrl": ctx.request.host + ctx.request.url,
+	            "data": {}
+	        }
+	        ctx.body = ret;
+		}
+		else {
+			ctx.status = 200;
+			var ret = {
+				"status": "success",
+	            "code": ctx.status,
+	            "message": "Project retrieval successful",
+	            "apiVersion": 1,
+	            "requestUrl": ctx.request.host + ctx.request.url,
+	            "data": {
+	            	"project_id": retval[0].dataValues.project_id,
+                    "project_name": retval[0].dataValues.project_name,
+                    "completion_time": retval[0].dataValues.completion_time + " Days",
+                    "description": retval[0].dataValues.description,
+                    "status": retval[0].dataValues.status,
+                    "join_deadline": retval[0].dataValues.join_deadline.toISOString().split('T')[0],
+                    "rev_deadline": retval[0].dataValues.rev_deadline.toISOString().split('T')[0],
+                    "sub_deadline": retval[0].dataValues.sub_deadline.toISOString().split('T')[0],
+                    "min_diff": retval[0].dataValues.min_diff,
+                    "max_diff": retval[0].dataValues.max_diff,
+                    "people": retval[0].dataValues.people,
+                    "xp_gain": retval[0].dataValues.xp_gain,
+                    "xp_bonus": retval[0].dataValues.xp_bonus,
+                    "skills": [],
+                    "tags": []
+	            }
+	        }
+
+        	await conn.getProjectSkills(retval[0].dataValues.project_id).then(function(retSkills) {
+        		if(retSkills == null || retSkills.length == 0) {
+        			ret.data.skills = "Project has no skills"
+        		}
+        		else{
+        			for(var j = 0; j < retSkills.length; j++) {
+        				ret.data.skills[j] = {
+        					"name": retSkills[j].dataValues.skill
+        				};
+        			}	
+        		}
+        	})
+
+        	await conn.getProjectTags(retval[0].dataValues.project_id).then(function(retTags) {
+        		if(retTags == null || retTags.length == 0) {
+        			ret.data.tags = "Project has no tags"
+        		}
+        		else{
+        			for(var k = 0; k < retTags.length; k++) {
+        				ret.data.tags[k] = {
+        					"name": retTags[k].dataValues.tag
+        				};
+        			}	
+        		}
+        	})
+
+	        ctx.body = ret;
+		}
+	})
+
+	await next();
 }
 
 module.exports = router;
