@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './EditProf.css'
+import {Redirect} from 'react-router-dom'
 
 class EditProf extends Component {
 
@@ -14,10 +15,28 @@ constructor(props) {
                 interests: "",
 		skills: "",
 		software: "",
+		redirect: false,
 	};
+
+        this.handleRedirect = this.handleRedirect.bind(this);
+
+}
+
+handleRedirect(){
+
+        this.setState({
+                redirect: !this.state.redirect,
+        });
 }
 
 render () {
+
+    if(this.state.redirect){
+	return(
+            <Redirect to = "/updatedinfo"/>
+        )
+
+    }
 
     return (
       <div id = "EditProfWrap">
@@ -64,7 +83,7 @@ render () {
 	    </div>
 
 	    <div id = "submitchanges">
-		<button id = "SCbutton">Submit changes</button>
+		<button id = "SCbutton" onClick = {this.handleRedirect}>Submit changes</button>
 	    </div>
 	</form>
       </div>

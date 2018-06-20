@@ -22,6 +22,7 @@ import ProjectCards from './components/Pages/Projects/ProjectCards/ProjectCards'
 import SignOut from './components/Pages/SignOut/SignOut'
 import ProjPage from './components/Pages/ProjPage/ProjPage'
 import EditProf from './components/Pages/EditProf/EditProf'
+import UpdatedInfo from './components/Pages/UpdatedInfo/UpdatedInfo'
 
 class App extends Component {
 constructor(props) {
@@ -102,6 +103,7 @@ render() {
 	<Route path = "/signedout" component = {SignOut}/>
 	<Route path = "/projectdescription" component = {ProjPage}/>
 	<Route path = "/editprofile" component = {EditProf}/>
+	<Route path = "/updatedinfo" component = {UpdatedInfo}/>
   </div> 
         </div>
       </div>
