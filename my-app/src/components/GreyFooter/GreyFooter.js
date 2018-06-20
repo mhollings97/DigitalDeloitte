@@ -12,7 +12,8 @@ render() {
     return (
 	<div id = "Footer">
 	  <div id = "FooterText">
-	    <p>Deloitte Digital &emsp;&emsp;  © &emsp;&emsp;  2018</p>
+	  <br></br>
+	    <p>Deloitte Digital © 2018</p>
 	  </div>
 	</div>
     );
