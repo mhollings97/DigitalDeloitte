@@ -12,7 +12,7 @@ class Image extends Component {
     	var min = 1;
     	var i = Math.floor(Math.random() * (max - min + 1)) + min;
     	var img2 = "./DeloitteLogo.jpg";
-    	if(i == 1){
+    /*	if(i == 1){
     		return(
 	<div>
 	<div id = "Image">
@@ -99,7 +99,7 @@ class Image extends Component {
 	</div>
 	</div>
 	)
-    	}
+    	}*/
     	return(
 	<div>
 	<div id = "Image">
