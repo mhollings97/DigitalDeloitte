@@ -46,7 +46,7 @@ class ProjectCards extends Component {
 		for(var i = 0; i < this.state.myProjects.length; i++)
 		    {
 			container.innerHTML += '<div id = "Project' + i +
-			    '"><ProjCard id = {' this.state.id[i] +
+			    '"><ProjCard id = {' + this.state.id[i] +
 			    '}/></div>';
 		    }
 		container.innerHTML += '</div';
