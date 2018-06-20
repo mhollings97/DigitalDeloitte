@@ -120,11 +120,11 @@ handlePWChange(e){
 			<input id = "SUpassword" name = "password" value={this.state.pw}
 				onChange={this.handlePWChange}/>
 			<br/>
-			<Link to = "/signupcomplete">
 			<div id = "SUbuttonwrap">	
+			<Link to = "/signupcomplete">
 			  <button id = 'SUbutton' onClick = {this.handleSubmit}> Submit </button>
-			</div>
 			</Link>
+			</div>
 		</form>
 
 	    </div>

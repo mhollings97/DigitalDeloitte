@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import Image from '../.././Image/Image'
 import './AfterSignUp.css'
@@ -68,7 +69,7 @@ render() {
 		  </div>
 		</div>
 		<div id = "linkButton">
-			<button onClick = {this.handleRedirect}> Continue to Profile </button>
+			<button id = "CTPbutton" onClick = {this.handleRedirect}> Continue to Profile </button>
 		</div>
 
 	    </div>
