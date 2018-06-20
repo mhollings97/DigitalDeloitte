@@ -36,6 +36,7 @@ constructor(props) {
 	this.toggleLog2 = this.toggleLog2.bind(this);
 	this.handleSubmit = this.toggleLog.bind(this);
 	this.handleSignOut = this.handleSignOut.bind(this);
+	this.handleSignIn = this.handleSignIn.bind(this);
 }
 toggleLog(showLogOn) {
 	  this.setState(prevState => ({
@@ -45,6 +46,12 @@ toggleLog(showLogOn) {
 handleSignOut(loggedIn){
 	this.setState(prevState =>({
 		loggedIn: false,
+	}));
+}
+handleSignIn(loggedIn){
+	console.log("handle sign in");
+	this.setState(prevState =>({
+		loggedIn: true,
 	}));
 }
 toggleLog2(showLogOn) {
@@ -122,20 +129,20 @@ render() {
         <Route exact = 'true' path = "/" component= {HomeScreen}/>
         <Route path = "/aboutus" component= {AboutUs}/>
 	<Route path = '/abouttheproject' component = {AboutProj}/>
-        <Route path = "/signup" component = {SignUp}/>
 	<Route path = "/signupcomplete" component = {AfterSignUp}/>
-	<Route exact = 'true' path = "/userprofile" render = { () =>
-
-	<UserProfile handleSignOut = {this.handleSignOut}/>
-
-        } />
-
 	<Route path = "/contactus" component = {UserData}/>
         <Route path = "/projectsavailable" component = {ProjectCards}/>
 	<Route path = "/signedout" component = {SignOut}/>
 	<Route path = "/projectdescription" component = {ProjPage}/>
 	<Route path = "/editprofile" component = {EditProf}/>
 	<Route path = "/updatedinfo" component = {UpdatedInfo}/>
+
+	<Route path = "/signup" render = { () =>
+	<SignUp signIn = {this.handleSignIn}/>} />
+
+	<Route exact = 'true' path = "/userprofile" render = { () =>
+	<UserProfile handleSignOut = {this.handleSignOut}/>} />
+
   </div>
         </div>
       </div>
