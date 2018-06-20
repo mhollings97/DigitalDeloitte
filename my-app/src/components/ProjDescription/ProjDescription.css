@@ -7,21 +7,26 @@
 }
 
 #projtype {
-	width: 25%;
+	width: 100%;
+	text-align: center;
 }
 
 #time {
-	width: 25%;
+	width: 100%;
+	text-align: center;
 }
 
 #deadlines {
-	width: 25%;
+	width: 100%;
+	text-align: center;
 }
 
 #requirements {
-	width: 25%;
+	width: 100%;
+	text-align: center;
 }
 
 #reward {
-	width: 25%;
+	width: 100%;
+	text-align: center;
 }

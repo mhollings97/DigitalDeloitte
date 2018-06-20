@@ -19,6 +19,7 @@ import ProjPage from '.././ProjPage/ProjPage'
 import SignOut from '.././SignOut/SignOut'
 import PostSubmit from '.././PostSubmit/PostSubmit'
 import EditProf from '.././EditProf/EditProf'
+import GreyFooter from '../.././GreyFooter/GreyFooter'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 class HomeScreen extends Component {
 constructor(props) {
@@ -77,6 +78,10 @@ constructor(props) {
                 <div id = "OfferContainer">
                         <Offer/>
                 </div>
+	        <div id = "FooterWrap">
+	          <GreyFooter/>
+        	</div>
+
 
             </div>
         </div>
