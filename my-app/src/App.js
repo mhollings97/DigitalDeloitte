@@ -57,13 +57,7 @@ render() {
 				<button onClick ={this.toggleLog}>Need and Account? Click here to sign up!</button>
 			</Link>
 		}
-		submitButton = {
-			<Link to = {'/userprofile'} >
-				<button onClick ={this.toggleLog}> Submit </button>
-			</Link>
-
-		}
-
+		toggleLog = {this.toggleLog}
 		/> </div>}
 
 		{this.state.showLogOn
@@ -102,7 +96,7 @@ render() {
 	<Route path = '/abouttheproject' component = {AboutProj}/>
         <Route path = "/signup" component = {SignUp}/>
 	<Route path = "/signupcomplete" component = {AfterSignUp}/>
-        <Route exact = 'true' path = "/userprofile" component = {UserProfile}/>
+	<Route exact = 'true' path = "/userprofile" component = {UserProfile}/> :
         <Route path = "/contactus" component = {UserData}/>
         <Route path = "/projectsavailable" component = {ProjectCards}/>
 	<Route path = "/signedout" component = {SignOut}/>

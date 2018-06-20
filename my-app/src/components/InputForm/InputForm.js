@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import './InputForm.css';
 class InputForm extends Component {
 constructor(props) {
@@ -7,10 +7,7 @@ constructor(props) {
     this.state = {
         email: '',
 	password: '',
-
-	redirect: false,
     };
-
     this.handlePWChange = this.handlePWChange.bind(this);
     this.handleEChange = this.handleEChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,8 +21,6 @@ constructor(props) {
   }
 
   handleSubmit(event) {
-
-console.log("Did I make it here?");
      var object = {
          "username": this.state.email,
          "password": this.state.password
@@ -42,22 +37,38 @@ console.log("Did I make it here?");
 
 
          .then(responseData => {
-
+		this.setState({ code: responseData.code});
                  console.log(responseData);
 
-                 if(responseData.code === 200)
-                     {
+                 if(responseData.code === 200){
+			console.log("here");
 			sessionStorage.setItem('user_id' , responseData.data.userData.user_id);
-                     }
+			sessionStorage.setItem('auth', 1);
+                   }
 
                  else {
                      //TODO: INSERT ERROR MESSAGE
-                     console.log("You forgot to log the error message");
+			sessionStorage.setItem('user_id', -1);
                  }
              })
+	console.log('Fetch statement session values');
+	console.log(sessionStorage.getItem('user_id'));
+	console.log(sessionStorage.getItem('auth'));
   }
 
+componentWillMount(){
+	console.log('component is setting session values');
+	sessionStorage.setItem('user_id', -1);
+	sessionStorage.setItem('auth',-1);
+	console.log(sessionStorage.getItem('user_id'));
+	console.log(sessionStorage.getItem('auth'));
+}
   render() {
+
+	if(sessionStorage.getItem('auth') == 1){
+		console.log("Redirect sucks man");
+		return <Redirect to = '/userprofile'/>;
+	}
 
     return (
       <div>
@@ -72,7 +83,7 @@ console.log("Did I make it here?");
               <input type = "text" password = {this.state.password} onChange= {this.handlePWChange}/> 
             </div >
 	    <div onClick = {this.handleSubmit} id = "buttonS">
-		{this.props.submitButton}
+		<button onClick = {this.props.toggleLog}> Submit </button>
 	    </div>
 	    <div id = "SignUp">
 		{this.props.linkButton}
