@@ -134,7 +134,8 @@ conn.createTable().then(async function() {
 		await user8.createApp("Grade School", "Digital Deloitte", "My mother", "LinkedIn.eu", "Personal.us", "My Cover Letter");
 		await user9.createApp("Professor", "Anything but this", "The fear of death", "LinkedIn.us", "Personal.com", "My Cover Letter");
 	}).then(async function() {
-		check = await conn.getAllProject();
+		check = await conn.getAllProject()
+	}).then(async function() {;
 
 		if(check.length == 0) {
 			await conn.createProject("Digital Deloitte", 16, "Make a website", "Never going to be done.", 
