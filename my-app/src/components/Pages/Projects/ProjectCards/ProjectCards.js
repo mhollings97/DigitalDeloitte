@@ -67,5 +67,5 @@ render () {
 	);
 
 }
-
+}
 export default ProjectCards;
