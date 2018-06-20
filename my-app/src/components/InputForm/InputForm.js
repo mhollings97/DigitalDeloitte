@@ -62,7 +62,7 @@ constructor(props) {
                  }
              })
 
-	this.forceUpdate();
+//	this.forceUpdate();
 }
 
 componentWillMount(){
