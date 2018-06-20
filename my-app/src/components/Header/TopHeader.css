@@ -21,3 +21,9 @@
     right: calc(5% + 5px);
     padding-top: 8px;
 }
+
+#UP {
+    position: absolute;
+    right: calc(5% + 5px);
+    padding-top: 8px;
+}

@@ -124,7 +124,7 @@ handleERedirect(){
 		    <div id = "Editing">
 			<button id = "editprofile" onClick = {this.handleERedirect}>Edit Information</button>
 		    </div>	
-		    <div id = "SignOut">
+		    <div id = "SignOut" onClick = {this.props.handleSignOut}>
 			<button id = "signingout" onClick = {this.handleSORedirect}>Sign Out</button>
 		    </div>
 		    <div id = "Completed">
