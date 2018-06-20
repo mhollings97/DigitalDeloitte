@@ -4,7 +4,14 @@
 }
 
 #buttonS{
-	padding-top: 16px;
-	padding-bottom: 16px;
+	width: 50%;
+	margin-left: 25%;
+	margin-top: 16px;
+	margin-bottom: 16px;
+
 }
 
+#innerButton{
+	height: 100%;
+	width: 100%;
+}

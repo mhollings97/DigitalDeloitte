@@ -28,18 +28,27 @@ class App extends Component {
 constructor(props) {
     super(props);
     this.state = {
-		showLogOn: false
+		showLogOn: false,
+		redirectUP: false
 	};
 	this.toggleLog = this.toggleLog.bind(this);
+	this.toggleLog2 = this.toggleLog2.bind(this);
 	this.handleSubmit = this.toggleLog.bind(this);
 }
-
-
-        toggleLog(showLogOn) {
-            this.setState(prevState => ({
+toggleLog(showLogOn) {
+	  this.setState(prevState => ({
                 showLogOn: !this.state.showLogOn
           }));
-        }
+}
+
+toggleLog2(showLogOn) {
+     if(sessionStorage.getItem('user_id') !== '-1'){
+	  this.setState(prevState => ({
+                showLogOn: !this.state.showLogOn,
+		redirectUP: true,
+          }));
+     }
+}
 
 
 
@@ -58,8 +67,9 @@ render() {
 				<button onClick ={this.toggleLog}>Need and Account? Click here to sign up!</button>
 			</Link>
 		}
-		toggleLog = {this.toggleLog}
+		toggleLog = {this.toggleLog2}
 		/> </div>}
+		{this.state.redirectUP && <Redirect to = '/userprofile'/>}
 
 		{this.state.showLogOn
                 	&&
