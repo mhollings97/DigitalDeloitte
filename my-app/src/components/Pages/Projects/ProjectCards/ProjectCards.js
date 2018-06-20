@@ -31,29 +31,40 @@ class ProjectCards extends Component {
 		    this.setState({id: temp, loading: 'false'})
 		})
 	    }
-    render () {
+render () {
 
-        if(this.state.loading === 'initial') {
-            return <h2></h2>
+		if(this.state.loading === 'initial') {
+			return <h2></h2>
 		}
-        if(this.state.loading === 'true') {
-            return <h2></h2>
+		if(this.state.loading === 'true') {
+			return <h2></h2>
 		}
 
-                var container = document.getElementById("container");
-		container.innerHTML += '<div>';
-		container.innerHTML += '<div id = "AllCards">';
-		for(var i = 0; i < this.state.myProjects.length; i++)
-		    {
-			container.innerHTML += '<div id = "Project' + i +
-			    '"><ProjCard id = {' + this.state.id[i] +
-			    '}/></div>';
-		    }
-		container.innerHTML += '</div';
-		container.innerHTML += '</div';
-		return container;
-	}
+        return (
 
+	<div>
+	<div id = "AllCards">
+
+	    <div id = "PC1">
+		<ProjCard id = {this.state.id[0]}/>
+	    </div>
+
+	    <div id = "PC2">
+		<ProjCard id = {this.state.id[1]}/>
+	    </div>
+
+	    <div id = "PC3">
+		<ProjCard id = {this.state.id[2]}/>
+	    </div>
+
+	    <div id = "PC4">
+		<ProjCard id = {this.state.id[3]}/>
+	    </div>
+
+	</div>
+	</div>
+
+	);
 
 }
 
