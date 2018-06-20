@@ -14,6 +14,8 @@
 #EPfirstName {
 	padding-top: 2%;
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	width: 100%;
+	height: 100%;
 }
 
 #EPlastName{
@@ -76,21 +78,35 @@
 #FN {
 	border: 3px solid green;
 	border-radius: 25px;
+	height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
 
 #LN {
 	border: 3px solid green;
 	border-radius: 25px;
+        height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
 
 #EM {
 	border: 3px solid green;
 	border-radius: 25px;
+        height: 25px;
+	width: 200px;
+	text-align: center;
+	font-size: 15px;
 }
 
 #PW {
 	border: 3px solid green;
 	border-radius: 25px;
+        height: 25px;
+	width: 200px;
+	text-align: center;
+	font-size: 15px;
 }
 
 
@@ -99,6 +115,9 @@
 	width: 25%;
 	margin-right: 5%;
 	border-radius: 25px;
+        height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
 
 #I2 {
@@ -106,12 +125,18 @@
 	width: 25%;
 	margin-right: 5%;
 	border-radius: 25px;
+        height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
 
 #I3 {
 	border: 3px solid green;
 	width: 25%;
 	border-radius: 25px;
+        height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
 
 #SK1 {
@@ -119,6 +144,9 @@
 	width: 25%;
 	margin-right: 5%;
 	border-radius: 25px;
+        height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
 
 #SK2 {
@@ -126,6 +154,9 @@
 	width: 25%;
 	margin-right: 5%;
 	border-radius: 25px;
+        height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
 
 #SK3 {
@@ -133,6 +164,9 @@
 	width: 25%;
 	border-radius: 25px;
 	border-radius: 25px;
+        height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
 
 #SO1 {
@@ -140,6 +174,9 @@
 	width: 25%;
 	margin-right: 5%;
 	border-radius: 25px;
+        height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
 	
 #SO2 {
@@ -147,10 +184,16 @@
 	width: 25%;
 	margin-right: 5%;
 	border-radius: 25px;
+        height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
 
 #SO3 {
 	border: 3px solid green;
 	width: 25%;
 	border-radius: 25px;
+        height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
