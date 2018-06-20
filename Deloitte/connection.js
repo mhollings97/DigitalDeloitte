@@ -500,8 +500,17 @@ function Connection() {
 		}).catch(function(err) {return null});
 	}
 
+	this.getProjectSkills = function(pid) {
+		return NS.findAll({
+			where: {project_id: pid}
+		}).catch(function(err) {return null})
+	}
 
-
+	this.getProjectTags = function(pid) {
+		return Tags.findAll({
+			where: {project_id: pid}
+		}).catch(function(err) {return null})
+	}
 
 
 
